@@ -16,8 +16,10 @@ import java.util.Date;
 public class RecordEntity {
     //clase para el historial de reparaciones
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(unique = true, nullable = false)
+    private Long id;
+
 
     private Date admissionDate; //fecha de llega al taller
     private int admissionHour;   //hora de llegada

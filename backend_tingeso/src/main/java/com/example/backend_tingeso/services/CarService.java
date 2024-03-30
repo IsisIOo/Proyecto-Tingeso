@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import com.example.backend_tingeso.repositories.CarRepository;
 import com.example.backend_tingeso.entities.CarEntity;
 
+
 import java.util.ArrayList;
 
 @Service
@@ -23,16 +24,16 @@ public class CarService {
     }
 
     public CarEntity getCarByPatent(String patent){
-        return carRepository.findByPatent(patent).get();
-    }
-
-    public CarEntity getEmployeeByRut(String patent){
         return carRepository.findByPatent(patent);
     }
 
     public CarEntity updateCar(CarEntity car) {
         return carRepository.save(car);
     }
+
+    //public EmployeeEntity getEmployeeByRut(String rut){
+    //    return employeeRepository.findByRut(rut);
+    //}
 
     public boolean deleteCar(CarEntity car) throws Exception {
         try{

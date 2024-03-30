@@ -14,8 +14,9 @@ import lombok.NoArgsConstructor;
 
 public class CarEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(unique = true, nullable = false)
+    private Long id;
 
     private String patent; //patente de letras y numeros
     private String brand; //marca del vehiculo

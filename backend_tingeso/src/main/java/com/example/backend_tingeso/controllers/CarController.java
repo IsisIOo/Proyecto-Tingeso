@@ -17,13 +17,13 @@ public class CarController {
 
     @GetMapping("/")
     public ResponseEntity<List<CarEntity>> listCar() {
-        List<CarEntity> car = CarService.getCar();
+        List<CarEntity> car = carService.getCar();
         return ResponseEntity.ok(car);
     }
 
     @GetMapping("/{patent}")
     public ResponseEntity<CarEntity> getCarBypatent(@PathVariable String patent) {
-        CarEntity car = carService.getCarBypatent(patent);
+        CarEntity car = carService.getCarByPatent(patent);
         return ResponseEntity.ok(car);
     }
 

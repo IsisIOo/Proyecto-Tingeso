@@ -12,9 +12,9 @@ import java.util.List;
 public interface CarRepository extends JpaRepository<CarEntity, String> {
     public CarEntity findByBrand(String brand); //encuentra los autos de una marca
 
-    List<CarEntity> findByCategory(String category);
-    List<CarEntity> findBySalaryGreaterThan(int salary);
-    List<CarEntity> findByChildrenBetween(Integer startChildren, Integer endChildren);
+   // List<CarEntity> findByCategory(String category);
+    //List<CarEntity> findBySalaryGreaterThan(int salary);
+    //List<CarEntity> findByChildrenBetween(Integer startChildren, Integer endChildren);
     @Query(value = "SELECT * FROM car WHERE car.patent = :patent", nativeQuery = true)
     CarEntity findByPatent(@Param("patent") String patent);
 }
