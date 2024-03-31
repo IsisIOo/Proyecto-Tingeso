@@ -40,6 +40,18 @@ public class CarController {
         return ResponseEntity.ok(car);
     }
 
+    @GetMapping("/motortype/{motortype}")
+    public ResponseEntity<List<CarEntity>> listCarMotortype(@PathVariable String motortype) {
+        List<CarEntity> car = carService.getCarByMotortype(motortype);
+        return ResponseEntity.ok(car);
+    }
+
+    @GetMapping("/brand/{brand}")
+    public ResponseEntity<List<CarEntity>> listCarBrand(@PathVariable String brand) {
+        List<CarEntity> car = carService.getCarByMotortype(brand);
+        return ResponseEntity.ok(car);
+    }
+
     //todos los autos del mismo año
     @GetMapping("/productionYear/{productionYear}")
     public ResponseEntity<List<CarEntity>> listCarProductionyear(@PathVariable int productionYear) {

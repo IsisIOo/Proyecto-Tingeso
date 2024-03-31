@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface CarRepository extends JpaRepository<CarEntity, Long> {
-    public CarEntity findByBrand(String brand); //encuentra los autos de una marca
+    //public CarEntity findByBrand(String brand); //encuentra los autos de una marca, peeero hice otro, no se si este es util
 
    // List<CarEntity> findByCategory(String category);
     //List<CarEntity> findBySalaryGreaterThan(int salary);
@@ -28,4 +28,11 @@ public interface CarRepository extends JpaRepository<CarEntity, Long> {
 
     @Query(value = "SELECT * FROM car WHERE car.production_year  = :production_year", nativeQuery = true)
     ArrayList<CarEntity> findByProductionyear(@Param("production_year") int production_year);
+    //tener cuidado con el nombre de las tablas en el where car. [aqui despues del punto]
+
+    @Query(value = "SELECT * FROM car WHERE car.motor_type  = :motor_type", nativeQuery = true)
+    ArrayList<CarEntity> findByMotortype(@Param("motor_type") String motor_type);
+
+    @Query(value = "SELECT * FROM car WHERE car.brand = :brand", nativeQuery = true)
+    ArrayList<CarEntity> findByBrand(@Param("brand") String brand);
 }
