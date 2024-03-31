@@ -42,6 +42,10 @@ public class CarService {
         return (ArrayList<CarEntity>) carRepository.findByType(type);
     }
 
+    public ArrayList<CarEntity> getCarByProductionyear(@PathVariable int productionYear){
+        return (ArrayList<CarEntity>) carRepository.findByProductionyear(productionYear);
+    }
+
     public CarEntity updateCar(CarEntity car) {
         return carRepository.save(car);
     }

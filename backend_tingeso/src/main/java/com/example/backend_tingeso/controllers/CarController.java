@@ -40,6 +40,13 @@ public class CarController {
         return ResponseEntity.ok(car);
     }
 
+    //todos los autos del mismo año
+    @GetMapping("/productionYear/{productionYear}")
+    public ResponseEntity<List<CarEntity>> listCarProductionyear(@PathVariable int productionYear) {
+        List<CarEntity> car = carService.getCarByProductionyear(productionYear);
+        return ResponseEntity.ok(car);
+    }
+
 //postear un auto
     @PostMapping("/")
     public ResponseEntity<CarEntity> saveCar(@RequestBody CarEntity car) {

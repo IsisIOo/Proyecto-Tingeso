@@ -25,4 +25,7 @@ public interface CarRepository extends JpaRepository<CarEntity, Long> {
 
     @Query(value = "SELECT * FROM car WHERE car.type = :type", nativeQuery = true)
     ArrayList<CarEntity> findByType(@Param("type") String type);
+
+    @Query(value = "SELECT * FROM car WHERE car.production_year  = :production_year", nativeQuery = true)
+    ArrayList<CarEntity> findByProductionyear(@Param("production_year") int production_year);
 }
