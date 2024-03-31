@@ -46,9 +46,10 @@ public class CarController {
         return ResponseEntity.ok(car);
     }
 
+    //busca segun marca
     @GetMapping("/brand/{brand}")
     public ResponseEntity<List<CarEntity>> listCarBrand(@PathVariable String brand) {
-        List<CarEntity> car = carService.getCarByMotortype(brand);
+        List<CarEntity> car = carService.getCarByBrand(brand);
         return ResponseEntity.ok(car);
     }
 
