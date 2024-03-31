@@ -21,12 +21,26 @@ public class CarController {
         return ResponseEntity.ok(car);
     }
 
-    @GetMapping("/{patent}")
+    @GetMapping("/patent/{patent}")
     public ResponseEntity<CarEntity> getCarBypatent(@PathVariable String patent) {
         CarEntity car = carService.getCarByPatent(patent);
         return ResponseEntity.ok(car);
     }
 
+   /* @GetMapping("/type/{type}") //este es para encontrar solo uno
+    public ResponseEntity<CarEntity> getCarByType(@PathVariable String type) {
+        CarEntity car = carService.getCarByType(type);
+        return ResponseEntity.ok(car);
+    }*/
+
+    //para encontrar todos
+    @GetMapping("/type/{type}")
+    public ResponseEntity<List<CarEntity>> listCarType(@PathVariable String type) {
+        List<CarEntity> car = carService.getCarByType(type);
+        return ResponseEntity.ok(car);
+    }
+
+//postear un auto
     @PostMapping("/")
     public ResponseEntity<CarEntity> saveCar(@RequestBody CarEntity car) {
         CarEntity carNew = carService.saveCar(car);
@@ -39,9 +53,9 @@ public class CarController {
         return ResponseEntity.ok(carUpdated);
     }
 
-    @DeleteMapping("/{patent}")
-    public ResponseEntity<Boolean> delete(@PathVariable CarEntity car) throws Exception {
-        var isDeleted = carService.deleteCar(car);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Boolean> deleteCarById(@PathVariable Long id) throws Exception {
+        var isDeleted = carService.deleteCar(id);
         return ResponseEntity.noContent().build();
     }
 }

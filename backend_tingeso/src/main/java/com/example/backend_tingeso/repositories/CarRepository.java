@@ -6,10 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public interface CarRepository extends JpaRepository<CarEntity, String> {
+public interface CarRepository extends JpaRepository<CarEntity, Long> {
     public CarEntity findByBrand(String brand); //encuentra los autos de una marca
 
    // List<CarEntity> findByCategory(String category);
@@ -17,4 +18,11 @@ public interface CarRepository extends JpaRepository<CarEntity, String> {
     //List<CarEntity> findByChildrenBetween(Integer startChildren, Integer endChildren);
     @Query(value = "SELECT * FROM car WHERE car.patent = :patent", nativeQuery = true)
     CarEntity findByPatent(@Param("patent") String patent);
+
+    /*@Query(value = "SELECT * FROM car WHERE car.type = :type", nativeQuery = true)
+    CarEntity findByType(@Param("type") String type);
+    //ya no necesito esta pq esta solo encuentra 1*/
+
+    @Query(value = "SELECT * FROM car WHERE car.type = :type", nativeQuery = true)
+    ArrayList<CarEntity> findByType(@Param("type") String type);
 }
