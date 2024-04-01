@@ -20,8 +20,10 @@ public class RecordEntity {
     @Column(unique = true, nullable = false)
     private Long id;
 
-    private String patent; //patente de letras y numeros    private Date admissionDate; //fecha de llega al taller
 
+    private String patent; //patente de letras y numeros
+
+    private Date admissionDate; //fecha de llega al taller
     private int admissionHour;   //hora de llegada
 
     private String repairType; //tipo de reparacion/es

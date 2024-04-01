@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.backend_tingeso.entities.RecordEntity;
-import com.example.backend_tingeso.entities.CarEntity;
 import com.example.backend_tingeso.services.RecordService;
+import com.example.backend_tingeso.entities.CarEntity;
+
 
 import java.util.List;
 
@@ -17,13 +18,25 @@ public class RecordController {
     RecordService recordService;
 
     @GetMapping("/")
-    public ResponseEntity<List<RecordEntity>> listExtraHours() {
-        List<RecordEntity> extraHours = RecordService.getExtraHours();
-        return ResponseEntity.ok(extraHours);
+    public ResponseEntity<List<RecordEntity>> listRecords() {
+        List<RecordEntity> recordHistory = recordService.getRecordRepository();
+        return ResponseEntity.ok(recordHistory);
 
     }
 
-    @GetMapping("/{id}")
+    @PostMapping("/")
+    public ResponseEntity<RecordEntity> saveRecord(@RequestBody RecordEntity recordHistory) {
+        RecordEntity recordHistoryNew = recordService.saveRecord(recordHistory);
+        return ResponseEntity.ok(recordHistoryNew);
+    }
+
+    @GetMapping("/car/{patent}")
+    public ResponseEntity<List<RecordEntity>> getRecordsByCarPatent(@PathVariable String patent) {
+        List<RecordEntity> records = recordService.getRecordsByPatent(patent);
+        return ResponseEntity.ok(records);
+    }
+
+    /*@GetMapping("/{id}")
     public ResponseEntity<RecordEntity> getExtraHourById(@PathVariable Long id) {
         RecordEntity recordEntity = RecordService.getExtraHourById(id);
         return ResponseEntity.ok(extraHour);
@@ -51,5 +64,5 @@ public class RecordController {
     public ResponseEntity<Boolean> deleteExtraHoursById(@PathVariable Long id) throws Exception {
         var isDeleted = RecordService.deleteExtraHour(id);
         return ResponseEntity.noContent().build();
-    }
+    }*/
 }

@@ -1,5 +1,6 @@
 package com.example.backend_tingeso.services;
 
+import com.example.backend_tingeso.entities.RecordEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.jpa.repository.Query;
@@ -7,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import com.example.backend_tingeso.repositories.CarRepository;
 import com.example.backend_tingeso.entities.CarEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import com.example.backend_tingeso.repositories.RecordRepository;
 
 
 import java.util.ArrayList;
@@ -15,9 +17,16 @@ import java.util.ArrayList;
 public class CarService {
     @Autowired
     CarRepository carRepository;
+    @Autowired
+    RecordRepository recordRepository;
+
+   /* public ArrayList<RecordEntity> getRepository(){
+        return (ArrayList<RecordEntity>) recordRepository.findAll();
+    }*/
 
     //obtiene todos los autos
     public ArrayList<CarEntity> getCar(){
+
         return (ArrayList<CarEntity>) carRepository.findAll();
     }
 
@@ -32,6 +41,11 @@ public class CarService {
     public CarEntity getCarByPatent(String patent){
         return carRepository.findByPatent(patent);
     }
+
+    /*public CarEntity getCarByPatent2(String patent){
+        return carRepository.findByPatent2(patent);
+    }*/
+
 
     /* encuentra solo un elemento
     public CarEntity getCarByType(String type){
@@ -71,4 +85,6 @@ public class CarService {
         }
 
     }
+
+
 }

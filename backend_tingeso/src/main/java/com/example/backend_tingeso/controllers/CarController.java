@@ -40,6 +40,12 @@ public class CarController {
         return ResponseEntity.ok(car);
     }
 
+    /*@GetMapping("/history1/{history1}")
+    public ResponseEntity<CarEntity> getCarBypatent2(@PathVariable String history1) {
+        CarEntity car = carService.getCarByPatent2(history1);
+        return ResponseEntity.ok(car);
+    }*/
+
     @GetMapping("/motortype/{motortype}")
     public ResponseEntity<List<CarEntity>> listCarMotortype(@PathVariable String motortype) {
         List<CarEntity> car = carService.getCarByMotortype(motortype);

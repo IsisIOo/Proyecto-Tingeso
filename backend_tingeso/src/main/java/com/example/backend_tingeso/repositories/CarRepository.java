@@ -1,6 +1,8 @@
 package com.example.backend_tingeso.repositories;
 
+
 import com.example.backend_tingeso.entities.CarEntity;
+import com.example.backend_tingeso.entities.RecordEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -35,4 +37,7 @@ public interface CarRepository extends JpaRepository<CarEntity, Long> {
 
     @Query(value = "SELECT * FROM car WHERE car.brand = :brand", nativeQuery = true)
     ArrayList<CarEntity> findByBrand(@Param("brand") String brand);
+    @Query(value = "SELECT * FROM record WHERE record.patent = :patent", nativeQuery = true)
+    RecordEntity findByPatent2(@Param("patent") String patent);
+
 }
