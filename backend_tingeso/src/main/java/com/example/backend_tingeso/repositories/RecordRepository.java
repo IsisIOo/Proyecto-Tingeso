@@ -11,7 +11,10 @@ import java.util.List;
 
 @Repository
 public interface RecordRepository extends JpaRepository<RecordEntity, Long> {
-        List<RecordEntity> findByPatent(String patent);
+        List<RecordEntity> findByPatent(String patent); //no borrar
+
+
+        //probar
         @Query(value = "SELECT * FROM record WHERE record.patent = :patent AND YEAR(record.date)=:year AND MONTH(record.date)=:month", nativeQuery = true)
         List<RecordEntity> getadmissionDate(@Param("patent") String patent, @Param("year") int year, @Param("month") int month);
 
