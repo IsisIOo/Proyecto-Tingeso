@@ -33,7 +33,7 @@ public class RecordEntity {
     private int departureHour; //hora de salida, asumo que deberia ser igual a la de llegada
 
     private Date clientDate; //fecha en la que el cliente se lleva el vehiculo
-    private Date clientHour; //hora en la que el cliente se lleva el vehiculo
+    private int clientHour; //hora en la que el cliente se lleva el vehiculo
 
 }
 

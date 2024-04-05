@@ -4,6 +4,7 @@ import com.example.backend_tingeso.repositories.CarRepository;
 import com.example.backend_tingeso.repositories.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Date;
 
 import com.example.backend_tingeso.repositories.RepairRepository;
 
@@ -17,8 +18,8 @@ public class RepairService {
 
     //get reparaciones para saber cuanto sale la reparacion segun el tipo de reparacion y el tipo de motor
 
-    public float getCost(String patent){
-        int total_price =0;
+    public double getCost(String patent){
+        double total_price =0;
         //partimos obteniendo el auto segun la patente
         String motor = carRepository.findByPatent(patent).getMotorType();
         String repairtype = recordRepository.findByPatentOne(patent).getRepairType();
@@ -179,6 +180,248 @@ public class RepairService {
             else{
                 total_price=total_price;
             }
+        }
+
+        // ahora veo si aplica el descuento segun la hora de ingreso
+        int hour = recordRepository.findByPatentOne(patent).getAdmissionHour();//hora para determinar si se le aplica descuento por hora de llegada
+
+        if(9< hour && hour<12){//agregar que se entre lunes y jueves
+            double total_price_hour = total_price * 0.1;
+            double total_price_hour2 = total_price - total_price_hour;
+        }
+        else{
+            total_price=total_price;
+        }
+        //descuento segun marca, aun tengo dudas de este y correo blabla
+        String brand1 = carRepository.findByPatent(patent).getBrand();
+
+
+        //recargo por kilometraje
+        int km = carRepository.findByPatent(patent).getKilometers();
+        if(brand1.toLowerCase() == "sedan"){
+            if(km<5000){
+                total_price=total_price;
+            }
+            if(5001<km && km< 12000){
+                double total_price_km=total_price*0.03;
+                total_price= total_price + total_price_km;
+            }
+            if(12001<km && km<25000){
+                double total_price_km=total_price*0.07;
+                total_price= total_price + total_price_km;
+            }
+            if(25001<km && km<40000){
+                double total_price_km=total_price*0.12;
+                total_price= total_price + total_price_km;
+            }
+            if(40000<km){
+                double total_price_km=total_price*0.2;
+                total_price= total_price + total_price_km;
+            }
+
+        }
+        if(brand1.toLowerCase() == "hatchback"){
+            if(km<5000){
+                total_price=total_price;
+            }
+            if(5001<km && km< 12000){
+                double total_price_km=total_price*0.03;
+                total_price= total_price + total_price_km;
+            }
+            if(12001<km && km<25000){
+                double total_price_km=total_price*0.07;
+                total_price= total_price + total_price_km;
+            }
+            if(25001<km && km<40000){
+                double total_price_km=total_price*0.12;
+                total_price= total_price + total_price_km;
+            }
+            if(40000<km){
+                double total_price_km=total_price*0.2;
+                total_price= total_price + total_price_km;
+            }
+        }
+
+        if(brand1.toLowerCase() == "suv"){
+            if(km<5000){
+                total_price=total_price;
+            }
+            if(5001<km && km< 12000){
+                double total_price_km=total_price*0.05;
+                total_price= total_price + total_price_km;
+            }
+            if(12001<km && km<25000){
+                double total_price_km=total_price*0.09;
+                total_price= total_price + total_price_km;
+            }
+            if(25001<km && km<40000){
+                double total_price_km=total_price*0.12;
+                total_price= total_price + total_price_km;
+            }
+            if(40000<km){
+                double total_price_km=total_price*0.2;
+                total_price= total_price + total_price_km;
+            }
+        }
+
+        if(brand1.toLowerCase() == "pickup"){
+            if(km<5000){
+                total_price=total_price;
+            }
+            if(5001<km && km< 12000){
+                double total_price_km=total_price*0.05;
+                total_price= total_price + total_price_km;
+            }
+            if(12001<km && km<25000){
+                double total_price_km=total_price*0.09;
+                total_price= total_price + total_price_km;
+            }
+            if(25001<km && km<40000){
+                double total_price_km=total_price*0.12;
+                total_price= total_price + total_price_km;
+            }
+            if(40000<km){
+                double total_price_km=total_price*0.2;
+                total_price= total_price + total_price_km;
+            }
+
+        }
+
+        if(brand1.toLowerCase() == "furgoneta"){
+            if(km<5000){
+                total_price=total_price;
+            }
+            if(5001<km && km< 12000){
+                double total_price_km=total_price*0.05;
+                total_price= total_price + total_price_km;
+            }
+            if(12001<km && km<25000){
+                double total_price_km=total_price*0.09;
+                total_price= total_price + total_price_km;
+            }
+            if(25001<km && km<40000){
+                double total_price_km=total_price*0.12;
+                total_price= total_price + total_price_km;
+            }
+            if(40000<km){
+                double total_price_km=total_price*0.2;
+                total_price= total_price + total_price_km;
+            }
+
+        }
+
+
+
+
+        //recargo por antiguedad
+        int year_car = carRepository.findByPatent(patent).getProductionYear();
+        if(brand1.toLowerCase() == "sedan"){
+            if((2024 - year_car) <= 5) {
+                total_price= total_price;
+            }
+
+            if((2024 - year_car) >= 6 && (2024 - year_car)<=10) {
+                double total_price_year=total_price*0.05;
+                total_price= total_price + total_price_year;
+            }
+
+            if((2024 - year_car) >= 11 && (2024 - year_car)<=15) {
+                double total_price_year=total_price*0.09;
+                total_price= total_price + total_price_year;
+            }
+
+            if((2024 - year_car) >= 16) {
+                double total_price_year=total_price*0.15;
+                total_price= total_price + total_price_year;
+            }
+        }
+
+        if(brand1.toLowerCase() == "hatchback"){
+            if((2024 - year_car) <= 5) {
+                total_price= total_price;
+            }
+
+            if((2024 - year_car) >= 6 && (2024 - year_car)<=10) {
+                double total_price_year=total_price*0.05;
+                total_price= total_price + total_price_year;
+            }
+
+            if((2024 - year_car) >= 11 && (2024 - year_car)<=15) {
+                double total_price_year=total_price*0.09;
+                total_price= total_price + total_price_year;
+            }
+
+            if((2024 - year_car) >= 16) {
+                double total_price_year=total_price*0.15;
+                total_price= total_price + total_price_year;
+            }
+        }
+
+        if(brand1.toLowerCase() == "suv"){
+            if((2024 - year_car) <= 5) {
+                total_price= total_price;
+            }
+
+            if((2024 - year_car) >= 6 && (2024 - year_car)<=10) {
+                double total_price_year=total_price*0.07;
+                total_price= total_price + total_price_year;
+            }
+
+            if((2024 - year_car) >= 11 && (2024 - year_car)<=15) {
+                double total_price_year=total_price*0.11;
+                total_price= total_price + total_price_year;
+            }
+
+            if((2024 - year_car) >= 16) {
+                double total_price_year=total_price*0.2;
+                total_price= total_price + total_price_year;
+            }
+        }
+
+        if(brand1.toLowerCase() == "pickup"){
+            if((2024 - year_car) <= 5) {
+                total_price= total_price;
+            }
+
+            if((2024 - year_car) >= 6 && (2024 - year_car)<=10) {
+                double total_price_year=total_price*0.07;
+                total_price= total_price + total_price_year;
+            }
+
+            if((2024 - year_car) >= 11 && (2024 - year_car)<=15) {
+                double total_price_year=total_price*0.11;
+                total_price= total_price + total_price_year;
+            }
+
+            if((2024 - year_car) >= 16) {
+                double total_price_year=total_price*0.2;
+                total_price= total_price + total_price_year;
+            }
+        }
+
+        if(brand1.toLowerCase() == "furgoneta"){
+            if((2024 - year_car) <= 5) {
+                total_price= total_price;
+            }
+
+            if((2024 - year_car) >= 6 && (2024 - year_car)<=10) {
+                double total_price_year=total_price*0.07;
+                total_price= total_price + total_price_year;
+            }
+
+            if((2024 - year_car) >= 11 && (2024 - year_car)<=15) {
+                double total_price_year=total_price*0.11;
+                total_price= total_price + total_price_year;
+            }
+
+            if((2024 - year_car) >= 16) {
+                double total_price_year=total_price*0.2;
+                total_price= total_price + total_price_year;
+            }
+        }
+
+        else{
+            total_price=total_price;
         }
 
         System.out.println(motor);

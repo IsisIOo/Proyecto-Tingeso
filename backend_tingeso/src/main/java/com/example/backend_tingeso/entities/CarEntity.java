@@ -33,5 +33,5 @@ public class CarEntity {
     private int productionYear; //año de fabricacion
     private String motorType; //tipo de motor gasolina, diesel, hibrido y electrico
     private int numberSeats; //numero de asientos
-
+    private int kilometers; //kilometraje del vehiculo
 }
