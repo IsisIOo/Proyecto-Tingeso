@@ -37,6 +37,8 @@ public interface CarRepository extends JpaRepository<CarEntity, Long> {
 
     @Query(value = "SELECT * FROM car WHERE car.brand = :brand", nativeQuery = true)
     ArrayList<CarEntity> findByBrand(@Param("brand") String brand);
+
+    //recupera los historiales del auto
     @Query(value = "SELECT * FROM record WHERE record.patent = :patent", nativeQuery = true)
     RecordEntity findByPatent2(@Param("patent") String patent);
 

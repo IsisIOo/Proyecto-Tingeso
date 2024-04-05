@@ -30,6 +30,7 @@ public class CarService {
         return (ArrayList<CarEntity>) carRepository.findAll();
     }
 
+
     /*public ArrayList<CarEntity> getCarType(@PathVariable String type){
         return (ArrayList<CarEntity>) carRepository.findByType(type);
     }*/
@@ -41,6 +42,8 @@ public class CarService {
     public CarEntity getCarByPatent(String patent){
         return carRepository.findByPatent(patent);
     }
+
+
 
     /*public CarEntity getCarByPatent2(String patent){
         return carRepository.findByPatent2(patent);
