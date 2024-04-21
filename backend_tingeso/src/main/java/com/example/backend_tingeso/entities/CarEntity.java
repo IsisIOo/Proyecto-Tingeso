@@ -8,8 +8,6 @@ import lombok.NonNull;
 //import com.example.backend_tingeso.entities.RecordEntity;
 //import com.example.backend_tingeso.services.RecordService;
 
-
-
 @Entity //va asi tal cual
 @Table(name = "car")
 @Data
