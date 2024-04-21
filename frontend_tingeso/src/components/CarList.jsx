@@ -23,7 +23,7 @@ const CarList = () => {
       .getAll()
       .then((response) => {
         console.log("Mostrando listado de todos los autos ingresados.", response.data);
-        setEmployees(response.data);
+        setCars(response.data);
       })
       .catch((error) => {
         console.log(
@@ -43,7 +43,7 @@ const CarList = () => {
       "¿Esta seguro que desea borrar este auto?"
     );
     if (confirmDelete) {
-      employeeService
+      carService
         .remove(id)
         .then((response) => {
           console.log("auto ha sido eliminado.", response.data);
