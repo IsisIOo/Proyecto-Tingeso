@@ -27,7 +27,7 @@ public class RecordEntity {
     private int admissionHour;   //hora de llegada
 
     private String repairType; //tipo de reparacion/es
-    private int totalAmount; //monto total de las reparaciones
+    private double totalAmount; //monto total de las reparaciones
 
     private Date departureDate; //fecha de salida del vehiculo
     private int departureHour; //hora de salida, asumo que deberia ser igual a la de llegada

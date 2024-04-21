@@ -22,8 +22,8 @@ public class RepairController {
     RepairService repairService;
 
     @GetMapping("/patent/{patent}")
-    public float queso(@PathVariable String patent) {
-        float a = repairService.getCost(patent);
+    public double queso(@PathVariable String patent) {
+        double a = repairService.getCost(patent);
         return a;
     }
 }
