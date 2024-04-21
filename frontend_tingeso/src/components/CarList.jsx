@@ -109,14 +109,16 @@ const CarList = () => {
           {cars.map((car) => (
             <TableRow
               key={car.id}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell align="left">{car.patent}</TableCell>
-              <TableCell align="left">{car.model}</TableCell>
-              <TableCell align="right">{car.brand}</TableCell>
-              <TableCell align="right">{car.type}</TableCell>
-              <TableCell align="right">{car.motortype}</TableCell>
-              <TableCell>
+          <TableCell align="left">{car.patent}</TableCell>
+          <TableCell align="left">{car.brand}</TableCell>
+          <TableCell align="right">{car.model}</TableCell>
+          <TableCell align="right">{car.type}</TableCell>
+          <TableCell align="right">{car.productionYear}</TableCell> {/* Año de producción */}
+          <TableCell align="right">{car.motorType}</TableCell> {/* Tipo de motor */}
+          <TableCell align="right">{car.numberSeats}</TableCell> {/* Nro. de asientos */}
+
+          <TableCell>
                 <Button
                   variant="contained"
                   color="info"
