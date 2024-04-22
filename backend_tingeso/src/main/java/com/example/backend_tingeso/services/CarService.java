@@ -10,8 +10,10 @@ import com.example.backend_tingeso.entities.CarEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import com.example.backend_tingeso.repositories.RecordRepository;
 
+import java.util.*;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Collectors;
 
 @Service
 public class CarService {
@@ -19,6 +21,13 @@ public class CarService {
     CarRepository carRepository;
     @Autowired
     RecordRepository recordRepository;
+    @Autowired
+    RecordRepository repairRepository;
+    @Autowired
+    RecordService recordService;
+    @Autowired
+    RepairService repairService;
+
 
    /* public ArrayList<RecordEntity> getRepository(){
         return (ArrayList<RecordEntity>) recordRepository.findAll();
@@ -88,6 +97,52 @@ public class CarService {
         }
 
     }
+
+    public ArrayList<CarEntity> ObtenerRegistroyPrecios(List<CarEntity> car){
+        for (int i = 0; i < car.size(); i++) {
+            CarEntity carEntity = car.get(i);
+            String patent = carEntity.getPatent();
+            RecordEntity recordEntity = recordRepository.findByPatentOne(patent);
+
+        }
+        return (ArrayList<CarEntity>) car;
+    }
+
+
+
+    public Map<String, Double> getCosts(List<CarEntity> cars) {
+        Map<String, Double> costsMap = new HashMap<>();
+
+        // Obtener los costos y asociarlos a las patentes de los autos
+        for (CarEntity car : cars) {
+            String patent = car.getPatent();
+            RecordEntity record = recordService.getOneRecordRespository(patent);
+
+            if (record != null) {
+                double totalAmount = record.getTotalAmount();
+                costsMap.put(patent, totalAmount);
+            } else {
+                // Si no hay registro para la patente, se asigna un costo de 0.0
+                costsMap.put(patent, 0.0);
+            }
+        }
+
+        // Ordenar el mapa de costos de mayor a menor
+        Map<String, Double> sortedCostsMap = costsMap.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+
+        // Mostrar el auto con el menor costo
+        if (!sortedCostsMap.isEmpty()) {
+            Map.Entry<String, Double> minCostEntry = sortedCostsMap.entrySet().iterator().next();
+            System.out.println("Auto con menor costo: Patente = " + minCostEntry.getKey() + ", Costo = " + minCostEntry.getValue());
+        }
+
+        return sortedCostsMap;
+    }
+
+
 
 
 }

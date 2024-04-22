@@ -19,10 +19,29 @@ public class RecordService {
         return (ArrayList<RecordEntity>) recordRepository.findAll();
     }
 
+    public RecordEntity getOneRecordRespository(String patent){
+        return (RecordEntity) recordRepository.findByPatentOne(patent);
+    }
+
     public RecordEntity saveRecord(RecordEntity record){
         return recordRepository.save(record);
     }
     public List<RecordEntity> getRecordsByPatent(String patent) {
         return recordRepository.findByPatent(patent);
+    }
+
+    public RecordEntity setAmount(RecordEntity record, double totalAmount) {
+        record.setTotalAmount(totalAmount);
+        return recordRepository.save(record);
+    }
+
+    public boolean deleteRecord(Long id) throws Exception {
+        try{
+            recordRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+
     }
 }

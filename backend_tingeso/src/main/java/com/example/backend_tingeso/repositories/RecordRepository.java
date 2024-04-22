@@ -14,15 +14,12 @@ import java.util.List;
 public interface RecordRepository extends JpaRepository<RecordEntity, Long> {
         List<RecordEntity> findByPatent(String patent); //no borrar, esta mala
 
-
         //probar
         @Query(value = "SELECT * FROM record WHERE record.patent = :patent AND YEAR(record.date)=:year AND MONTH(record.date)=:month", nativeQuery = true)
         List<RecordEntity> getadmissionDate(@Param("patent") String patent, @Param("year") int year, @Param("month") int month);
 
         @Query(value = "SELECT * FROM record WHERE record.patent = :patent" , nativeQuery = true)
         RecordEntity findByRepairTypeAndPatent(@Param("patent") String patent);
-
-
 
         //obtener un solo registro al cual le puedo hacer un get luego
         @Query(value = "SELECT * FROM record WHERE record.patent = :patent", nativeQuery = true)

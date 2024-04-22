@@ -1,12 +1,16 @@
 package com.example.backend_tingeso.controllers;
 
 import com.example.backend_tingeso.entities.CarEntity;
+import com.example.backend_tingeso.entities.RecordEntity;
 import com.example.backend_tingeso.services.CarService;
+import com.example.backend_tingeso.services.RecordService;
+import com.example.backend_tingeso.services.RepairService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/car")
@@ -15,12 +19,30 @@ public class CarController {
     @Autowired
     CarService carService;
 
+    @Autowired
+    RecordService recordService;
+
+    @Autowired
+    RepairService repairService;
+
+    //obtiene todos
     @GetMapping("/")
     public ResponseEntity<List<CarEntity>> listCar() {
         List<CarEntity> car = carService.getCar();
         return ResponseEntity.ok(car);
     }
 
+    //Vamos a conseguir los costos de todos los autos
+    @GetMapping("/allCost/")
+    public ResponseEntity<Map<String, Double>> listCosts() {
+        List<CarEntity> cars = carService.getCar(); //obtengo los autos para obtener todos los costos de estos
+        Map<String, Double>  costs = carService.getCosts(cars);
+
+        return ResponseEntity.ok(costs);
+    }
+
+
+    //encontrar solo uno
     @GetMapping("/patent/{patent}")
     public ResponseEntity<CarEntity> getCarBypatent(@PathVariable String patent) {
         CarEntity car = carService.getCarByPatent(patent);
@@ -84,4 +106,6 @@ public class CarController {
         var isDeleted = carService.deleteCar(id);
         return ResponseEntity.noContent().build();
     }
+
+
 }

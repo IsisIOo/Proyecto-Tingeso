@@ -43,11 +43,11 @@ export default function Sidemenu({ open, toggleDrawer }) {
           <ListItemText primary="Autos" />
         </ListItemButton>
 
-        <ListItemButton onClick={() => navigate("/extraHours/list")}>
+        <ListItemButton onClick={() => navigate("/record/list")}>
           <ListItemIcon>
             <MoreTimeIcon />
           </ListItemIcon>
-          <ListItemText primary="Horas Extra" />
+          <ListItemText primary="Historial" />
         </ListItemButton>
 
         <ListItemButton onClick={() => navigate("/paycheck/list")}>

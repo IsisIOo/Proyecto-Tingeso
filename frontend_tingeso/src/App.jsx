@@ -7,7 +7,9 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Navbar from "./components/Navbar"
 import Home from './components/Home'
 import CarList from "./components/CarList"
+import RecordList from "./components/RecordList"
 import AddEditCar from './components/AddEditCar'
+import AddEditRecord from './components/AddEditRecord'
 
 function App() {
   return (
@@ -18,6 +20,10 @@ function App() {
               <Route path="/home" element={<Home/>} />
               <Route path = "/car/list" element = {<CarList/>} />
               <Route path = "/car/add" element = {<AddEditCar/>} />
+
+              {/*registros del auto*/} 
+              <Route path = "/record/list" element = {<RecordList/>} />
+              <Route path = "/record/add" element = {<AddEditRecord/>} />
             </Routes>
           </div>
       </Router>
