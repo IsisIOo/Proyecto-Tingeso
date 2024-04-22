@@ -1,5 +1,7 @@
 package com.example.backend_tingeso.services;
 
+import com.example.backend_tingeso.entities.CarEntity;
+import com.example.backend_tingeso.entities.RepairEntity;
 import com.example.backend_tingeso.repositories.CarRepository;
 import com.example.backend_tingeso.repositories.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -523,5 +525,21 @@ public class RepairService {
         System.out.println("Precio total de la reparación con recargo por antiguedad: " + total_price);
         return total_price;
     }
+
+    public double IVA(double total_price){
+        double iva = total_price * 0.19;
+        total_price = total_price + iva;
+        System.out.println("El IVA aplicado a la reparación: " + iva);
+        System.out.println("Precio total de la reparación con IVA: " + total_price);
+        return total_price;
+    }
+
+    public RepairEntity getRepairByPatent(String patent){
+        return repairRepository.findByPatentrepair(patent);
+    }
+
+
+
+
 }
 

@@ -22,8 +22,29 @@ public class RepairController {
     RepairService repairService;
 
     @GetMapping("/patent/{patent}")
-    public double queso(@PathVariable String patent) {
-        double a = repairService.getCost(patent);
-        return a;
+    public double costosTotales(@PathVariable String patent) {
+        double costo = repairService.getCost(patent);
+        double costo_iva = repairService.IVA(costo);
+        return costo_iva;
     }
+
+    @GetMapping("/discounts/{patent}")
+    public double descuentos(@PathVariable String patent) {
+        RepairEntity repairEntity = repairService.getRepairByPatent(patent);
+        double descuento_por_dia= repairEntity.getDiscountPerDay();
+        double descuento_por_marca= repairEntity.getDiscountPerbonus();
+        double descuento_total= descuento_por_dia+descuento_por_marca;
+        return descuento_total;
+    }
+
+    @GetMapping("/recharges/{patent}")
+    public double recargos(@PathVariable String patent) {
+        RepairEntity repairEntity = repairService.getRepairByPatent(patent);
+        double recargo_por_dia= repairEntity.getDelayCharge();
+        double recargo_por_antiguedad= repairEntity.getSeniorityCharge();
+        double recargo_por_kilometro= repairEntity.getMileageCharge();
+        double recargo_total= recargo_por_dia+recargo_por_antiguedad+recargo_por_kilometro;
+        return recargo_total;
+    }
+
 }

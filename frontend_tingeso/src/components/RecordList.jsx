@@ -60,7 +60,7 @@ const RecordList = () => {
 
   const handleEdit = (id) => {
     console.log("Printing id", id);
-    navigate(`/record/edit/${id}`);
+    navigate(`/record/details/${id}`);
   };
 
   return (
@@ -135,7 +135,7 @@ const RecordList = () => {
                   style={{ marginLeft: "0.5rem" }}
                   startIcon={<EditIcon />}
                 >
-                  Editar
+                  Detalles
                 </Button>
 
                 <Button

@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import SaveIcon from "@mui/icons-material/Save";
+import Paper from "@mui/material/Paper";
 
 const AddEditRecord = () => {
   const [patent, setPatent] = useState("");
@@ -84,6 +85,7 @@ const AddEditRecord = () => {
   }, []);
 
   return (
+    <Paper >
     <Box
       display="flex"
       flexDirection="column"
@@ -179,11 +181,11 @@ const AddEditRecord = () => {
 
         <FormControl>
           <br />
-          <Button
+          <Button 
             variant="contained"
-            color="info"
+            //color="info"
             onClick={(e) => saveRecord(e)}
-            style={{ marginLeft: "0.5rem" }}
+            style={{ marginLeft: "0.5rem", color  : "white", backgroundColor: "green"}}
             startIcon={<SaveIcon />}
           >
             Grabar
@@ -193,6 +195,7 @@ const AddEditRecord = () => {
       <hr />
       <Link to="/record/list">Back to List</Link>
     </Box>
+    </Paper>
   );
 };
 

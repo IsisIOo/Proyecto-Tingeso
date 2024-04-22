@@ -95,7 +95,6 @@ public class CarService {
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
-
     }
 
     public ArrayList<CarEntity> ObtenerRegistroyPrecios(List<CarEntity> car){

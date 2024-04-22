@@ -27,7 +27,7 @@ export default function Sidemenu({ open, toggleDrawer }) {
       onClick={toggleDrawer(false)}
     >
       <List>
-        <ListItemButton onClick={() => navigate("/home")}>
+        <ListItemButton onClick={() => navigate("/")}>
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>

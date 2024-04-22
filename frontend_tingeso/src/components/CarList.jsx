@@ -64,7 +64,8 @@ const CarList = () => {
   };
 
   return (
-    <TableContainer component={Paper}>
+    <Paper style={{ backgroundColor: 'white' }}>
+    <TableContainer component={Paper} >
       <br />
       <Link
         to="/car/add"
@@ -126,6 +127,7 @@ const CarList = () => {
                   onClick={() => handleEdit(car.patent)}
                   style={{ marginLeft: "0.5rem" }}
                   startIcon={<EditIcon />}
+                  
                 >
                   Editar
                 </Button>
@@ -146,6 +148,7 @@ const CarList = () => {
         </TableBody>
       </Table>
     </TableContainer>
+    </Paper>
   );
 };
 

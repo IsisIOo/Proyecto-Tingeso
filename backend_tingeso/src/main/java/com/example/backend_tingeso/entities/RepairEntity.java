@@ -19,10 +19,14 @@ public class RepairEntity {
     private Long id;
 
     private String patent;// para que se relacione a un auto
-    private float total; //total de la reparacion
-    private float discountPerDay; //descuentopor dia de atencion
-    private float discountPerbonus; //descuento por bono, estas son para 4 marcas toyot, ford, hyundai y honda
-    private float delayCharge; //recargo por atraso de recogida
-    private float mileageCharge; //recargo por kilometraje
-    private float seniorityCharge; //cargo por antiguedad del vehiculo
+    private double total; //total de la reparacion
+    private double discountPerDay; //descuento por dia de atencion
+    private double discountPerbonus; //descuento por bono, estas son para 4 marcas toyot, ford, hyundai y honda
+    private double delayCharge; //recargo por atraso de recogida
+    private double mileageCharge; //recargo por kilometraje
+    private double seniorityCharge; //cargo por antiguedad del vehiculo
+
+    //2 descuentos
+    //3 recargos
+    //1 total
 }

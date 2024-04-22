@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import SaveIcon from "@mui/icons-material/Save";
+import Paper from "@mui/material/Paper";
 
 const AddEditCar = () => {
   const [patent, setPatent] = useState("");
@@ -83,6 +84,7 @@ const AddEditCar = () => {
   }, []);
 
   return (
+    <Paper >
     <Box
       display="flex"
       flexDirection="column"
@@ -202,6 +204,7 @@ const AddEditCar = () => {
       <hr />
       <Link to="/car/list">Back to List</Link>
     </Box>
+    </Paper>
   );
 };
 
