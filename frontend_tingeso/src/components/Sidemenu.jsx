@@ -50,7 +50,7 @@ export default function Sidemenu({ open, toggleDrawer }) {
           <ListItemText primary="Historial" />
         </ListItemButton>
 
-        <ListItemButton onClick={() => navigate("/paycheck/list")}>
+        <ListItemButton onClick={() => navigate("/cost/list")}>
           <ListItemIcon>
             <PaidIcon />
           </ListItemIcon>

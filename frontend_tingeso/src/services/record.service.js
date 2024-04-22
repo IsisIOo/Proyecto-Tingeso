@@ -19,4 +19,6 @@ const update = data => { //put cost en record
 const remove = id => {
     return httpRecord.delete(`/api/v1/car/${id}`);
 }
+
+
 export default { getAll, create, get, update, remove };

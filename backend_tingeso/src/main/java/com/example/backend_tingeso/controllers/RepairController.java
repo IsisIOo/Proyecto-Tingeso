@@ -21,6 +21,8 @@ public class RepairController {
     @Autowired
     RepairService repairService;
 
+
+    //calcula el de 1 solo
     @GetMapping("/patent/{patent}")
     public double costosTotales(@PathVariable String patent) {
         double costo = repairService.getCost(patent);
@@ -46,5 +48,50 @@ public class RepairController {
         double recargo_total= recargo_por_dia+recargo_por_antiguedad+recargo_por_kilometro;
         return recargo_total;
     }
+
+    @GetMapping("/recharge-delay/{patent}")
+    public double recargodelay(@PathVariable String patent) {
+        RepairEntity repairEntity = repairService.getRepairByPatent(patent);
+        double recargo_por_dia= repairEntity.getDelayCharge();
+        return recargo_por_dia;
+    }
+
+    @GetMapping("/recharge-senior/{patent}")
+    public double recargoantiguedad(@PathVariable String patent) {
+        RepairEntity repairEntity = repairService.getRepairByPatent(patent);
+        double recargo_por_viejo= repairEntity.getSeniorityCharge();
+        return recargo_por_viejo;
+    }
+
+    @GetMapping("/recharge-mile/{patent}")
+    public double recargoamile(@PathVariable String patent) {
+        RepairEntity repairEntity = repairService.getRepairByPatent(patent);
+        double recargo_por_kilometro= repairEntity.getMileageCharge();
+        return recargo_por_kilometro;
+    }
+
+    @GetMapping("/discount-dia/{patent}")
+    public double descuentodia(@PathVariable String patent) {
+        RepairEntity repairEntity = repairService.getRepairByPatent(patent);
+        double descuentodia= repairEntity.getDiscountPerDay();
+        return descuentodia;
+    }
+
+    @GetMapping("/discount-marca/{patent}")
+    public double descuentomarca(@PathVariable String patent) {
+        RepairEntity repairEntity = repairService.getRepairByPatent(patent);
+        double descuentomarca= repairEntity.getDiscountPerbonus();
+        return descuentomarca;
+    }
+
+    @GetMapping("/repaircost/{patent}")
+    public double costorepair(@PathVariable String patent) {
+        RepairEntity repairEntity = repairService.getRepairByPatent(patent);
+        double repair= repairEntity.getTotalOriginal();
+        return repair;
+    }
+
+
+
 
 }

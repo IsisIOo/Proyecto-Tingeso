@@ -12,7 +12,7 @@ import RecordList from "./components/RecordList"
 import AddEditCar from './components/AddEditCar'
 import AddEditRecord from './components/AddEditRecord'
 import NotFound from './components/NotFound'
-import CostDetails from './components/CostDetails'
+import CostList from './components/CostList'
 
 function App() {
   return (
@@ -27,7 +27,8 @@ function App() {
               {/*registros del auto*/} 
               <Route path = "/record/list" element = {<RecordList/>} />
               <Route path = "/record/add" element = {<AddEditRecord/>} />
-              <Route path = "/record/details/" element = {<CostDetails/>} />
+
+              <Route path = "/cost/list" element = {<CostList/>} />
               <Route path = "*" element = {<NotFound/>} />
             </Routes>
           </div>

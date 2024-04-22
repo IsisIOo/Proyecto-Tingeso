@@ -73,6 +73,7 @@ const RecordList = () => {
         <Button
           variant="contained"
           color="primary"
+          style={{ marginLeft: "0.5rem", color  : "white", backgroundColor: "#D6589F"}}
           startIcon={<PersonAddIcon />}
         >
           Añadir Historial

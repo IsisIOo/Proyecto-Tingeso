@@ -194,7 +194,7 @@ const AddEditCar = () => {
             variant="contained"
             color="info"
             onClick={(e) => saveCar(e)}
-            style={{ marginLeft: "0.5rem" }}
+            style={{ marginLeft: "0.5rem", color  : "white", backgroundColor: "#D6589F"}}
             startIcon={<SaveIcon />}
           >
             Grabar

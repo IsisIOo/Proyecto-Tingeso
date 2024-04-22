@@ -185,7 +185,7 @@ const AddEditRecord = () => {
             variant="contained"
             //color="info"
             onClick={(e) => saveRecord(e)}
-            style={{ marginLeft: "0.5rem", color  : "white", backgroundColor: "green"}}
+            style={{ marginLeft: "0.5rem", color  : "white", backgroundColor: "#D6589F"}}
             startIcon={<SaveIcon />}
           >
             Grabar

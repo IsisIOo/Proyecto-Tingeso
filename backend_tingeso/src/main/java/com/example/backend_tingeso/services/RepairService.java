@@ -31,6 +31,33 @@ public class RepairService {
         return total_price;
     }
 
+    //hace lo mismo solo que retorna una entidad
+    public RepairEntity getCostentity(String patent) {
+        double total_price = precioSegunReparacionyMotor(patent);
+        total_price = DescuentosSegunHora(patent, total_price);
+        //total_price = DescuentoSegunMarca(patent, total_price);
+        //comentada el descuento segun marca porque espero usar essa funcion como un boton
+        total_price = RecargoPorKilometraje(patent, total_price);
+        total_price = recargoPorAntiguedad(patent, total_price);
+
+        //los set para el repair entity
+        double total_price_entity = precioSegunReparacionyMotor(patent);
+        double deshora = DescuentosSegunHora(patent, total_price);
+        double totalOriginal = precioSegunReparacionyMotor(patent);
+
+        //nuevo repair entity que se retornara
+        RepairEntity repairEntity = new RepairEntity();
+        repairEntity.setPatent(patent);
+        repairEntity.setTotalOriginal(totalOriginal);
+
+        repairEntity.setTotalAmount(total_price);
+
+        return repairEntity;
+    }
+
+
+
+
     public double precioSegunReparacionyMotor(String patent) {
         double total_price = 0;
         String motor = carRepository.findByPatent(patent).getMotorType();
@@ -191,8 +218,11 @@ public class RepairService {
     }
 
 
+    //a este se le agrega segun hora y dia
     public double DescuentosSegunHora(String patent, double total_price) {
         // ahora veo si aplica el descuento segun la hora de ingreso
+
+        //agregar dia
         int hour = recordRepository.findByPatentOne(patent).getAdmissionHour();//hora para determinar si se le aplica descuento por hora de llegada
         if (9 < hour && hour < 12) {//agregar que se entre lunes y jueves
             double total_price_hour = total_price * 0.1;
@@ -534,6 +564,8 @@ public class RepairService {
         return total_price;
     }
 
+
+    //encontrar segun tipo de reparacion
     public RepairEntity getRepairByPatent(String patent){
         return repairRepository.findByPatentrepair(patent);
     }
