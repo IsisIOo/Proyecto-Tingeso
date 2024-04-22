@@ -1,6 +1,7 @@
 package com.example.backend_tingeso.controllers;
 
 
+import com.example.backend_tingeso.entities.CarEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,11 @@ public class RepairController {
     @Autowired
     RepairService repairService;
 
+    @PostMapping("/")
+    public ResponseEntity<RepairEntity> saveRepair(String patent) {
+        RepairEntity repairNew = repairService.saveCostentity(patent);
+        return ResponseEntity.ok(repairNew);
+    }
 
     //calcula el de 1 solo
     @GetMapping("/patent/{patent}")
@@ -90,6 +96,8 @@ public class RepairController {
         double repair= repairEntity.getTotalOriginal();
         return repair;
     }
+
+
 
 
 

@@ -26,13 +26,15 @@ public class RepairService {
         total_price = DescuentosSegunHora(patent, total_price);
         //total_price = DescuentoSegunMarca(patent, total_price);
         //comentada el descuento segun marca porque espero usar essa funcion como un boton
+        //por atraso total_price =
         total_price = RecargoPorKilometraje(patent, total_price);
         total_price = recargoPorAntiguedad(patent, total_price);
         return total_price;
     }
+    //aun no hago recargo por atrado!!!
 
     //hace lo mismo solo que retorna una entidad
-    public RepairEntity getCostentity(String patent) {
+    public RepairEntity saveCostentity(String patent) {
         double total_price = precioSegunReparacionyMotor(patent);
         total_price = DescuentosSegunHora(patent, total_price);
         //total_price = DescuentoSegunMarca(patent, total_price);
@@ -41,15 +43,19 @@ public class RepairService {
         total_price = recargoPorAntiguedad(patent, total_price);
 
         //los set para el repair entity
-        double total_price_entity = precioSegunReparacionyMotor(patent);
-        double deshora = DescuentosSegunHora(patent, total_price);
         double totalOriginal = precioSegunReparacionyMotor(patent);
+        double deshora = DescuentosSegunHora(patent, totalOriginal);
+        double kilo = RecargoPorKilometraje(patent, deshora);
+        double antiguedad = recargoPorAntiguedad(patent, kilo);
 
         //nuevo repair entity que se retornara
         RepairEntity repairEntity = new RepairEntity();
         repairEntity.setPatent(patent);
         repairEntity.setTotalOriginal(totalOriginal);
+        repairEntity.setMileageCharge(kilo);
+        repairEntity.setSeniorityCharge(antiguedad);
 
+        //sacado arriba normalmente, los set son para obtener los descuentos aplicados
         repairEntity.setTotalAmount(total_price);
 
         return repairEntity;

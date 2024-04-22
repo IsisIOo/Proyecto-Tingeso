@@ -114,20 +114,17 @@ const RecordList = () => {
         </TableHead>
         <TableBody>
           {record.map((record) => (
-            <TableRow
-              key={record.id}
-            >
-          <TableCell align="left">{record.patent}</TableCell>
-          <TableCell align="left">{record.admissionDate}</TableCell>
-          <TableCell align="right">{record.admissionHour}</TableCell>
-          <TableCell align="right">{record.repairType}</TableCell>
-          <TableCell align="right">{record.totalAmount}</TableCell> {/* Año de producción */}
-          <TableCell align="right">{record.departureDate}</TableCell> {/* Tipo de motor */}
-          <TableCell align="right">{record.departureHour}</TableCell> {/* Nro. de asientos */}
-          <TableCell align="right">{record.clientDate}</TableCell> {/* Tipo de motor */}
-          <TableCell align="right">{record.clientHour}</TableCell> {/* Nro. de asientos */}
-
-          <TableCell>
+            <TableRow key={record.id}>
+              <TableCell align="left">{record.patent}</TableCell>
+              <TableCell align="left">{record.admissionDate}</TableCell>
+              <TableCell align="right">{record.admissionHour}</TableCell>
+              <TableCell align="right">{record.repairType}</TableCell>
+              <TableCell align="right">{record.totalAmount}</TableCell>
+              <TableCell align="right">{record.departureDate}</TableCell>
+              <TableCell align="right">{record.departureHour}</TableCell>
+              <TableCell align="right">{record.clientDate}</TableCell>
+              <TableCell align="right">{record.clientHour}</TableCell>
+              <TableCell>
                 <Button
                   variant="contained"
                   color="info"
@@ -138,7 +135,6 @@ const RecordList = () => {
                 >
                   Detalles
                 </Button>
-
                 <Button
                   variant="contained"
                   color="error"
