@@ -1,4 +1,5 @@
 import httpRecord from "../http-common";
+import httpRepair from "../http-common";
 
 const getAll = () => {
     return httpRecord.get('/api/v1/record/');
@@ -20,5 +21,8 @@ const remove = id => {
     return httpRecord.delete(`/api/v1/car/${id}`);
 }
 
+const getTotalAmount = patent => {
+    return httpRepair.get(`/api/v1/record/repaircostIVA/${patent}`);
+}
 
-export default { getAll, create, get, update, remove };
+export default { getAll, create, get, update, remove, getTotalAmount };

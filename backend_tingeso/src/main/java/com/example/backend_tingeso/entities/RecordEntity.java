@@ -25,7 +25,6 @@ public class RecordEntity {
 
     private int admissionDateDay; //fecha de llega al taller
     private int admissionDateMonth;
-    private int admissionDateYear;
     private int admissionHour;   //hora de llegada
 
     private String repairType; //tipo de reparacion/es

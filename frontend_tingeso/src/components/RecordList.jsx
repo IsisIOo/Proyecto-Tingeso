@@ -87,7 +87,13 @@ const RecordList = () => {
               Patente
             </TableCell>
             <TableCell align="left" sx={{ fontWeight: "bold" }}>
-              Fecha admision
+              Dia admision
+            </TableCell>
+            <TableCell align="left" sx={{ fontWeight: "bold" }}>
+              Mes admision
+            </TableCell>
+            <TableCell align="left" sx={{ fontWeight: "bold" }}>
+              Año admision
             </TableCell>
             <TableCell align="right" sx={{ fontWeight: "bold" }}>
               Hora admision
@@ -116,7 +122,9 @@ const RecordList = () => {
           {record.map((record) => (
             <TableRow key={record.id}>
               <TableCell align="left">{record.patent}</TableCell>
-              <TableCell align="left">{record.admissionDate}</TableCell>
+              <TableCell align="left">{record.admissionDateDay}</TableCell>
+              <TableCell align="left">{record.admissionDateMonth}</TableCell>
+              <TableCell align="left">{record.admissionDateYear}</TableCell>
               <TableCell align="right">{record.admissionHour}</TableCell>
               <TableCell align="right">{record.repairType}</TableCell>
               <TableCell align="right">{record.totalAmount}</TableCell>

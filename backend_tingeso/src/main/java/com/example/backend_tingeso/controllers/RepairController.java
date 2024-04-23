@@ -98,6 +98,13 @@ public class RepairController {
         return repair;
     }
 
+    @GetMapping("/repaircostIVA/{patent}")
+    public double costorepairiva(@PathVariable String patent) {
+        RepairEntity repairEntity = repairService.getRepairByPatent(patent);
+        double repair= repairEntity.getTotalAmount();
+        return repair;
+    }
+
 
 
 
