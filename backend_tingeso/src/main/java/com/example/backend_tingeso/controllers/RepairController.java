@@ -1,7 +1,6 @@
 package com.example.backend_tingeso.controllers;
 
 
-import com.example.backend_tingeso.entities.CarEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,20 +21,21 @@ public class RepairController {
     @Autowired
     RepairService repairService;
 
-    @PostMapping("/")
-    public ResponseEntity<RepairEntity> saveRepair(String patent) {
+    @PostMapping("/{patent}")
+    public ResponseEntity<RepairEntity> saveRepair(@PathVariable String patent) {
         RepairEntity repairNew = repairService.saveCostentity(patent);
         return ResponseEntity.ok(repairNew);
     }
 
-    //calcula el de 1 solo
+    //calcula el costo de 1 solo record y auto
     @GetMapping("/patent/{patent}")
     public double costosTotales(@PathVariable String patent) {
         double costo = repairService.getCost(patent);
-        double costo_iva = repairService.IVA(costo);
+        double costo_iva = repairService.IVATOTAL(costo);
         return costo_iva;
     }
 
+    //obtiene descuento y recargos individualmente
     @GetMapping("/discounts/{patent}")
     public double descuentos(@PathVariable String patent) {
         RepairEntity repairEntity = repairService.getRepairByPatent(patent);
@@ -90,6 +90,7 @@ public class RepairController {
         return descuentomarca;
     }
 
+    //obtiene cuanto salia la reparacion sin descuentos ni nada
     @GetMapping("/repaircost/{patent}")
     public double costorepair(@PathVariable String patent) {
         RepairEntity repairEntity = repairService.getRepairByPatent(patent);

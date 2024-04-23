@@ -11,7 +11,9 @@ import Paper from "@mui/material/Paper";
 
 const AddEditRecord = () => {
   const [patent, setPatent] = useState("");
-  const [admissionDate, setadmissionDate] = useState("");
+  const [admissionDateDay, setadmissionDateDay] = useState();
+  const [admissionDateMonth, setadmissionDateMonth] = useState();
+  const [admissionDateYear, setadmissionDateYear] = useState();
   const [admissionHour, setadmissionHour] = useState("");
   const [repairType, setrepairType] = useState("");
   const [totalAmount, settotalAmount] = useState();
@@ -108,13 +110,128 @@ const AddEditRecord = () => {
 
         <FormControl fullWidth>
           <TextField
-            id="admissionDate"
-            label="Fecha admision"
-            value={admissionDate}
+            id="admissionDateDay"
+            label="Dia admision"
+            value={admissionDateDay}
+            select
             variant="standard"
-            onChange={(e) => setadmissionDate(e.target.value)}
-          />
+            
+            onChange={(e) => setadmissionDateDay(e.target.value)}
+            style={{ width: "25%" }}
+            helperText="Dia"
+          >
+          
+            <MenuItem value={1}>1</MenuItem>
+            <MenuItem value={2}>2</MenuItem>
+            <MenuItem value={3}>3</MenuItem>
+            <MenuItem value={4}>4</MenuItem>
+            <MenuItem value={5}>5</MenuItem>
+            <MenuItem value={6}>6</MenuItem>
+            <MenuItem value={7}>7</MenuItem>
+            <MenuItem value={8}>8</MenuItem>
+            <MenuItem value={9}>9</MenuItem>
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={11}>11</MenuItem>
+            <MenuItem value={12}>12</MenuItem>
+            <MenuItem value={13}>13</MenuItem>
+            <MenuItem value={14}>14</MenuItem>
+            <MenuItem value={15}>15</MenuItem>
+            <MenuItem value={16}>16</MenuItem>
+            <MenuItem value={17}>17</MenuItem>
+            <MenuItem value={18}>18</MenuItem>
+            <MenuItem value={19}>19</MenuItem>
+            <MenuItem value={20}>20</MenuItem>
+            <MenuItem value={21}>21</MenuItem>
+            <MenuItem value={22}>22</MenuItem>
+            <MenuItem value={23}>23</MenuItem>
+            <MenuItem value={24}>24</MenuItem>
+            <MenuItem value={25}>25</MenuItem>
+            <MenuItem value={26}>26</MenuItem>
+            <MenuItem value={27}>27</MenuItem>
+            <MenuItem value={28}>28</MenuItem>
+            <MenuItem value={29}>29</MenuItem>
+            <MenuItem value={30}>30</MenuItem>
+            <MenuItem value={31}>31</MenuItem>
+          </TextField >
         </FormControl>
+        
+        <FormControl fullWidth>
+          <TextField
+            id="admissionDateMonth"
+            label="Mes admision" 
+            value={admissionDateMonth}
+            select
+            variant="standard"
+            
+            onChange={(e) => setadmissionDateMonth(e.target.value)}
+            style={{ width: "25%" }}
+            helperText="Mes"
+          >
+          
+            <MenuItem value={1}>1</MenuItem>
+            <MenuItem value={2}>2</MenuItem>
+            <MenuItem value={3}>3</MenuItem>
+            <MenuItem value={4}>4</MenuItem>
+            <MenuItem value={5}>5</MenuItem>
+            <MenuItem value={6}>6</MenuItem>
+            <MenuItem value={7}>7</MenuItem>
+            <MenuItem value={8}>8</MenuItem>
+            <MenuItem value={9}>9</MenuItem>
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={11}>11</MenuItem>
+            <MenuItem value={12}>12</MenuItem>
+          </TextField >
+        </FormControl>
+
+        <FormControl fullWidth>
+          <TextField
+            id="admissionDateYear"
+            label="Año admision" 
+            value={admissionDateYear}
+            select
+            variant="standard"
+            
+            onChange={(e) => setadmissionDateYear(e.target.value)}
+            style={{ width: "25%" }}
+            helperText="Año"
+          >
+            <MenuItem value={1998}>2000</MenuItem>
+            <MenuItem value={1999}>2001</MenuItem>
+            <MenuItem value={2000}>2000</MenuItem>
+            <MenuItem value={2001}>2001</MenuItem>
+            <MenuItem value={2002}>2002</MenuItem>
+            <MenuItem value={2003}>2003</MenuItem>
+            <MenuItem value={2004}>2004</MenuItem>
+            <MenuItem value={2005}>2005</MenuItem>
+            <MenuItem value={2006}>2006</MenuItem>
+            <MenuItem value={2007}>2007</MenuItem>
+            <MenuItem value={2008}>2008</MenuItem>
+            <MenuItem value={2009}>2009</MenuItem>
+            <MenuItem value={2010}>2010</MenuItem>
+            <MenuItem value={2011}>2011</MenuItem>
+            <MenuItem value={2008}>2008</MenuItem>
+            <MenuItem value={2009}>2009</MenuItem>
+            <MenuItem value={2010}>2010</MenuItem>
+            <MenuItem value={2011}>2011</MenuItem>
+            <MenuItem value={2012}>2012</MenuItem>
+            <MenuItem value={2013}>2013</MenuItem>
+            <MenuItem value={2014}>2014</MenuItem>
+            <MenuItem value={2015}>2015</MenuItem>
+            <MenuItem value={2016}>2016</MenuItem>
+            <MenuItem value={2017}>2017</MenuItem>
+            <MenuItem value={2018}>2018</MenuItem>
+            <MenuItem value={2019}>2019</MenuItem>
+            <MenuItem value={2020}>2020</MenuItem>
+            <MenuItem value={2021}>2021</MenuItem>
+            <MenuItem value={2022}>2022</MenuItem>
+            <MenuItem value={2023}>2023</MenuItem>
+            <MenuItem value={2024}>2024</MenuItem>
+          </TextField >
+        </FormControl>
+
+
+
+
 
         <FormControl fullWidth>
           <TextField
@@ -138,6 +255,11 @@ const AddEditRecord = () => {
           />
         </FormControl>
 
+
+
+
+
+
         <FormControl fullWidth>
           <TextField
             id="totalAmount"
@@ -145,9 +267,15 @@ const AddEditRecord = () => {
             type="totalAmount"
             value={totalAmount}
             variant="standard"
-            onChange={(e) => settotalAmount(e.target.value)}
+            readOnly // Hace que el campo de texto sea de solo lectura
+            disabled // Deshabilita la edición del campo de texto
           />
         </FormControl>
+
+
+
+
+
 
         <FormControl fullWidth>
           <TextField
@@ -159,13 +287,18 @@ const AddEditRecord = () => {
           />
         </FormControl>
 
+
+
+
+
         <FormControl fullWidth>
           <TextField
             id="clientDate"
             label="Fecha retirado"
             value={clientDate}
             variant="standard"
-            onChange={(e) => setclientDate(e.target.value)}
+            readOnly // Hace que el campo de texto sea de solo lectura
+            disabled // Deshabilita la edición del campo de texto}
           />
         </FormControl>
 
@@ -175,9 +308,15 @@ const AddEditRecord = () => {
           label="Hora retirado"
           value={clientHour}
           variant="standard"
-          onChange={(e) => setclientHour(e.target.value)}
+          readOnly // Hace que el campo de texto sea de solo lectura
+          disabled // Deshabilita la edición del campo de texto
           />
         </FormControl>
+
+
+
+
+
 
         <FormControl>
           <br />

@@ -25,9 +25,10 @@ public class RepairEntity {
     private double delayCharge; //recargo por atraso de recogida
     private double mileageCharge; //recargo por kilometraje
     private double seniorityCharge; //cargo por antiguedad del vehiculo
+    private double IVA; //impuesto al valor agregado
     private double totalAmount; //total de la reparacion
 
     //2 descuentos
     //3 recargos
-    //1 total
+    //2 totaL
 }

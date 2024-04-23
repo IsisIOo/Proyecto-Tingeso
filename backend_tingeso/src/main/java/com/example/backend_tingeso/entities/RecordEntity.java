@@ -23,7 +23,9 @@ public class RecordEntity {
 
     private String patent; //patente de letras y numeros
 
-    private String admissionDate; //fecha de llega al taller
+    private int admissionDateDay; //fecha de llega al taller
+    private int admissionDateMonth;
+    private int admissionDateYear;
     private int admissionHour;   //hora de llegada
 
     private String repairType; //tipo de reparacion/es

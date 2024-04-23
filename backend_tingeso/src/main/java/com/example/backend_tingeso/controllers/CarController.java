@@ -33,13 +33,14 @@ public class CarController {
     }
 
     //Vamos a conseguir los costos de todos los autos
-    @GetMapping("/allCost/")
+    /*@GetMapping("/allCost/")
     public ResponseEntity<Map<String, Double>> listCosts() {
         List<CarEntity> cars = carService.getCar(); //obtengo los autos para obtener todos los costos de estos
-        Map<String, Double>  costs = carService.getCosts(cars);
+
+        //Map<String, Double>  costs = carService.getCosts(cars);
 
         return ResponseEntity.ok(costs);
-    }
+    }*/
 
 
     //encontrar solo uno

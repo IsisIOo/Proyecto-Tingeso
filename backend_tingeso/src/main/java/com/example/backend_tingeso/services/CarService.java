@@ -109,7 +109,7 @@ public class CarService {
 
 
 
-    public Map<String, Double> getCosts(List<CarEntity> cars) {
+   /* public Map<String, Double> getCosts(List<CarEntity> cars) {
         Map<String, Double> costsMap = new HashMap<>();
 
         // Obtener los costos y asociarlos a las patentes de los autos
@@ -124,10 +124,12 @@ public class CarService {
                 // Si no hay registro para la patente, se asigna un costo de 0.0
                 costsMap.put(patent, 0.0);
             }
-        }
+        }*/
+
+
 
         // Ordenar el mapa de costos de mayor a menor
-        Map<String, Double> sortedCostsMap = costsMap.entrySet()
+      /*  Map<String, Double> sortedCostsMap = costsMap.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
@@ -139,7 +141,7 @@ public class CarService {
         }
 
         return sortedCostsMap;
-    }
+    }*/
 
 
 
