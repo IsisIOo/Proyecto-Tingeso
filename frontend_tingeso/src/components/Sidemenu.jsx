@@ -17,6 +17,7 @@ import MoreTimeIcon from "@mui/icons-material/MoreTime";
 import HomeIcon from "@mui/icons-material/Home";
 import { useNavigate } from "react-router-dom";
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 
 export default function Sidemenu({ open, toggleDrawer }) {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ export default function Sidemenu({ open, toggleDrawer }) {
 
         <ListItemButton onClick={() => navigate("/record/list")}>
           <ListItemIcon>
-            <MoreTimeIcon />
+            <AssignmentIcon />
           </ListItemIcon>
           <ListItemText primary="Historial de autos" />
         </ListItemButton>

@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import costService from "../services/cost.service";
+import InfoIcon from '@mui/icons-material/Info';
 
 const CostList = () => {
   const [cost, setCost] = useState([]);

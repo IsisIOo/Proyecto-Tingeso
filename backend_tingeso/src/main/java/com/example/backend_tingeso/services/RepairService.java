@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.example.backend_tingeso.repositories.RepairRepository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class RepairService {
@@ -853,6 +854,13 @@ public class RepairService {
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
+    }
+
+
+
+
+    public ArrayList<RepairEntity> getRepairByPatentfinal(@PathVariable String patent){
+        return (ArrayList<RepairEntity>) repairRepository.findByPatentrepairfinal(patent);
     }
 }
 

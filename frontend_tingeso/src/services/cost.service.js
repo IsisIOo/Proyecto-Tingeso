@@ -42,5 +42,16 @@ const costorepair = patent => {
     return httpRepair.get(`/api/v1/repairs/repaircost/${patent}`);
 }
 
+const CALCULATODO = patent => {
+    return httpRepair.post(`/api/v1/repairs/${patent}`);
+}
 
-export default { getAll, calculate, discounts, recharges, rechargedelay, rechargeantiguedad, rechargemile, discountday, discountmarca, costorepair };
+
+//obitene todos los repairs asociado a un solo auto
+const getAllrepairs1 = patent => {
+    return httpRepair.get(`/api/v1/repairs/`);
+}
+
+
+
+export default { getAll, getAllrepairs1, calculate, discounts, recharges, rechargedelay, rechargeantiguedad, rechargemile, discountday, discountmarca, costorepair, CALCULATODO };

@@ -41,6 +41,7 @@ public class RepairController {
         return ResponseEntity.ok(repair);
     }
 
+    //ESTA ES LA IMPORTANTE
     @PostMapping("/{patent}")
     public ResponseEntity<RepairEntity> saveRepair(@PathVariable String patent) {
         RepairEntity repairNew = repairService.saveCostentity(patent);
@@ -137,6 +138,12 @@ public class RepairController {
     public ResponseEntity<Boolean> deleteCarById(@PathVariable Long id) throws Exception {
         var isDeleted = repairService.deleteRepair(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<RepairEntity>> listRepairByPatent(String patent) {
+        List<RepairEntity> repair = repairService.getRepairByPatentfinal(patent);
+        return ResponseEntity.ok(repair);
     }
 
 

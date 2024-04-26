@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import InfoIcon from '@mui/icons-material/Info';
 
 const RecordList = () => {
   const [records, setRecord] = useState([]);
@@ -63,11 +64,15 @@ const RecordList = () => {
 
 
 
-
-  const handleEdit = (id) => {
-    console.log("Printing id", id);
-    navigate(`/record/details/${id}`);
+//trato de crear un boton que redireccione a los detalles del costo
+  const handleDetailsCost = (patent) => {
+    console.log("Printing patente", patent);
+    navigate(`/Cost/details/${patent}`);
   };
+  
+
+
+
 
   return (
     <Paper style={{ backgroundColor: 'white' }}>
@@ -154,12 +159,14 @@ const RecordList = () => {
                   variant="contained"
                   color="info"
                   size="small"
-                  onClick={() => handleEdit(record.patent)}
+                  onClick={() => handleDetailsCost(record.patent)}
                   style={{ marginLeft: "0.5rem" }}
-                  startIcon={<EditIcon />}
+                  startIcon={<InfoIcon />}
                 >
-                  Detalles
+                  Detalles Costo
                 </Button>
+
+
                 <Button
                   variant="contained"
                   color="error"
@@ -170,6 +177,8 @@ const RecordList = () => {
                 >
                 Eliminar 
                 </Button>
+
+
               </TableCell>
             </TableRow>
           ))}

@@ -7,8 +7,10 @@ import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import SaveIcon from "@mui/icons-material/Save";
+import AssignmentIcon from '@mui/icons-material/Assignment';
 import Paper from "@mui/material/Paper";
 import carService from "../services/car.service";
+import InfoIcon from '@mui/icons-material/Info';
 import repairService from "../services/repair.service";
 
 const AddEditRecord = () => {
@@ -233,12 +235,13 @@ const AddEditRecord = () => {
             variant="standard"
             onChange={(e) => setRepairType(e.target.value)}
             style={{ width: "25%" }}
+            
           >
           
             <MenuItem value={"Reparaciones del Sistema de Frenos"}>Reparaciones del Sistema de Frenos</MenuItem>
             <MenuItem value={"Servicio del Sistema de Refrigeración"}>Servicio del Sistema de Refrigeración</MenuItem>
             <MenuItem value={"Reparaciones del Motor"}>Reparaciones del Motor</MenuItem>
-            <MenuItem value={"Reparaciones de la Transmisión"}>Reparaciones de la Transmisión</MenuItem>
+            <MenuItem value={"Reparaciones de la transmisión"}>Reparaciones de la transmisión</MenuItem>
             <MenuItem value={"Reparación del Sistema Eléctrico"}>Reparación del Sistema Eléctrico</MenuItem>
             <MenuItem value={"Reparaciones del Sistema de Escape"}>Reparaciones del Sistema de Escape</MenuItem>
             <MenuItem value={"Reparación de Neumáticos y Ruedas"}>Reparación de Neumáticos y Ruedas</MenuItem>
