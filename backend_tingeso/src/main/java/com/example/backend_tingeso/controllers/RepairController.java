@@ -1,12 +1,15 @@
 package com.example.backend_tingeso.controllers;
 
 
+import com.example.backend_tingeso.entities.CarEntity;
+import com.example.backend_tingeso.repositories.RepairRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend_tingeso.entities.RepairEntity;
 import com.example.backend_tingeso.services.RepairService;
+import com.example.backend_tingeso.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +23,23 @@ import java.util.List;
 public class RepairController {
     @Autowired
     RepairService repairService;
+    @Autowired
+    RepairRepository repairRepository;
+    @Autowired
+    CarService carService;
+
+    //Obtener todas las reparaciones
+    @GetMapping("/")
+    public ResponseEntity<List<RepairEntity>> listRepair() {
+        List<RepairEntity> repair = repairService.getRepair();
+        return ResponseEntity.ok(repair);
+    }
+
+    @GetMapping("/patentRepair/{patent}")
+    public ResponseEntity<RepairEntity> getRepairBypatent(@PathVariable String patent) {
+        RepairEntity repair = repairService.getRepairByPatent(patent);
+        return ResponseEntity.ok(repair);
+    }
 
     @PostMapping("/{patent}")
     public ResponseEntity<RepairEntity> saveRepair(@PathVariable String patent) {
@@ -31,20 +51,25 @@ public class RepairController {
     @GetMapping("/patent/{patent}")
     public double costosTotales(@PathVariable String patent) {
         double costo = repairService.getCost(patent);
-        double costo_iva = repairService.IVATOTAL(costo);
-        return costo_iva;
+        return costo;
     }
 
+
+
+    //DE AQUI PA ABAJO NO FUNCIONA
     //obtiene descuento y recargos individualmente
     @GetMapping("/discounts/{patent}")
     public double descuentos(@PathVariable String patent) {
         RepairEntity repairEntity = repairService.getRepairByPatent(patent);
+        if (repairEntity == null) {
+            System.out.println("RepairEntity es null para la patente: " + patent);
+            return 0.0; // Retorna un valor predeterminado
+        }
         double descuento_por_dia= repairEntity.getDiscountPerDay();
         double descuento_por_marca= repairEntity.getDiscountPerbonus();
         double descuento_total= descuento_por_dia+descuento_por_marca;
         return descuento_total;
     }
-
     @GetMapping("/recharges/{patent}")
     public double recargos(@PathVariable String patent) {
         RepairEntity repairEntity = repairService.getRepairByPatent(patent);
@@ -98,12 +123,22 @@ public class RepairController {
         return repair;
     }
 
+
+    //obtiene la entidad repair por su patente
     @GetMapping("/repaircostIVA/{patent}")
     public double costorepairiva(@PathVariable String patent) {
+        RepairService carService;
         RepairEntity repairEntity = repairService.getRepairByPatent(patent);
         double repair= repairEntity.getTotalAmount();
         return repair;
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Boolean> deleteCarById(@PathVariable Long id) throws Exception {
+        var isDeleted = repairService.deleteRepair(id);
+        return ResponseEntity.noContent().build();
+    }
+
 
 
 

@@ -40,21 +40,21 @@ export default function Sidemenu({ open, toggleDrawer }) {
           <ListItemIcon>
             <DirectionsCarIcon/>
           </ListItemIcon>
-          <ListItemText primary="Autos" />
+          <ListItemText primary="Registro de Autos" />
         </ListItemButton>
 
         <ListItemButton onClick={() => navigate("/record/list")}>
           <ListItemIcon>
             <MoreTimeIcon />
           </ListItemIcon>
-          <ListItemText primary="Historial" />
+          <ListItemText primary="Historial de autos" />
         </ListItemButton>
 
         <ListItemButton onClick={() => navigate("/cost/list")}>
           <ListItemIcon>
             <PaidIcon />
           </ListItemIcon>
-          <ListItemText primary="Planilla Sueldos" />
+          <ListItemText primary="Planilla de Costos" />
         </ListItemButton>
 
         <ListItemButton onClick={() => navigate("/paycheck/calculate")}>

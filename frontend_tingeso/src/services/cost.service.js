@@ -43,5 +43,4 @@ const costorepair = patent => {
 }
 
 
-
 export default { getAll, calculate, discounts, recharges, rechargedelay, rechargeantiguedad, rechargemile, discountday, discountmarca, costorepair };

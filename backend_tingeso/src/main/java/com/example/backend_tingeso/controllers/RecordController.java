@@ -82,14 +82,65 @@ public class RecordController {
         return ResponseEntity.noContent().build();
     }
 
-
-    @PutMapping("/patent-put/{patent}")
+    /*@PutMapping("/PUTCOSTT1/{patent}")
     public ResponseEntity<RecordEntity> setAmount(@PathVariable String patent) {
+        System.out.println("hola");
         RecordEntity recordHistory = recordService.getOneRecordRespository(patent);
-        double totalAmount = repairService.getCost(patent);
+
+        System.out.println("hola");
+        double totalAmount = recordService.getCost(patent);
+
+        System.out.println("hola");
         recordHistory.setTotalAmount(totalAmount);
+
+        System.out.println("hola");
         return ResponseEntity.ok(recordHistory);
+    }*/
+
+   /* @PutMapping("/PUTCOSTT/{patent}/")
+    public ResponseEntity<RecordEntity> updateRecord(@RequestBody RecordEntity record, @PathVariable String patent) throws Exception{
+        RecordEntity recordHistory = recordService.getOneRecordRespository(patent);
+        Long id = recordHistory.getId();
+        var isDeleted = recordService.deleteRecord(id);
+
+        RecordEntity recordUpdated = recordService.updateRecord(record);
+        return ResponseEntity.ok(recordUpdated);
+    }*/
+
+        //recupera el record que posee la patenten y le asigna el costo total de la reparacion
+
+
+    //fuNCION QUE YA NO SEEEE
+    @PostMapping("/newRecord/")
+    public ResponseEntity<RecordEntity> updateRecord(@RequestBody RecordEntity rec){
+
+        //Creamos una nueva entidad con new
+        RecordEntity recordHistory = new RecordEntity();
+
+        //Conseguimos los costos para colocarlo en el auto
+        double totalAmount = recordService.getCostbyRepair(rec);
+
+        //Vamos a colocar cada uno de los componentes en el nuevo auto
+        recordHistory.setPatent(rec.getPatent());
+        recordHistory.setId(rec.getId());
+        recordHistory.setAdmissionHour(rec.getAdmissionHour());
+        recordHistory.setAdmissionDateDayName(rec.getAdmissionDateDayName());
+        recordHistory.setAdmissionDateDay(rec.getAdmissionDateDay());
+        recordHistory.setAdmissionDateMonth(rec.getAdmissionDateMonth());
+        recordHistory.setRepairType(rec.getRepairType());
+        recordHistory.setDepartureDateDay(rec.getDepartureDateDay());
+        recordHistory.setDepartureDateMonth(rec.getDepartureDateMonth());
+        recordHistory.setDepartureHour(rec.getDepartureHour());
+        recordHistory.setClientDateDay(rec.getClientDateDay());
+        recordHistory.setClientDateMonth(rec.getClientDateMonth());
+        recordHistory.setClientHour(rec.getClientHour());
+        recordHistory.setTotalAmount(totalAmount);
+
+        RecordEntity recordHistoryNew = recordService.saveRecord(recordHistory);
+        return ResponseEntity.ok(recordHistoryNew);
     }
+
+
 
 
 

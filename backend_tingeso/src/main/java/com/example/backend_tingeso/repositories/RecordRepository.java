@@ -25,4 +25,10 @@ public interface RecordRepository extends JpaRepository<RecordEntity, Long> {
         @Query(value = "SELECT * FROM record WHERE record.patent = :patent", nativeQuery = true)
         RecordEntity findByPatentOne(@Param("patent") String patent);
 
+
+        //para encontrar los que tienen cierto tipo de reparacion. Encuentro el auto, tomo el tipo y la patente, con la patente accedo al tipo de
+        //reparacion y en ese mismo lugar obtengo el costo total de la reparacion
+        @Query(value = "SELECT * FROM record WHERE record.repairType = :repairType", nativeQuery = true)
+        RecordEntity findByRepairType(@Param("repairType") String repairType);
+
 }

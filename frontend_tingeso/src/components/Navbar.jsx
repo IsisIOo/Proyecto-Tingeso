@@ -18,7 +18,7 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{backgroundColor: "#121481"}}>
+      <AppBar position="fixed" sx={{backgroundColor: "#121481"}}>
         <Toolbar>
           <IconButton
             size="large"
@@ -32,7 +32,7 @@ export default function Navbar() {
           </IconButton>
 
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Proyecto automovilistico de Taller de Ingeniería de Software.
+            Proyecto automovilistico AutoFix
           </Typography>
 
         </Toolbar>

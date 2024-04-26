@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import java.util.Date;
 
@@ -20,21 +21,30 @@ public class RecordEntity {
     @Column(unique = true, nullable = false)
     private Long id;
 
-
+    @NonNull
     private String patent; //patente de letras y numeros
-
+    @NonNull
+    private String admissionDateDayName; //nombre del dia de llegada
+    @NonNull
     private int admissionDateDay; //fecha de llega al taller
+    @NonNull
     private int admissionDateMonth;
+    @NonNull
     private int admissionHour;   //hora de llegada
-
+    @NonNull
     private String repairType; //tipo de reparacion/es
-    private double totalAmount; //monto total de las reparaciones
 
-    private String departureDate; //fecha de salida del vehiculo
+    @NonNull
+    private int departureDateDay; //fecha de salida del vehiculo
+    @NonNull
+    private int departureDateMonth;
+    @NonNull
     private int departureHour; //hora de salida, asumo que deberia ser igual a la de llegada
 
-    private String clientDate; //fecha en la que el cliente se lleva el vehiculo
+    private int clientDateDay; //fecha en la que el cliente se lleva el vehiculo
+    private int clientDateMonth;
     private int clientHour; //hora en la que el cliente se lleva el vehiculo
 
+    private double totalAmount;
 }
 

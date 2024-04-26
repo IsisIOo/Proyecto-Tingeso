@@ -137,7 +137,7 @@ const CarList = () => {
                   variant="contained"
                   color="error"
                   size="small"
-                  onClick={() => handleDelete(car.patent)}
+                  onClick={() => handleDelete(car.id)}
                   style={{ marginLeft: "0.5rem" }}
                   startIcon={<DeleteIcon />}
                 >

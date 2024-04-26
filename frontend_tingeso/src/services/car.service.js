@@ -17,6 +17,8 @@ const update = data => {
 }
 
 const remove = id => {
-    return httpCar.delete(`/api/v1/car/${id}`);
+    return httpCar.delete(`/api/v1/car/delete/${id}`);
 }
+
+
 export default { getAll, create, get, update, remove };

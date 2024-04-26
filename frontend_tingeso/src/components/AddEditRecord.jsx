@@ -8,19 +8,24 @@ import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import SaveIcon from "@mui/icons-material/Save";
 import Paper from "@mui/material/Paper";
+import carService from "../services/car.service";
+import repairService from "../services/repair.service";
 
 const AddEditRecord = () => {
   const [patent, setPatent] = useState("");
-  const [admissionDateDay, setadmissionDateDay] = useState();
-  const [admissionDateMonth, setadmissionDateMonth] = useState();
-  const [admissionHour, setadmissionHour] = useState("");
-  const [repairType, setrepairType] = useState("");
-  const [totalAmount, settotalAmount] = useState();
-  const [departureDate, setdepartureDate] = useState("");
-  const [departureHour, setdepartureHour] = useState();
-  const [clientDate, setclientDate] = useState("");
-  const [clientHour, setclientHour] = useState();
+  const [admissionDateDayName, setAdmissionDateDayName] = useState("");
+  const [admissionDateDay, setAdmissionDateDay] = useState("");
+  const [admissionDateMonth, setAdmissionDateMonth] = useState("");
+  const [admissionHour, setAdmissionHour] = useState("");
+  const [repairType, setRepairType] = useState("");
+  const [departureDateDay, setDepartureDateDay] = useState("");
+  const [departureDateMonth, setDepartureDateMonth] = useState("");
+  const [departureHour, setDepartureHour] = useState("");
+  const [clientDateDay, setClientDateDay] = useState("");
+  const [clientDateMonth, setClientDateMonth] = useState("");
+  const [clientHour, setClientHour] = useState("");
   const [category, setCategory] = useState("");
+  const [totalAmount, setTotalAmount] = useState(null);
   const { id } = useParams();
   const [titleRecordForm, setTitleRecordForm] = useState("");
   const navigate = useNavigate();
@@ -28,40 +33,41 @@ const AddEditRecord = () => {
 
   const saveRecord = (e) => {
     e.preventDefault();
-
-    const record = { patent, admissionDateDay, admissionDateMonth, admissionHour, repairType, totalAmount, departureDate, departureHour, clientDate, clientHour, id };
-    console.log(record);
-
-    if (id) {
-      //Actualizar Datos 
-      recordService
-        .update(record)
-        .then((response) => {
-          console.log("Historial ha sido actualizado.", response.data);
-          navigate("/record/list");
-        })
-        .catch((error) => {
-          console.log(
-            "Ha ocurrido un error al intentar actualizar datos del historial.",
-            error
-          );
-        });
-    } else {
-      //Crear nuevo empleado
-      recordService
-        .create(record)
-        .then((response) => {
-          console.log("Historial ha sido añadido.", response.data);
-          navigate("/record/list");
-        })
-        .catch((error) => {
-          console.log(
-            "Ha ocurrido un error al intentar crear nuevo historial.",
-            error
-          );
-        });
-    }
+  
+        const record = { patent, admissionDateDayName, admissionDateDay, admissionDateMonth, admissionHour, repairType,  departureDateDay, departureDateMonth, departureHour, clientDateDay, clientDateMonth, clientHour, id };
+        console.log(record);
+  
+        if (id) {
+          //Actualizar Datos 
+          recordService
+            .update(record)
+            .then((response) => {
+              console.log("Historial ha sido actualizado.", response.data);
+              navigate("/record/list");
+            })
+            .catch((error) => {
+              console.log(
+                "Ha ocurrido un error al intentar actualizar datos del historial.",
+                error
+              );
+            });
+        } else {
+          //Crear nuevo empleado
+          recordService
+            .newrecord(record)
+            .then((response) => {
+              console.log("Historial ha sido añadido.", response.data);
+              navigate("/record/list");
+            })
+            .catch((error) => {
+              console.log(
+                "Ha ocurrido un error al intentar crear nuevo historial.",
+                error
+              );
+            });
+        }
   };
+
 
   useEffect(() => {
     if (id) {
@@ -70,14 +76,20 @@ const AddEditRecord = () => {
         .get(id)
         .then((record) => {
           setPatent(record.data.patent);
+          setadmissionDateDayName(record.data.admissionDateDayName);
           setadmissionDateDay(record.data.admissionDateDay);
           setadmissionDateMonth(record.data.admissionDateMonth);
           setadmissionHour(record.data.admissionHour);
           setrepairType(record.data.repairType);
-          settotalAmount(record.data.totalAmount);
-          setdepartureDate(record.data.departureDate);
-          setclientDate(record.data.clientDate);
+          //fecha en la que debe irse
+          setdepartureDateDay(record.data.departureDateDay);
+          setdepartureDateMonth(record.data.departureDateMonth);
+          setdepartureHour(record.data.departureHour);
+          //fecha en el que se lo llevan
+          setclientDateDay(record.data.clientDateDay);
+          setclientDateMonth(record.data.clientDateMonth);
           setclientHour(record.data.clientHour);
+          setTotalAmount(null);
         })
         .catch((error) => {
           console.log("Se ha producido un error.", error);
@@ -109,6 +121,26 @@ const AddEditRecord = () => {
           />
         </FormControl>
 
+        <FormControl fullWidth>
+          <TextField
+            id="admissionDateDayName"
+            label="Dia admisión"
+            value={admissionDateDayName}
+            select
+            variant="standard"
+            onChange={(e) => setAdmissionDateDayName(e.target.value)}
+            style={{ width: "25%" }}
+          >
+            <MenuItem value={"Lunes"}>Lunes</MenuItem>
+            <MenuItem value={"Martes"}>Martes</MenuItem>
+            <MenuItem value={"Miercoles"}>Miercoles</MenuItem>
+            <MenuItem value={"Jueves"}>Jueves</MenuItem>
+            <MenuItem value={"Viernes"}>Viernes</MenuItem>
+            <MenuItem value={"Sabado"}>Sabado</MenuItem>
+            <MenuItem value={"Domingo"}>Domingo</MenuItem>
+          </TextField>
+        </FormControl>
+
 
         <FormControl fullWidth>
           <TextField
@@ -117,8 +149,7 @@ const AddEditRecord = () => {
             value={admissionDateDay}
             select
             variant="standard"
-            
-            onChange={(e) => setadmissionDateDay(e.target.value)}
+            onChange={(e) => setAdmissionDateDay(e.target.value)}
             style={{ width: "25%" }}
           >
           
@@ -163,11 +194,9 @@ const AddEditRecord = () => {
             value={admissionDateMonth}
             select
             variant="standard"
-            
-            onChange={(e) => setadmissionDateMonth(e.target.value)}
+            onChange={(e) => setAdmissionDateMonth(e.target.value)}
             style={{ width: "25%" }}
           >
-          
             <MenuItem value={1}>1</MenuItem>
             <MenuItem value={2}>2</MenuItem>
             <MenuItem value={3}>3</MenuItem>
@@ -191,68 +220,141 @@ const AddEditRecord = () => {
             label="Hora de admisión"
             value={admissionHour}
             variant="standard"
-            onChange={(e) => setadmissionHour(e.target.value)}
+            onChange={(e) => setAdmissionHour(e.target.value)}
           />
         </FormControl>
 
         <FormControl fullWidth>
           <TextField
             id="repairType"
-            label="Tipo de reparación"
-            //type="number"
+            label="Tipo de reparacion" 
             value={repairType}
+            select
             variant="standard"
-            onChange={(e) => setrepairType(e.target.value)}
-            //helperText="Salario mensual en Pesos Chilenos"
-          />
+            onChange={(e) => setRepairType(e.target.value)}
+            style={{ width: "25%" }}
+          >
+          
+            <MenuItem value={"Reparaciones del Sistema de Frenos"}>Reparaciones del Sistema de Frenos</MenuItem>
+            <MenuItem value={"Servicio del Sistema de Refrigeración"}>Servicio del Sistema de Refrigeración</MenuItem>
+            <MenuItem value={"Reparaciones del Motor"}>Reparaciones del Motor</MenuItem>
+            <MenuItem value={"Reparaciones de la Transmisión"}>Reparaciones de la Transmisión</MenuItem>
+            <MenuItem value={"Reparación del Sistema Eléctrico"}>Reparación del Sistema Eléctrico</MenuItem>
+            <MenuItem value={"Reparaciones del Sistema de Escape"}>Reparaciones del Sistema de Escape</MenuItem>
+            <MenuItem value={"Reparación de Neumáticos y Ruedas"}>Reparación de Neumáticos y Ruedas</MenuItem>
+            <MenuItem value={"Reparaciones de la Suspensión y la Dirección"}>Reparaciones de la Suspensión y la Dirección</MenuItem>
+            <MenuItem value={"Reparación del Sistema de Aire Acondicionado y Calefacción"}>Reparación del Sistema de Aire Acondicionado y Calefacción</MenuItem>
+            <MenuItem value={"Reparaciones del Sistema de Combustible"}>Reparaciones del Sistema de Combustible</MenuItem>
+            <MenuItem value={"Reparación y Reemplazo del Parabrisas y Cristales"}>Reparación y Reemplazo del Parabrisas y Cristales</MenuItem>
+          </TextField >
         </FormControl>
-
-
-
 
 
 
         <FormControl fullWidth>
           <TextField
-            id="totalAmount"
-            label="Total a pagar"
-            type="totalAmount"
-            value={totalAmount}
+            id="departureDateDay"
+            label="Dia retiro"
+            value={departureDateDay}
+            select
             variant="standard"
-            readOnly // Hace que el campo de texto sea de solo lectura
-            disabled // Deshabilita la edición del campo de texto
-
             
+            onChange={(e) => setDepartureDateDay(e.target.value)}
+            style={{ width: "25%" }}
+          >
+          
+            <MenuItem value={1}>1</MenuItem>
+            <MenuItem value={2}>2</MenuItem>
+            <MenuItem value={3}>3</MenuItem>
+            <MenuItem value={4}>4</MenuItem>
+            <MenuItem value={5}>5</MenuItem>
+            <MenuItem value={6}>6</MenuItem>
+            <MenuItem value={7}>7</MenuItem>
+            <MenuItem value={8}>8</MenuItem>
+            <MenuItem value={9}>9</MenuItem>
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={11}>11</MenuItem>
+            <MenuItem value={12}>12</MenuItem>
+            <MenuItem value={13}>13</MenuItem>
+            <MenuItem value={14}>14</MenuItem>
+            <MenuItem value={15}>15</MenuItem>
+            <MenuItem value={16}>16</MenuItem>
+            <MenuItem value={17}>17</MenuItem>
+            <MenuItem value={18}>18</MenuItem>
+            <MenuItem value={19}>19</MenuItem>
+            <MenuItem value={20}>20</MenuItem>
+            <MenuItem value={21}>21</MenuItem>
+            <MenuItem value={22}>22</MenuItem>
+            <MenuItem value={23}>23</MenuItem>
+            <MenuItem value={24}>24</MenuItem>
+            <MenuItem value={25}>25</MenuItem>
+            <MenuItem value={26}>26</MenuItem>
+            <MenuItem value={27}>27</MenuItem>
+            <MenuItem value={28}>28</MenuItem>
+            <MenuItem value={29}>29</MenuItem>
+            <MenuItem value={30}>30</MenuItem>
+            <MenuItem value={31}>31</MenuItem>
+          </TextField >
+        </FormControl>
+        
+        <FormControl fullWidth>
+          <TextField
+            id="departureDateMonth"
+            label="Mes retiro" 
+            value={departureDateMonth}
+            select
+            variant="standard"
+            
+            onChange={(e) => setDepartureDateMonth(e.target.value)}
+            style={{ width: "25%" }}
+          >
+          
+            <MenuItem value={1}>1</MenuItem>
+            <MenuItem value={2}>2</MenuItem>
+            <MenuItem value={3}>3</MenuItem>
+            <MenuItem value={4}>4</MenuItem>
+            <MenuItem value={5}>5</MenuItem>
+            <MenuItem value={6}>6</MenuItem>
+            <MenuItem value={7}>7</MenuItem>
+            <MenuItem value={8}>8</MenuItem>
+            <MenuItem value={9}>9</MenuItem>
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={11}>11</MenuItem>
+            <MenuItem value={12}>12</MenuItem>
+          </TextField >
+        </FormControl>
+
+        <FormControl fullWidth>
+          <TextField
+            id="departureHour"
+            label="Hora de retiro"
+            value={departureHour}
+            variant="standard"
+            onChange={(e) => setDepartureHour(e.target.value)}
           />
         </FormControl>
 
 
 
-
-
-
         <FormControl fullWidth>
           <TextField
-            id="departureDate"
-            label="Fecha de retiro"
-            value={departureDate}
+            id="clientDateDay"
+            label="Dia retirado"
+            value={clientDateDay}
             variant="standard"
-            onChange={(e) => setdepartureDate(e.target.value)}
+            onChange={(e) => setClientDateDay(e.target.value)}
+
           />
         </FormControl>
 
-
-
-
-
         <FormControl fullWidth>
           <TextField
-            id="clientDate"
-            label="Fecha retirado"
-            value={clientDate}
+            id="clientDateMonth"
+            label="Mes retirado"
+            value={clientDateMonth}
             variant="standard"
-            readOnly // Hace que el campo de texto sea de solo lectura
-            disabled // Deshabilita la edición del campo de texto}
+            onChange={(e) => setClientDateMonth(e.target.value)}
+
           />
         </FormControl>
 
@@ -262,10 +364,13 @@ const AddEditRecord = () => {
           label="Hora retirado"
           value={clientHour}
           variant="standard"
-          readOnly // Hace que el campo de texto sea de solo lectura
-          disabled // Deshabilita la edición del campo de texto
+          onChange={(e) => setClientHour(e.target.value)}
+
           />
         </FormControl>
+
+
+
 
 
 
@@ -284,6 +389,7 @@ const AddEditRecord = () => {
             Grabar
           </Button>
         </FormControl>
+        
       </form>
       <hr />
       <Link to="/record/list">Back to List</Link>

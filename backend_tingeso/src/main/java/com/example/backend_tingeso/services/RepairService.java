@@ -6,6 +6,8 @@ import com.example.backend_tingeso.repositories.CarRepository;
 import com.example.backend_tingeso.repositories.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.example.backend_tingeso.repositories.RepairRepository;
@@ -16,12 +18,18 @@ public class RepairService {
     CarRepository carRepository;
     @Autowired
     RecordRepository recordRepository;
+    @Autowired
     RepairRepository repairRepository;
+    //getter
+    public ArrayList<RepairEntity> getRepair(){
+        return (ArrayList<RepairEntity>) repairRepository.findAll();
+    }
 
     //get reparaciones para saber cuanto sale la reparacion segun el tipo de reparacion y el tipo de motor
 
     public double getCost(String patent) {
         double total_price = precioSegunReparacionyMotor(patent);
+        total_price = IVATOTAL(total_price); //le saca el iva al costo original
         total_price = DescuentosSegunHora(patent, total_price);
         //total_price = DescuentoSegunMarca(patent, total_price);
         //comentada el descuento segun marca porque espero usar essa funcion como un boton
@@ -46,7 +54,7 @@ public class RepairService {
         total_price = recargoPorAntiguedad(patent, total_price);
 
 
-        //los set para el repair entity
+        //los set para el repair entity, aplica descuento sobre descuento
         double totalOriginal = precioSegunReparacionyMotor(patent);
         double iva2 = IVASOLO(totalOriginal);
         double ivaiva = IVATOTAL(totalOriginal);
@@ -69,7 +77,7 @@ public class RepairService {
         //sacado arriba normalmente, los set son para obtener los descuentos aplicados
         repairEntity.setTotalAmount(total_price);
 
-        return repairEntity;
+        return repairRepository.save(repairEntity);
     }
 
 
@@ -79,7 +87,6 @@ public class RepairService {
         double total_price = 0;
         String motor = carRepository.findByPatent(patent).getMotorType();
         String repairtype = recordRepository.findByPatentOne(patent).getRepairType();
-        String[] partes = repairtype.split(",");
 
         if (motor.toLowerCase().equals("gasolina")) {
             if (repairtype.toLowerCase().contains("reparaciones del sistema de frenos")) {
@@ -239,12 +246,14 @@ public class RepairService {
 
         //agregar dia
         int hour = recordRepository.findByPatentOne(patent).getAdmissionHour();//hora para determinar si se le aplica descuento por hora de llegada
-        if (9 < hour && hour < 12) {//agregar que se entre lunes y jueves
-            double total_price_hour = total_price * 0.1;
-            total_price = total_price - total_price_hour;
-            System.out.println("El descuento aplicado por la hora: " + total_price_hour);
+        String day = recordRepository.findByPatentOne(patent).getAdmissionDateDayName().toLowerCase();//dia para determinar si se le aplica descuento por dia de llegada
+        if (9 < hour && hour < 12 ) {//agregar que se entre lunes y jueves
+           if(day.equals("jueves")  || day.equals("lunes")) {
+               double total_price_hour = total_price * 0.1;
+               total_price = total_price - total_price_hour;
+               System.out.println("El descuento aplicado por la hora: " + total_price_hour);
+           }
         }
-
         else {
             total_price = total_price;
         }
@@ -824,19 +833,26 @@ public class RepairService {
 
     public double DescuentosSegunHora1(String patent, double total_price) {
         // ahora veo si aplica el descuento segun la hora de ingreso
-        double total_price_hour=0;
         //agregar dia
+        double total_price_hour = 0;
         int hour = recordRepository.findByPatentOne(patent).getAdmissionHour();//hora para determinar si se le aplica descuento por hora de llegada
-        if (9 < hour && hour < 12) {//agregar que se entre lunes y jueves
-            total_price_hour = total_price * 0.1;
-
+        String day = recordRepository.findByPatentOne(patent).getAdmissionDateDayName().toLowerCase();//dia para determinar si se le aplica descuento por dia de llegada
+        if (9 < hour && hour < 12 ) {//agregar que se entre lunes y jueves
+            if(day.equals("jueves")  || day.equals("lunes") || day.equals("martes") || day.equals("miercoles") || day.equals("viernes")) {
+                total_price_hour = total_price * 0.1;
+                System.out.println("El descuento aplicado por la hora: " + total_price_hour);
+            }
         }
-
         return total_price_hour;
     }
 
-
-
-
+    public boolean deleteRepair(Long id) throws Exception {
+        try{
+            repairRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }
 

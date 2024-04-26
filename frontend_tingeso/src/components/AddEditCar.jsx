@@ -8,16 +8,17 @@ import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import SaveIcon from "@mui/icons-material/Save";
 import Paper from "@mui/material/Paper";
+import Container from "@mui/material/Container";
 
 const AddEditCar = () => {
   const [patent, setPatent] = useState("");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const [type, setType] = useState("");
-  const [productionYear, setProductionyear] = useState();
+  const [productionYear, setProductionyear] = useState("");
   const [motorType, setMotortype] = useState("");
-  const [numberSeats, setNumberseats] = useState();
-  const [kilometers, setKilometers] = useState();
+  const [numberSeats, setNumberseats] = useState("");
+  const [kilometers, setKilometers] = useState("");
   const [category, setCategory] = useState("");
   const { id } = useParams();
   const [titleCarForm, setTitleCarForm] = useState("");
@@ -26,11 +27,11 @@ const AddEditCar = () => {
   const saveCar = (e) => {
     e.preventDefault();
 
-    const car = { patent, brand, model, type, productionYear, motorType, numberSeats, kilometers, id };
+    const car = { id, patent, brand, model, type, productionYear, motorType, numberSeats, kilometers };
     console.log(car);
 
     if (id) {
-      //Actualizar Datos Empelado
+      //Actualizar Datos 
       carService
         .update(car)
         .then((response) => {
@@ -44,7 +45,7 @@ const AddEditCar = () => {
           );
         });
     } else {
-      //Crear nuevo empleado
+      //Crear nuevo 
       carService
         .create(car)
         .then((response) => {
@@ -84,17 +85,19 @@ const AddEditCar = () => {
   }, []);
 
   return (
-    <Paper >
+    <Container maxWidth="lg" style={{ height: '100vh' }}>
+    <Paper style={{ height: '100%', overflow: 'auto' }}>
     <Box
       display="flex"
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
+      style={{ height: '700px', width: '700px' }}
     >
       <h3> {titleCarForm} </h3>
 
       <form>
-        <FormControl fullWidth>
+        <FormControl style={{width: '100%'}}>
           <TextField
             id="patent"
             label="Patente"
@@ -103,9 +106,7 @@ const AddEditCar = () => {
             onChange={(e) => setPatent(e.target.value)}
             helperText="Ej. ABC123"
           />
-        </FormControl>
 
-        <FormControl fullWidth>
           <TextField
             id="brand"
             label="Marca"
@@ -113,9 +114,7 @@ const AddEditCar = () => {
             variant="standard"
             onChange={(e) => setBrand(e.target.value)}
           />
-        </FormControl>
 
-        <FormControl fullWidth>
           <TextField
             id="model"
             label="Modelo"
@@ -123,21 +122,24 @@ const AddEditCar = () => {
             variant="standard"
             onChange={(e) => setModel(e.target.value)}
           />
-        </FormControl>
 
-        <FormControl fullWidth>
           <TextField
             id="type"
-            label="Tipo"
-            //type="number"
+            label="Tipo de auto"
             value={type}
+            select
             variant="standard"
+            defaultValue="Gasolina"
             onChange={(e) => setType(e.target.value)}
-            //helperText="Salario mensual en Pesos Chilenos"
-          />
-        </FormControl>
+            //style={{ width: "25%" }}
+          >
+            <MenuItem value={"Sedan"}>Sedan</MenuItem>
+            <MenuItem value={"Hatchback"}>Hatchback</MenuItem>
+            <MenuItem value={"SUV"}>SUV</MenuItem>
+            <MenuItem value={"Pickup"}>Pickup</MenuItem>
+            <MenuItem value={"Furgoneta"}>Furgoneta</MenuItem>
+          </TextField>
 
-        <FormControl fullWidth>
           <TextField
             id="productionYear"
             label="Año de producción"
@@ -146,37 +148,39 @@ const AddEditCar = () => {
             variant="standard"
             onChange={(e) => setProductionyear(e.target.value)}
           />
-        </FormControl>
 
-        <FormControl fullWidth>
           <TextField
             id="motorType"
             label="Tipo de motor"
             value={motorType}
+            select
             variant="standard"
+            defaultValue="Gasolina"
             onChange={(e) => setMotortype(e.target.value)}
-          />
-        </FormControl>
+            //style={{ width: "25%" }}
+          >
+            <MenuItem value={"Gasolina"}>Gasolina</MenuItem>
+            <MenuItem value={"Diesel"}>Diesel</MenuItem>
+            <MenuItem value={"Híbrido"}>Híbrido</MenuItem>
+            <MenuItem value={"Eléctrico"}>Eléctrico</MenuItem>
+          </TextField>
 
-        <FormControl fullWidth>
           <TextField
             id="numberSeats"
             label="Cantidad de asientos"
             value={numberSeats}
             select
             variant="standard"
-            defaultValue="1"
+            
             onChange={(e) => setNumberseats(e.target.value)}
-            style={{ width: "25%" }}
+            //style={{ width: "25%" }}
           >
             <MenuItem value={1}>1</MenuItem>
             <MenuItem value={2}>2</MenuItem>
             <MenuItem value={3}>3</MenuItem>
             <MenuItem value={4}>4</MenuItem>
           </TextField>
-        </FormControl>
 
-        <FormControl fullWidth>
           <TextField
           id="kilometers"
           label="Kilometros"
@@ -186,9 +190,7 @@ const AddEditCar = () => {
           onChange={(e) => setKilometers(e.target.value)}
           helperText="Kilometros del auto."
           />
-        </FormControl>
 
-        <FormControl>
           <br />
           <Button
             variant="contained"
@@ -205,6 +207,7 @@ const AddEditCar = () => {
       <Link to="/car/list">Back to List</Link>
     </Box>
     </Paper>
+    </Container>
   );
 };
 

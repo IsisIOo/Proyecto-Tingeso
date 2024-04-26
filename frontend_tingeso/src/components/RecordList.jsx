@@ -14,7 +14,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const RecordList = () => {
-  const [record, setRecord] = useState([]);
+  const [records, setRecord] = useState([]);
 
   const navigate = useNavigate();
 
@@ -33,9 +33,11 @@ const RecordList = () => {
       });
   };
 
+
   useEffect(() => {
     init();
   }, []);
+
 
   const handleDelete = (id) => {
     console.log("Printing id", id);
@@ -58,12 +60,17 @@ const RecordList = () => {
     }
   };
 
+
+
+
+
   const handleEdit = (id) => {
     console.log("Printing id", id);
     navigate(`/record/details/${id}`);
   };
 
   return (
+    <Paper style={{ backgroundColor: 'white' }}>
     <TableContainer component={Paper}>
       <br />
       <Link
@@ -88,12 +95,12 @@ const RecordList = () => {
             </TableCell>
             <TableCell align="left" sx={{ fontWeight: "bold" }}>
               Dia admision
+            </TableCell>            
+            <TableCell align="left" sx={{ fontWeight: "bold" }}>
+              Dia Admision
             </TableCell>
             <TableCell align="left" sx={{ fontWeight: "bold" }}>
               Mes admision
-            </TableCell>
-            <TableCell align="left" sx={{ fontWeight: "bold" }}>
-              Año admision
             </TableCell>
             <TableCell align="right" sx={{ fontWeight: "bold" }}>
               Hora admision
@@ -102,36 +109,46 @@ const RecordList = () => {
               Tipo reparacion
             </TableCell>
             <TableCell align="right" sx={{ fontWeight: "bold" }}>
-              Costo total
+              Dia retiro
             </TableCell>
             <TableCell align="right" sx={{ fontWeight: "bold" }}>
-              Fecha retiro
-            </TableCell>
+              Mes retiro
+            </TableCell> 
             <TableCell align="left" sx={{ fontWeight: "bold" }}>
               Hora retiro
             </TableCell>
             <TableCell align="left" sx={{ fontWeight: "bold" }}>
-              Fecha retirado
+              Dia retirado
+            </TableCell>
+            <TableCell align="right" sx={{ fontWeight: "bold" }}>
+              Mes retirado
             </TableCell>
             <TableCell align="left" sx={{ fontWeight: "bold" }}>
               Hora retirado
-            </TableCell>
+            </TableCell>    
+            <TableCell align="left" sx={{ fontWeight: "bold" }}>
+              Costo Total
+            </TableCell> 
           </TableRow>
         </TableHead>
         <TableBody>
-          {record.map((record) => (
+          {records.map((record) => (
             <TableRow key={record.id}>
               <TableCell align="left">{record.patent}</TableCell>
+              <TableCell align="left">{record.admissionDateDayName}</TableCell>
               <TableCell align="left">{record.admissionDateDay}</TableCell>
               <TableCell align="left">{record.admissionDateMonth}</TableCell>
-              <TableCell align="left">{record.admissionDateYear}</TableCell>
               <TableCell align="right">{record.admissionHour}</TableCell>
               <TableCell align="right">{record.repairType}</TableCell>
-              <TableCell align="right">{record.totalAmount}</TableCell>
-              <TableCell align="right">{record.departureDate}</TableCell>
+              <TableCell align="right">{record.departureDateDay}</TableCell>
+              <TableCell align="right">{record.departureDateMonth}</TableCell>
               <TableCell align="right">{record.departureHour}</TableCell>
-              <TableCell align="right">{record.clientDate}</TableCell>
+              <TableCell align="right">{record.clientDateDay}</TableCell>
+              <TableCell align="right">{record.clientDateMonth}</TableCell>
               <TableCell align="right">{record.clientHour}</TableCell>
+              <TableCell align="right">{record.totalAmount}</TableCell>
+              
+
               <TableCell>
                 <Button
                   variant="contained"
@@ -147,11 +164,11 @@ const RecordList = () => {
                   variant="contained"
                   color="error"
                   size="small"
-                  onClick={() => handleDelete(record.patent)}
+                  onClick={() => handleDelete(record.id)}
                   style={{ marginLeft: "0.5rem" }}
                   startIcon={<DeleteIcon />}
                 >
-                  Eliminar
+                Eliminar 
                 </Button>
               </TableCell>
             </TableRow>
@@ -159,6 +176,7 @@ const RecordList = () => {
         </TableBody>
       </Table>
     </TableContainer>
+    </Paper>
   );
 };
 

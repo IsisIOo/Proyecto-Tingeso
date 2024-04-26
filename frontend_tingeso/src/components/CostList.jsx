@@ -13,7 +13,7 @@ const CostList = () => {
 
   const init = () => {
     costService
-      
+      .getAll()
       .then((response) => {
         console.log(
           "Mostrando planilla de Costos totales.",

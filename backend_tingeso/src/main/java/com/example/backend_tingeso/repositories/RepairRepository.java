@@ -9,25 +9,28 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RepairRepository extends JpaRepository<RepairEntity, Long>  {
-    @Query(value = "SELECT * FROM repair WHERE repair.patent = :patent", nativeQuery = true)
+
+    //busca segun patente en repair type
+    @Query(value = "SELECT * FROM cost WHERE cost.patent = :patent", nativeQuery = true)
     RepairEntity findByPatentrepair(@Param("patent") String patent);
 
+
     @Query(value = "SELECT * FROM repair WHERE repair.total = :total", nativeQuery = true)
-    CarEntity findByTotal(@Param("total") double total);
+    RepairEntity findByTotal(@Param("total") double total);
 
     @Query(value = "SELECT * FROM repair WHERE repair.discountPerDay = :discountPerDay", nativeQuery = true)
-    CarEntity findByDiscountPerDay(@Param("discountPerDay") double discountPerDay);
+    RepairEntity findByDiscountPerDay(@Param("discountPerDay") double discountPerDay);
 
     @Query(value = "SELECT * FROM repair WHERE repair.discountPerbonus = :discountPerbonus", nativeQuery = true)
-    CarEntity findByDiscountPerbonus(@Param("discountPerbonus") double discountPerbonus);
+    RepairEntity findByDiscountPerbonus(@Param("discountPerbonus") double discountPerbonus);
 
     @Query(value = "SELECT * FROM repair WHERE repair.delayCharge = :delayCharge", nativeQuery = true)
-    CarEntity findByDelayCharge(@Param("delayCharge") double delayCharge);
+    RepairEntity findByDelayCharge(@Param("delayCharge") double delayCharge);
 
     @Query(value = "SELECT * FROM repair WHERE repair.mileageCharge = :mileageCharge", nativeQuery = true)
-    CarEntity findByMileageCharge(@Param("mileageCharge") double mileageCharge);
+    RepairEntity findByMileageCharge(@Param("mileageCharge") double mileageCharge);
 
     @Query(value = "SELECT * FROM repair WHERE repair.seniorityCharge = :seniorityCharge", nativeQuery = true)
-    CarEntity findBySeniorityCharge(@Param("seniorityCharge") double seniorityCharge);
+    RepairEntity findBySeniorityCharge(@Param("seniorityCharge") double seniorityCharge);
 
 }
