@@ -21,8 +21,7 @@ const CostDetails = () => {
  
 
   const init = () => {
-    costService
-      .CALCULATODO(patent) //lo crea
+    //costService.CALCULATODO(patent) //lo crea. AHORA LO HACE EN COST LIST Y ADDEDITCOST
       costService.getAllrepairs1(patent) //lo busca
 
       .then((response) => {
@@ -50,12 +49,12 @@ const CostDetails = () => {
           <TableRow>
             <TableCell align="right" sx={{ fontWeight: "bold" }}>
               Patente
-            </TableCell>            
+            </TableCell>    
+            <TableCell align="right" sx={{ fontWeight: "bold" }}>
+            IVA
+            </TableCell>        
             <TableCell align="right" sx={{ fontWeight: "bold" }}>
               Total reparacion
-            </TableCell>
-            <TableCell align="right" sx={{ fontWeight: "bold" }}>
-              IVA
             </TableCell>
             <TableCell align="right" sx={{ fontWeight: "bold" }}>
             Descuento dia

@@ -30,6 +30,7 @@ public class RepairController {
 
     //Obtener todas las reparaciones
     @GetMapping("/")
+    //obtiene todas las reparaciones
     public ResponseEntity<List<RepairEntity>> listRepair() {
         List<RepairEntity> repair = repairService.getRepair();
         return ResponseEntity.ok(repair);
@@ -140,8 +141,8 @@ public class RepairController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/")
-    public ResponseEntity<List<RepairEntity>> listRepairByPatent(String patent) {
+    @GetMapping("/all/{patent}")
+    public ResponseEntity<List<RepairEntity>> listRepairByPatent(@PathVariable String patent) {
         List<RepairEntity> repair = repairService.getRepairByPatentfinal(patent);
         return ResponseEntity.ok(repair);
     }

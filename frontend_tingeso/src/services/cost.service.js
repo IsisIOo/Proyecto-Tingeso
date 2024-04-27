@@ -3,7 +3,12 @@ import httpRepair from "../http-common";
 
 
 const getAll = () => {
-    return httpCar.get('/api/v1/car/allCost/');
+    return httpRepair.get('/api/v1/repairs/');
+}
+
+
+const get = () => {
+    return httpRepair.get(`/api/v1/repairs/patentRepair/${patent}`);
 }
 
 const calculate = patent => {
@@ -49,9 +54,12 @@ const CALCULATODO = patent => {
 
 //obitene todos los repairs asociado a un solo auto
 const getAllrepairs1 = patent => {
-    return httpRepair.get(`/api/v1/repairs/`);
+    return httpRepair.get(`/api/v1/repairs/all/${patent}`);
+}
+
+const remove = id => {
+    return httpRepair.delete(`/api/v1/repairs/delete/${id}`);
 }
 
 
-
-export default { getAll, getAllrepairs1, calculate, discounts, recharges, rechargedelay, rechargeantiguedad, rechargemile, discountday, discountmarca, costorepair, CALCULATODO };
+export default { getAll, get, remove, getAllrepairs1, calculate, discounts, recharges, rechargedelay, rechargeantiguedad, rechargemile, discountday, discountmarca, costorepair, CALCULATODO };

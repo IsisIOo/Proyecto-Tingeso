@@ -76,7 +76,7 @@ const RecordList = () => {
 
   return (
     <Paper style={{ backgroundColor: 'white' }}>
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper}> 
       <br />
       <Link
         to="/record/add"

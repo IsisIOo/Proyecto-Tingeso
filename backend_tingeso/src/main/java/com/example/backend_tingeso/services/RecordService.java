@@ -151,7 +151,7 @@ public class RecordService {
             }
         }
 
-        if (motor.toLowerCase().equals("hibrido")) {
+        if (motor.toLowerCase().equals("híbrido")) {
             if (repairtype.toLowerCase().contains("reparaciones del sistema de frenos")) {
                 total_price = total_price + 180000;
             }
@@ -187,7 +187,7 @@ public class RecordService {
             }
         }
 
-        if (motor.toLowerCase().equals("electrico")) {
+        if (motor.toLowerCase().equals("eléctrico")) {
             if (repairtype.toLowerCase().contains("reparaciones del sistema de frenos")) {
                 total_price = total_price + 220000;
             }
