@@ -10,14 +10,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-const TablaReparacionTipo = () => {
+const TablaRep = () => {
   const [repairData, setRepairData] = useState([]);
 
   useEffect(() => {
     fetchRepairData();
   }, []);
-
-// ...
 
 const fetchRepairData = () => {
     Promise.all([recordService.getAll(), carService.getAll()])
@@ -25,23 +23,27 @@ const fetchRepairData = () => {
         const repairs = repairResponse.data;
         const cars = carResponse.data;
   
-        // Crear un objeto para almacenar las reparaciones agrupadas por tipo
+        // Crear un objeto para almacenar las reparaciones agrupadas por tipo de vehículo
         const groupedRepairs = {};
   
-        // Iterar sobre cada reparación y agruparlas por tipo de reparación
+        // Iterar sobre cada reparación y agruparlas por tipo de vehículo
         repairs.forEach((repair) => {
-          const key = repair.repairType;
-          if (!groupedRepairs[key]) {
-            // Si no existe la clave, crear un nuevo objeto con la información
-            groupedRepairs[key] = {
-              repairType: repair.repairType,
-              numVehicles: 1,
-              totalCost: repair.totalAmount,
-            };
-          } else {
-            // Si la clave ya existe, incrementar el número de vehículos y el costo total
-            groupedRepairs[key].numVehicles++;
-            groupedRepairs[key].totalCost += repair.totalAmount;
+          const car = cars.find((car) => car.patent === repair.patent);
+          if (car) {
+            const key = `${repair.repairType}-${car.type}`; // Utilizar solo el tipo de vehículo como clave
+            if (!groupedRepairs[key]) {
+              // Si no existe la clave, crear un nuevo objeto con la información
+              groupedRepairs[key] = {
+                type: car.type,
+                repairType: repair.repairType,
+                numVehicles: 1,
+                totalCost: repair.totalAmount,
+              };
+            } else {
+              // Si la clave ya existe, incrementar el número de vehículos y el costo total
+              groupedRepairs[key].numVehicles++;
+              groupedRepairs[key].totalCost += repair.totalAmount;
+            }
           }
         });
   
@@ -65,6 +67,7 @@ const fetchRepairData = () => {
         <TableHead>
           <TableRow>
             <TableCell>Tipo de Reparación</TableCell>
+            <TableCell>Tipo de vehículo</TableCell>
             <TableCell>Número de Vehículos Reparados</TableCell>
             <TableCell>Monto Total de Reparaciones</TableCell>
           </TableRow>
@@ -73,6 +76,7 @@ const fetchRepairData = () => {
           {repairData.map((repair, index) => (
             <TableRow key={index}>
               <TableCell>{repair.repairType}</TableCell>
+              <TableCell>{repair.type}</TableCell>
               <TableCell>{repair.numVehicles}</TableCell>
               <TableCell>{repair.totalCost}</TableCell>
             </TableRow>
@@ -83,4 +87,4 @@ const fetchRepairData = () => {
   );
 };
 
-export default TablaReparacionTipo;
+export default TablaRep;
