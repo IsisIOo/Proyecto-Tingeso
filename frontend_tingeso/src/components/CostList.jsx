@@ -13,6 +13,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const CostList = () => {
   const [cost, setCost] = useState([]);
@@ -166,6 +167,17 @@ const CostList = () => {
                   startIcon={<DeleteIcon />}
                 >
                   Eliminar
+                </Button>
+
+                <Button
+                  variant="contained"
+                  color="success"
+                  size="small"
+                  onClick={() => handleDelete(cost.id)}
+                  style={{ marginLeft: "0.5rem" }}
+                  startIcon={<AddCircleIcon />}
+                >
+                  Aplicar Bono
                 </Button>
 
             </TableRow>

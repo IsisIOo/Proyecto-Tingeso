@@ -29,6 +29,8 @@ public class RepairEntity {
     private double IVA; //impuesto al valor agregado
     private double totalAmount; //total de la reparacion
 
+    private int workTime; //tiempo que se demora el vehiculo de salir del taller
+
     //2 descuentos
     //3 recargos
     //2 totaL

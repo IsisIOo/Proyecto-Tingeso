@@ -61,5 +61,9 @@ const remove = id => {
     return httpRepair.delete(`/api/v1/repairs/delete/${id}`);
 }
 
+const time = patent => {
+    return httpRepair.get(`/api/v1/repairs/time`);
+}
 
-export default { getAll, get, remove, getAllrepairs1, calculate, discounts, recharges, rechargedelay, rechargeantiguedad, rechargemile, discountday, discountmarca, costorepair, CALCULATODO };
+
+export default { getAll, get, time, remove, getAllrepairs1, calculate, discounts, recharges, rechargedelay, rechargeantiguedad, rechargemile, discountday, discountmarca, costorepair, CALCULATODO };

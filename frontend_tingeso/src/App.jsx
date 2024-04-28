@@ -15,6 +15,11 @@ import NotFound from './components/NotFound'
 import CostList from './components/CostList'
 import AddEditCost from './components/AddEditCost'
 import CostDetails from './components/CostDetails'
+import TimeList from './components/TimeList'
+import AddEditTime from './components/AddEditTime'
+
+
+
 
 function App() {
   return (
@@ -35,6 +40,10 @@ function App() {
               <Route path = {"/cost/details/:patent"}  element = {<CostDetails/>} />
 
               <Route path = "*" element = {<NotFound/>} />
+
+              <Route path = {"/list/time"}  element = {<TimeList/>} /> 
+              <Route path = "/time/add" element = {<AddEditTime/>} />
+              <Route path = "/list/type" element = {<tablaReparacionTipo/>} />
             </Routes>
           </div>
 

@@ -18,6 +18,8 @@ import HomeIcon from "@mui/icons-material/Home";
 import { useNavigate } from "react-router-dom";
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import ElectricCarIcon from '@mui/icons-material/ElectricCar';
+import ScheduleIcon from '@mui/icons-material/Schedule';
 
 export default function Sidemenu({ open, toggleDrawer }) {
   const navigate = useNavigate();
@@ -58,18 +60,20 @@ export default function Sidemenu({ open, toggleDrawer }) {
           <ListItemText primary="Planilla de Costos" />
         </ListItemButton>
 
-        <ListItemButton onClick={() => navigate("/paycheck/calculate")}>
+        <ListItemButton onClick={() => navigate("/list/type")}>
           <ListItemIcon>
-            <CalculateIcon />
+            <ElectricCarIcon />
           </ListItemIcon>
-          <ListItemText primary="Calcular Planilla" />
+          <ListItemText primary="Repacion vs Motor" />
         </ListItemButton>
-        <ListItemButton onClick={() => navigate("/reports/AnualReport")}>
+        
+        <ListItemButton onClick={() => navigate("/list/time")}>
           <ListItemIcon>
-            <AnalyticsIcon />
+            <ScheduleIcon/>
           </ListItemIcon>
-          <ListItemText primary="Gráficos Planillas" />
+          <ListItemText primary="Tiempo espera" />
         </ListItemButton>
+
       </List>
 
       <Divider />

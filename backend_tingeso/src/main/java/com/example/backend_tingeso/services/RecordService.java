@@ -51,18 +51,6 @@ public class RecordService {
 
     }
 
-    /*public double getCost(String patent) {
-        double total_price = precioSegunReparacionyMotor(patent);
-        total_price = IVATOTAL(total_price); //le saca el iva al costo original
-        total_price = DescuentosSegunHora(patent, total_price);
-        //total_price = DescuentoSegunMarca(patent, total_price);
-        //comentada el descuento segun marca porque espero usar essa funcion como un boton
-        //por atraso total_price =
-        total_price = RecargoPorKilometraje(patent, total_price);
-        total_price = recargoPorAntiguedad(patent, total_price);
-        return total_price;
-    }*/
-
     public RecordEntity updateRecord(RecordEntity record) {
         return recordRepository.save(record);
     }
@@ -89,7 +77,7 @@ public class RecordService {
                 total_price = total_price + 350000;
 
             }
-            if (repairtype.toLowerCase().contains("reparaciones de la transmisión:")) {
+            if (repairtype.toLowerCase().contains("reparaciones de la transmisión")) {
                 total_price = total_price + 210000; //4
             }
             if (repairtype.toLowerCase().contains("reparación del sistema eléctrico")) {
@@ -125,7 +113,7 @@ public class RecordService {
             if (repairtype.toLowerCase().contains("reparaciones del motor")) {
                 total_price = total_price + 450000; //3
             }
-            if (repairtype.toLowerCase().contains("reparaciones de la transmisión:")) {
+            if (repairtype.toLowerCase().contains("reparaciones de la transmisión")) {
                 total_price = total_price + 210000; //4
             }
             if (repairtype.toLowerCase().contains("reparación del sistema eléctrico")) {
@@ -161,7 +149,7 @@ public class RecordService {
             if (repairtype.toLowerCase().contains("reparaciones del motor")) {
                 total_price = total_price + 700000;
             }
-            if (repairtype.toLowerCase().contains("reparaciones de la transmisión:")) {
+            if (repairtype.toLowerCase().contains("reparaciones de la transmisión")) {
                 total_price = total_price + 300000; //4
             }
             if (repairtype.toLowerCase().contains("reparación del sistema eléctrico")) {
@@ -197,7 +185,7 @@ public class RecordService {
             if (repairtype.toLowerCase().contains("reparaciones del motor")) {
                 total_price = total_price + 800000;
             }
-            if (repairtype.toLowerCase().contains("reparaciones de la transmisión:")) {
+            if (repairtype.toLowerCase().contains("reparaciones de la transmisión")) {
                 total_price = total_price + 300000; //4
             }
             if (repairtype.toLowerCase().contains("reparación del sistema eléctrico")) {
@@ -239,16 +227,16 @@ public class RecordService {
         int hour = rec.getAdmissionHour();//hora para determinar si se le aplica descuento por hora de llegada
         String day = rec.getAdmissionDateDayName().toLowerCase();//dia para determinar si se le aplica descuento por dia de llegada
         if (9 < hour && hour < 12 ) {//agregar que se entre lunes y jueves
-            if(day.equals("jueves")  || day.equals("lunes")) {
+            if(day.toLowerCase().equals("jueves")  || day.toLowerCase().equals("lunes")) {
                 double total_price_hour = total_price * 0.1;
                 total_price = total_price - total_price_hour;
-                System.out.println("El descuento aplicado por la hora: " + total_price_hour);
+                System.out.println("El descuento aplicado por la hora RECORD SERIVE SIN 1 : " + total_price_hour);
             }
         }
         else {
             total_price = total_price;
         }
-        System.out.println("Precio total de la reparación con descuento por hora: " + total_price);
+        System.out.println("Precio total de la reparación con descuento por hora: RECORD SERVICE FUERA IF" + total_price);
         return total_price;
     }
 
@@ -257,22 +245,22 @@ public class RecordService {
     public double DescuentoSegunMarca(String patent, double total_price) {
         //descuento segun marca
         String brand = carRepository.findByPatent(patent).getBrand();
-        if (brand.toLowerCase() == "toyota") {
+        if (brand.toLowerCase().equals("toyota")) {
             double total_price_brand = total_price * 0.1;
             total_price = total_price - total_price_brand;
             System.out.println("El descuento aplicado por la marca Toyota: " + total_price_brand);
         }
-        if (brand.toLowerCase() == "ford") {
+        if (brand.toLowerCase().equals("ford")) {
             double total_price_brand = total_price * 0.15;
             total_price = total_price - total_price_brand;
             System.out.println("El descuento aplicado por la marca Ford: " + total_price_brand);
         }
-        if (brand.toLowerCase() == "hyundai") {
+        if (brand.toLowerCase().equals("hyundai")) {
             double total_price_brand = total_price * 0.2;
             total_price = total_price - total_price_brand;
             System.out.println("El descuento aplicado por la marca Hyundai: " + total_price_brand);
         }
-        if (brand.toLowerCase() == "honda") {
+        if (brand.toLowerCase().equals("honda")) {
             double total_price_brand = total_price * 0.25;
             total_price = total_price - total_price_brand;
             System.out.println("El descuento aplicado por la marca Honda: " + total_price_brand);
@@ -290,147 +278,146 @@ public class RecordService {
 
     public double RecargoPorKilometraje(String patent, double total_price) {
         //recargo por kilometraje
-        String brand1 = carRepository.findByPatent(patent).getBrand();
+        double total_price_km=0;
+        String type1 = carRepository.findByPatent(patent).getType();
         int km = carRepository.findByPatent(patent).getKilometers();
-        if (brand1.toLowerCase() == "sedan") {
+        if (type1.toLowerCase().equals("sedan")) {
             if (km <= 5000) {
                 total_price = total_price;
                 System.out.println("No se aplicó recargo por kilometraje bajo 5000");
             }
             if (5001 < km && km <= 12000) {
-                double total_price_km = total_price * 0.03;
+                total_price_km = total_price * 0.03;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a Sedan por kilometraje sobre 5000: " + total_price_km);
             }
             if (12001 < km && km <= 25000) {
-                double total_price_km = total_price * 0.07;
+                total_price_km = total_price * 0.07;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a Sedan por kilometraje sobre 12000: " + total_price_km);
             }
             if (25001 < km && km <= 40000) {
-                double total_price_km = total_price * 0.12;
+                total_price_km = total_price * 0.12;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a Sedan por kilometraje sobre 25000: " + total_price_km);
             }
             if (40000 < km) {
-                double total_price_km = total_price * 0.2;
+                total_price_km = total_price * 0.2;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a Sedan por kilometraje sobre 40000: " + total_price_km);
             }
         }
 
-        if (brand1.toLowerCase() == "hatchback") {
+        if (type1.toLowerCase().equals("hatchback")) {
             if (km < 5000) {
                 total_price = total_price;
                 System.out.println("No se aplicó recargo por kilometraje bajo 5000");
             }
             if (5001 < km && km < 12000) {
-                double total_price_km = total_price * 0.03;
+                total_price_km = total_price * 0.03;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a Hatchback por kilometraje sobre 5000: " + total_price_km);
             }
             if (12001 < km && km < 25000) {
-                double total_price_km = total_price * 0.07;
+                total_price_km = total_price * 0.07;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a Hatchback por kilometraje sobre 12000: " + total_price_km);
             }
             if (25001 < km && km < 40000) {
-                double total_price_km = total_price * 0.12;
+                total_price_km = total_price * 0.12;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a Hatchback por kilometraje sobre 25000: " + total_price_km);
             }
             if (40000 < km) {
-                double total_price_km = total_price * 0.2;
+                total_price_km = total_price * 0.2;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a Hatchback por kilometraje sobre 40000: " + total_price_km);
             }
         }
 
-        if (brand1.toLowerCase() == "suv") {
+        if (type1.toLowerCase().equals("suv")) {
             if (km < 5000) {
                 total_price = total_price;
                 System.out.println("No se aplicó recargo por kilometraje bajo 5000");
             }
             if (5001 < km && km < 12000) {
-                double total_price_km = total_price * 0.05;
+                total_price_km = total_price * 0.05;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a SUV por kilometraje sobre 5000: " + total_price_km);
             }
             if (12001 < km && km < 25000) {
-                double total_price_km = total_price * 0.09;
+                total_price_km = total_price * 0.09;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a SUV por kilometraje sobre 12000: " + total_price_km);
             }
             if (25001 < km && km < 40000) {
-                double total_price_km = total_price * 0.12;
+                total_price_km = total_price * 0.12;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a SUV por kilometraje sobre 25000: " + total_price_km);
             }
             if (40000 < km) {
-                double total_price_km = total_price * 0.2;
+                total_price_km = total_price * 0.2;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a SUV por kilometraje sobre 40000: " + total_price_km);
             }
         }
 
-        if (brand1.toLowerCase() == "pickup") {
+        if (type1.toLowerCase().equals("pickup")) {
             if (km < 5000) {
                 total_price = total_price;
                 System.out.println("No se aplicó recargo por kilometraje bajo 5000");
             }
             if (5001 < km && km < 12000) {
-                double total_price_km = total_price * 0.05;
+                total_price_km = total_price * 0.05;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a Pickup por kilometraje sobre 5000: " + total_price_km);
             }
             if (12001 < km && km < 25000) {
-                double total_price_km = total_price * 0.09;
+                total_price_km = total_price * 0.09;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a Pickup por kilometraje sobre 12000: " + total_price_km);
             }
             if (25001 < km && km < 40000) {
-                double total_price_km = total_price * 0.12;
+                total_price_km = total_price * 0.12;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a Pickup por kilometraje sobre 25000: " + total_price_km);
             }
             if (40000 < km) {
-                double total_price_km = total_price * 0.2;
+                total_price_km = total_price * 0.2;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a Pickup por kilometraje sobre 40000: " + total_price_km);
             }
         }
 
-        if (brand1.toLowerCase() == "furgoneta") {
+        if (type1.toLowerCase().equals("furgoneta") ) {
             if (km < 5000) {
                 total_price = total_price;
                 System.out.println("No se aplicó recargo por kilometraje bajo 5000");
             }
             if (5001 < km && km < 12000) {
-                double total_price_km = total_price * 0.05;
+                total_price_km = total_price * 0.05;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a Furgoneta por kilometraje sobre 5000: " + total_price_km);
             }
             if (12001 < km && km < 25000) {
-                double total_price_km = total_price * 0.09;
+                total_price_km = total_price * 0.09;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a Furgoneta por kilometraje sobre 12000: " + total_price_km);
             }
             if (25001 < km && km < 40000) {
-                double total_price_km = total_price * 0.12;
+                total_price_km = total_price * 0.12;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a Furgoneta por kilometraje sobre 25000: " + total_price_km);
             }
             if (40000 < km) {
-                double total_price_km = total_price * 0.2;
+                total_price_km = total_price * 0.2;
                 total_price = total_price + total_price_km;
                 System.out.println("El recargo aplicado a Furgoneta por kilometraje sobre 40000: " + total_price_km);
             }
         }
-        else{
-            total_price= total_price;
-            System.out.println("No se aplicó recargo por kilometraje");
-        }
-        System.out.println("Precio total de la reparación con recargo por kilometraje: " + total_price);
+        System.out.println("Precio total de la reparación con recargo por kilometraje kakaakaka: " + total_price +"y el valor es " + total_price_km);
+        System.out.println("los kilometros son:" +km);
+        System.out.println("el recargo por kilometraje es:" + total_price_km);
         return total_price;
     }
 
@@ -438,8 +425,8 @@ public class RecordService {
     public double recargoPorAntiguedad(String patent, double total_price) {
         //recargo por antiguedad
         int year_car = carRepository.findByPatent(patent).getProductionYear();
-        String brand1 = carRepository.findByPatent(patent).getBrand();
-        if (brand1.toLowerCase() == "sedan") {
+        String type1 = carRepository.findByPatent(patent).getType();
+        if (type1.toLowerCase().equals("sedan")) {
             if ((2024 - year_car) <= 5) {
                 total_price = total_price;
                 System.out.println("No se aplicó recargo por antiguedad bajo 5 años");
@@ -464,7 +451,7 @@ public class RecordService {
             }
         }
 
-        if (brand1.toLowerCase() == "hatchback") {
+        if (type1.toLowerCase().equals("hatchback") ) {
             if ((2024 - year_car) <= 5) {
                 total_price = total_price;
                 System.out.println("No se aplicó recargo por antiguedad bajo 5 años");
@@ -489,7 +476,7 @@ public class RecordService {
             }
         }
 
-        if (brand1.toLowerCase() == "suv") {
+        if (type1.toLowerCase().equals("suv")) {
             if ((2024 - year_car) <= 5) {
                 total_price = total_price;
                 System.out.println("No se aplicó recargo por antiguedad bajo 5 años");
@@ -514,7 +501,7 @@ public class RecordService {
             }
         }
 
-        if (brand1.toLowerCase() == "pickup") {
+        if (type1.toLowerCase().equals("pickup") ) {
             if ((2024 - year_car) <= 5) {
                 total_price = total_price;
                 System.out.println("No se aplicó recargo por antiguedad bajo 5 años");
@@ -539,7 +526,7 @@ public class RecordService {
             }
         }
 
-        if (brand1.toLowerCase() == "furgoneta") {
+        if (type1.toLowerCase().equals("furgoneta") ) {
             if ((2024 - year_car) <= 5) {
                 total_price = total_price;
                 System.out.println("No se aplicó recargo por antiguedad bajo 5 años");
@@ -562,10 +549,6 @@ public class RecordService {
                 total_price = total_price + total_price_year;
                 System.out.println("El recargo aplicado a Furgoneta por antiguedad sobre 16 años: " + total_price_year);
             }
-        }
-        else {
-            total_price = total_price;
-            System.out.println("No se aplicó recargo por antiguedad");
         }
         System.out.println("Precio total de la reparación con recargo por antiguedad: " + total_price);
         return total_price;
@@ -592,8 +575,8 @@ public class RecordService {
         //recargo por antiguedad
         int year_car = carRepository.findByPatent(patent).getProductionYear();
         double total_price_year = 0;
-        String brand1 = carRepository.findByPatent(patent).getBrand();
-        if (brand1.toLowerCase() == "sedan") {
+        String type1 = carRepository.findByPatent(patent).getType();
+        if (type1.toLowerCase().equals("sedan") ) {
             if ((2024 - year_car) <= 5) {
                 System.out.println("No se aplicó recargo por antiguedad bajo 5 años");
             }
@@ -614,7 +597,7 @@ public class RecordService {
             }
         }
 
-        if (brand1.toLowerCase() == "hatchback") {
+        if (type1.toLowerCase().equals("hatchback")) {
             if ((2024 - year_car) <= 5) {
                 System.out.println("No se aplicó recargo por antiguedad bajo 5 años");
             }
@@ -635,7 +618,7 @@ public class RecordService {
             }
         }
 
-        if (brand1.toLowerCase() == "suv") {
+        if (type1.toLowerCase().equals("suv")) {
             if ((2024 - year_car) <= 5) {
                 System.out.println("No se aplicó recargo por antiguedad bajo 5 años");
             }
@@ -656,28 +639,25 @@ public class RecordService {
             }
         }
 
-        if (brand1.toLowerCase() == "pickup") {
+        if (type1.toLowerCase().equals("pickup") ) {
             if ((2024 - year_car) <= 5) {
                 System.out.println("No se aplicó recargo por antiguedad bajo 5 años");
             }
 
             if ((2024 - year_car) >= 6 && (2024 - year_car) <= 10) {
                 total_price_year = total_price * 0.07;
-
             }
 
             if ((2024 - year_car) >= 11 && (2024 - year_car) <= 15) {
                 total_price_year = total_price * 0.11;
-
             }
 
             if ((2024 - year_car) >= 16) {
                 total_price_year = total_price * 0.2;
-
             }
         }
 
-        if (brand1.toLowerCase() == "furgoneta") {
+        if (type1.toLowerCase().equals("furgoneta")) {
             if ((2024 - year_car) <= 5) {
                 System.out.println("No se aplicó recargo por antiguedad bajo 5 años");
             }
@@ -708,9 +688,9 @@ public class RecordService {
     public double RecargoPorKilometraje1(String patent, double total_price) {
         //recargo por kilometraje
         double total_price_km=0;
-        String brand1 = carRepository.findByPatent(patent).getBrand();
+        String type1 = carRepository.findByPatent(patent).getType();
         int km = carRepository.findByPatent(patent).getKilometers();
-        if (brand1.toLowerCase() == "sedan") {
+        if (type1.toLowerCase().equals("sedan")) {
             if (km <= 5000) {
                 System.out.println("No se aplicó recargo por kilometraje bajo 5000");
             }
@@ -731,7 +711,7 @@ public class RecordService {
             }
         }
 
-        if (brand1.toLowerCase() == "hatchback") {
+        if (type1.toLowerCase().equals("hatchback") ) {
             if (km < 5000) {
                 System.out.println("No se aplicó recargo por kilometraje bajo 5000 11111");
             }
@@ -747,11 +727,10 @@ public class RecordService {
             }
             if (40000 < km) {
                 total_price_km = total_price * 0.2;
-
             }
         }
 
-        if (brand1.toLowerCase() == "suv") {
+        if (type1.toLowerCase().equals("suv")) {
             if (km < 5000) {
                 System.out.println("No se aplicó recargo por kilometraje bajo 5000 11111");
             }
@@ -771,7 +750,7 @@ public class RecordService {
             }
         }
 
-        if (brand1.toLowerCase() == "pickup") {
+        if (type1.toLowerCase().equals("pickup")) {
             if (km < 5000) {
                 System.out.println("No se aplicó recargo por kilometraje bajo 5000");
             }
@@ -793,7 +772,7 @@ public class RecordService {
             }
         }
 
-        if (brand1.toLowerCase() == "furgoneta") {
+        if (type1.toLowerCase().equals("furgoneta")) {
             if (km < 5000) {
                 System.out.println("No se aplicó recargo por kilometraje bajo 5000");
             }
@@ -823,12 +802,56 @@ public class RecordService {
         int hour = rec.getAdmissionHour();//hora para determinar si se le aplica descuento por hora de llegada
         String day = rec.getAdmissionDateDayName().toLowerCase();//dia para determinar si se le aplica descuento por dia de llegada
         if (9 < hour && hour < 12 ) {//agregar que se entre lunes y jueves
-            if(day.equals("jueves")  || day.equals("lunes") || day.equals("martes") || day.equals("miercoles") || day.equals("viernes")) {
+            if(day.toLowerCase().equals("jueves")  || day.toLowerCase().equals("lunes")) {
                 total_price_hour = total_price * 0.1;
                 System.out.println("El descuento aplicado por la hora: " + total_price_hour);
             }
         }
         return total_price_hour;
+    }
+
+    public double recargoPorAtraso(RecordEntity rec, double total_price) {
+        //admision, pero creo que no es necesario
+        int hora_admision = rec.getAdmissionHour();
+        int dia_admision = rec.getClientDateDay();
+        int mes_admision = rec.getClientDateMonth();
+
+        //fechas de retiro indicadas por el taller
+        int dia_retiro_taller = rec.getDepartureDateDay();
+        int mes_retiro_taller = rec.getDepartureDateMonth();
+        int hora_retiro_taller = rec.getDepartureHour();
+
+        //fecha retirada por el cliente
+        int hora_retiro_cliente = rec.getClientHour();
+        int dia_retiro_cliente = rec.getClientDateDay();
+        int mes_retiro_cliente = rec.getClientDateMonth();
+
+        //si el retiro del cliente es mayor al retiro del taller es pq está atrasado
+        if ((dia_retiro_cliente - dia_retiro_taller) > 0 && mes_retiro_cliente == mes_retiro_taller) {
+            int retraso = dia_retiro_cliente - dia_retiro_taller;
+            System.out.println("el cliente esta retrasado por " + retraso + "DIAS");
+            //corresponde a la cantidad de dias de retraso por 5% de cada dia que se demoro
+            double recargo_dias = retraso * 0.05 * total_price;
+            total_price = total_price + recargo_dias;
+
+        }
+        if ((dia_retiro_cliente - dia_retiro_taller) > 0 && (mes_retiro_cliente - mes_retiro_taller) > 0) {
+            int retraso = dia_retiro_cliente - dia_retiro_taller;
+            int retraso_meses = mes_retiro_cliente - mes_retiro_taller;
+            System.out.println("el cliente esta retrasado por " + retraso + "dias y " + retraso_meses + "meses");
+            //voy a considerar que los meses solo tienen 30 dias
+
+            //retraso de dias simples
+            double recargo_dias = retraso * 0.05 * total_price;
+            //por ejemplo, si son 3 meses de diferencia, para sacar los dias seria 3 *30 =90 dias y cada dia tiene 0.05 de recargo
+            double recargo_meses = retraso_meses * 30 * 0.05 * total_price;
+
+            double recargo_total = recargo_dias + retraso_meses;
+            total_price = total_price + recargo_total;
+        }
+
+        System.out.println("el total con atraso es:" + total_price);
+        return total_price;
     }
 
 
@@ -840,7 +863,7 @@ public class RecordService {
         total_price = DescuentosSegunHora(rec, total_price);
         //total_price = DescuentoSegunMarca(patent, total_price);
         //comentada el descuento segun marca porque espero usar essa funcion como un boton
-        //por atraso total_price =
+        total_price = recargoPorAtraso(rec, total_price);
         total_price = RecargoPorKilometraje(rec.getPatent(), total_price);
         total_price = recargoPorAntiguedad(rec.getPatent(), total_price);
         return total_price;

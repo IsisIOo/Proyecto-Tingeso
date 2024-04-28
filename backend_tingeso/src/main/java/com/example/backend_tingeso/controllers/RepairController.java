@@ -148,7 +148,12 @@ public class RepairController {
     }
 
 
-
+    @GetMapping("/time")
+    public int tiempo(String patent) {
+        RepairEntity repairEntity = repairService.getRepairByPatent(patent);
+        int tiempo= repairEntity.getWorkTime();
+        return tiempo;
+    }
 
 
 
