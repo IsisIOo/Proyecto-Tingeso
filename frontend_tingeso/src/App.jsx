@@ -17,6 +17,7 @@ import AddEditCost from './components/AddEditCost'
 import CostDetails from './components/CostDetails'
 import TimeList from './components/TimeList'
 import AddEditTime from './components/AddEditTime'
+import TablaTipo from './components/TablaTipo'
 
 
 
@@ -43,7 +44,8 @@ function App() {
 
               <Route path = {"/list/time"}  element = {<TimeList/>} /> 
               <Route path = "/time/add" element = {<AddEditTime/>} />
-              <Route path = "/list/type" element = {<tablaReparacionTipo/>} />
+
+              <Route path = "/list/type" element = {<TablaTipo/>} />
             </Routes>
           </div>
 
