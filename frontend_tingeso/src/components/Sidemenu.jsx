@@ -20,6 +20,7 @@ import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import ElectricCarIcon from '@mui/icons-material/ElectricCar';
 import ScheduleIcon from '@mui/icons-material/Schedule';
+import ConstructionIcon from '@mui/icons-material/Construction';
 
 export default function Sidemenu({ open, toggleDrawer }) {
   const navigate = useNavigate();
@@ -73,31 +74,17 @@ export default function Sidemenu({ open, toggleDrawer }) {
           </ListItemIcon>
           <ListItemText primary="Tiempo espera" />
         </ListItemButton>
+        
+        <ListItemButton onClick={() => navigate("/list/reparacion")}>
+          <ListItemIcon>
+            <ConstructionIcon/>
+          </ListItemIcon>
+          <ListItemText primary="Cantidad reparaciones" />
+        </ListItemButton>
+
 
       </List>
 
-      <Divider />
-
-      <List>
-        <ListItemButton onClick={() => navigate("/employee/discounts")}>
-          <ListItemIcon>
-            <DiscountIcon />
-          </ListItemIcon>
-          <ListItemText primary="Descuentos" />
-        </ListItemButton>
-        <ListItemButton onClick={() => navigate("/paycheck/vacations")}>
-          <ListItemIcon>
-            <HailIcon />
-          </ListItemIcon>
-          <ListItemText primary="Vacaciones" />
-        </ListItemButton>
-        <ListItemButton onClick={() => navigate("/paycheck/medicalleave")}>
-          <ListItemIcon>
-            <MedicationLiquidIcon />
-          </ListItemIcon>
-          <ListItemText primary="Licencias Medicas" />
-        </ListItemButton>
-      </List>
     </Box>
   );
 
