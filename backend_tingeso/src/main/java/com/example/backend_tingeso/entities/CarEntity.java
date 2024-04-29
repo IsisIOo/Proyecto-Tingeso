@@ -13,17 +13,12 @@ import lombok.NonNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//@Builder  ---> No estoy seguro si esto tiene que ir.
 public class CarEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(unique = true, nullable = false)
     private Long id; //no lo asigno
 
-    /*@OneToOne(cascade = CascadeType.ALL) //un auto tiene un historial de reparaciones
-    //@Column(unique = true, nullable = false)
-    @JoinColumn(name = "id", referencedColumnName = "id")
-    public RecordEntity history; //es lista? watafac*/
     @NonNull
     private String patent; //patente de letras y numeros
     @NonNull

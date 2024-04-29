@@ -27,8 +27,7 @@ const AddEditTime = () => {
   
         if (id) {
           //Actualizar Datos 
-          costService
-            .update(cost)
+          costService.update(cost)
             .then((response) => {
               console.log("Costos ticket ha sido actualizado.", response.data);
             })

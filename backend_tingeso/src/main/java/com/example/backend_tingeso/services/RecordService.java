@@ -23,6 +23,7 @@ public class RecordService {
         return (List<RecordEntity>) recordRepository.findAll();
     }
 
+
     public RecordEntity getOneRecordRespository(String patent){
         return recordRepository.findByPatentOne(patent);
     }
@@ -33,13 +34,6 @@ public class RecordService {
     public List<RecordEntity> getRecordsByPatent(String patent) {
         return recordRepository.findByPatent(patent);
     }
-
-
-    //lo borre por mientras
-    //public RecordEntity setAmount(RecordEntity record, double totalAmount) {
-      //  record.setTotalAmount(totalAmount);
-       // return recordRepository.save(record);
-    //}
 
     public boolean deleteRecord(Long id) throws Exception {
         try{

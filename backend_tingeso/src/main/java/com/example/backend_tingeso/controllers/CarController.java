@@ -1,16 +1,12 @@
 package com.example.backend_tingeso.controllers;
 
 import com.example.backend_tingeso.entities.CarEntity;
-import com.example.backend_tingeso.entities.RecordEntity;
 import com.example.backend_tingeso.services.CarService;
-import com.example.backend_tingeso.services.RecordService;
-import com.example.backend_tingeso.services.RepairService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/car")
@@ -19,12 +15,6 @@ public class CarController {
     @Autowired
     CarService carService;
 
-    @Autowired
-    RecordService recordService;
-
-    @Autowired
-    RepairService repairService;
-
     //obtiene todos
     @GetMapping("/")
     public ResponseEntity<List<CarEntity>> listCar() {
@@ -32,60 +22,10 @@ public class CarController {
         return ResponseEntity.ok(car);
     }
 
-    //Vamos a conseguir los costos de todos los autos
-    /*@GetMapping("/allCost/")
-    public ResponseEntity<Map<String, Double>> listCosts() {
-        List<CarEntity> cars = carService.getCar(); //obtengo los autos para obtener todos los costos de estos
-
-        //Map<String, Double>  costs = carService.getCosts(cars);
-
-        return ResponseEntity.ok(costs);
-    }*/
-
-
     //encontrar solo uno
     @GetMapping("/patent/{patent}")
     public ResponseEntity<CarEntity> getCarBypatent(@PathVariable String patent) {
         CarEntity car = carService.getCarByPatent(patent);
-        return ResponseEntity.ok(car);
-    }
-
-   /* @GetMapping("/type/{type}") //este es para encontrar solo uno
-    public ResponseEntity<CarEntity> getCarByType(@PathVariable String type) {
-        CarEntity car = carService.getCarByType(type);
-        return ResponseEntity.ok(car);
-    }*/
-
-    //para encontrar todos
-    @GetMapping("/type/{type}")
-    public ResponseEntity<List<CarEntity>> listCarType(@PathVariable String type) {
-        List<CarEntity> car = carService.getCarByType(type);
-        return ResponseEntity.ok(car);
-    }
-
-    /*@GetMapping("/history1/{history1}")
-    public ResponseEntity<CarEntity> getCarBypatent2(@PathVariable String history1) {
-        CarEntity car = carService.getCarByPatent2(history1);
-        return ResponseEntity.ok(car);
-    }*/
-
-    @GetMapping("/motortype/{motortype}")
-    public ResponseEntity<List<CarEntity>> listCarMotortype(@PathVariable String motortype) {
-        List<CarEntity> car = carService.getCarByMotortype(motortype);
-        return ResponseEntity.ok(car);
-    }
-
-    //busca segun marca
-    @GetMapping("/brand/{brand}")
-    public ResponseEntity<List<CarEntity>> listCarBrand(@PathVariable String brand) {
-        List<CarEntity> car = carService.getCarByBrand(brand);
-        return ResponseEntity.ok(car);
-    }
-
-    //todos los autos del mismo año
-    @GetMapping("/productionYear/{productionYear}")
-    public ResponseEntity<List<CarEntity>> listCarProductionyear(@PathVariable int productionYear) {
-        List<CarEntity> car = carService.getCarByProductionyear(productionYear);
         return ResponseEntity.ok(car);
     }
 

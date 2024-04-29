@@ -19,8 +19,7 @@ const CostList = () => {
   const [cost, setCost] = useState([]);
 
   const init = () => {
-    costService
-      .getAll()
+    costService.getAll()
       .then((response) => {
         console.log(
           "Mostrando planilla de Costos totales.",

@@ -18,10 +18,6 @@ import java.util.List;
 public class RecordController {
     @Autowired
     RecordService recordService;
-    @Autowired
-    RepairService repairService;
-    @Autowired
-    RecordService carService;
 
     //todos los weas
     @GetMapping("/")
@@ -45,72 +41,12 @@ public class RecordController {
         return ResponseEntity.ok(recordHistoryNew);
     }
 
-    @GetMapping("/car/{patent}")
-    //este recibe una lista
-    public ResponseEntity<List<RecordEntity>> getRecordsByCarPatent(@PathVariable String patent) {
-        List<RecordEntity> records = recordService.getRecordsByPatent(patent);
-        return ResponseEntity.ok(records);
-    }
-
-    /*@GetMapping("/{id}")
-    public ResponseEntity<RecordEntity> getExtraHourById(@PathVariable Long id) {
-        RecordEntity recordEntity = RecordService.getExtraHourById(id);
-        return ResponseEntity.ok(extraHour);
-    }
-
-    @PostMapping("/")
-    public ResponseEntity<RecordEntity> saveExtraHours(@RequestBody RecordEntity extraHour) {
-        RecordEntity extraHourNew = RecordService.saveExtraHours(extraHour);
-        return ResponseEntity.ok(extraHourNew);
-    }
-
-    @GetMapping("/{rut}/{year}/{month}")
-    public ResponseEntity<List<RecordEntity>> listExtraHoursByRut(@PathVariable("rut") String rut, @PathVariable("year") int year, @PathVariable("month") int month) {
-        List<RecordEntity> extraHours = RecordService.getExtraHoursByRutYearMonth(rut,year,month);
-        return ResponseEntity.ok(extraHours);
-    }
-
-    @PutMapping("/")
-    public ResponseEntity<RecordEntity> updateExtraHours(@RequestBody RecordEntity extraHours){
-        RecordEntity extraHoursUpdated = RecordService.updateExtraHour(extraHours);
-        return ResponseEntity.ok(extraHoursUpdated);
-    }
-}*/
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteRecordById(@PathVariable Long id) throws Exception {
         var isDeleted = recordService.deleteRecord(id);
         return ResponseEntity.noContent().build();
     }
 
-    /*@PutMapping("/PUTCOSTT1/{patent}")
-    public ResponseEntity<RecordEntity> setAmount(@PathVariable String patent) {
-        System.out.println("hola");
-        RecordEntity recordHistory = recordService.getOneRecordRespository(patent);
-
-        System.out.println("hola");
-        double totalAmount = recordService.getCost(patent);
-
-        System.out.println("hola");
-        recordHistory.setTotalAmount(totalAmount);
-
-        System.out.println("hola");
-        return ResponseEntity.ok(recordHistory);
-    }*/
-
-   /* @PutMapping("/PUTCOSTT/{patent}/")
-    public ResponseEntity<RecordEntity> updateRecord(@RequestBody RecordEntity record, @PathVariable String patent) throws Exception{
-        RecordEntity recordHistory = recordService.getOneRecordRespository(patent);
-        Long id = recordHistory.getId();
-        var isDeleted = recordService.deleteRecord(id);
-
-        RecordEntity recordUpdated = recordService.updateRecord(record);
-        return ResponseEntity.ok(recordUpdated);
-    }*/
-
-        //recupera el record que posee la patenten y le asigna el costo total de la reparacion
-
-
-    //fuNCION QUE YA NO SEEEE
     @PostMapping("/newRecord/")
     public ResponseEntity<RecordEntity> updateRecord(@RequestBody RecordEntity rec){
 

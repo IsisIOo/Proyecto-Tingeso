@@ -11,7 +11,6 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import Paper from "@mui/material/Paper";
 import carService from "../services/car.service";
 import InfoIcon from '@mui/icons-material/Info';
-import repairService from "../services/repair.service";
 
 const AddEditRecord = () => {
   const [patent, setPatent] = useState("");
