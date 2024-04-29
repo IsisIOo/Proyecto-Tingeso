@@ -6,10 +6,7 @@ import com.example.backend_tingeso.repositories.CarRepository;
 import com.example.backend_tingeso.repositories.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
-import java.util.Date;
-
 import com.example.backend_tingeso.repositories.RepairRepository;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -34,8 +31,6 @@ public class RepairService {
         double total_price2 = DescuentosSegunHora(patent, total_price1);
         //total_price = DescuentoSegunMarca(patent, total_price);
         //comentada el descuento segun marca porque espero usar essa funcion como un boton
-
-
         double total_price3 = RecargoPorKilometraje(patent, total_price1);
         double total_price4 = recargoPorAntiguedad(patent, total_price1);
         double total_price5 = recargoPorAtraso(patent, total_price1);
@@ -88,9 +83,6 @@ public class RepairService {
 
         return repairRepository.save(repairEntity);
     }
-
-
-
 
     public double precioSegunReparacionyMotor(String patent) {
         double total_price = 0;
@@ -683,15 +675,12 @@ public class RepairService {
             }
             if (5001 < km && km <= 12000) {
                  total_price_km = total_price * 0.03;
-
             }
             if (12001 < km && km <= 25000) {
                  total_price_km = total_price * 0.07;
-
             }
             if (25001 < km && km <= 40000) {
                  total_price_km = total_price * 0.12;
-
             }
             if (40000 < km) {
                  total_price_km = total_price * 0.2;
@@ -710,14 +699,11 @@ public class RepairService {
             }
             if (25001 < km && km < 40000) {
                  total_price_km = total_price * 0.12;
-
             }
             if (40000 < km) {
                  total_price_km = total_price * 0.2;
-
             }
         }
-
         if (type1.toLowerCase().equals("suv")) {
             if (km < 5000) {
                 System.out.println("No se aplicó recargo por kilometraje bajo 5000 11111");
@@ -735,7 +721,6 @@ public class RepairService {
                  total_price_km = total_price * 0.2;
             }
         }
-
         if (type1.toLowerCase().equals("pickup")) {
             if (km < 5000) {
                 System.out.println("No se aplicó recargo por kilometraje bajo 5000");
@@ -754,7 +739,6 @@ public class RepairService {
                  total_price_km = total_price * 0.2;
             }
         }
-
         if (type1.toLowerCase().equals("furgoneta")) {
             if (km < 5000) {
                 System.out.println("No se aplicó recargo por kilometraje bajo 5000");
@@ -852,9 +836,7 @@ public class RepairService {
             recargo_total = recargo_dias + retraso_meses;
             return recargo_total;
         }
-
         return recargo_total;
-
     }
 
     public int tiempodeTrabajo(String patent) {
@@ -886,12 +868,7 @@ public class RepairService {
         }
         System.out.println("los dias de retraso son:" + dias_demora);
         return dias_demora;
-
     }
-
-
-
-
 
     public double recargoPorAtraso(String patent, double total_price) {
         //admision, pero creo que no es necesario
@@ -936,12 +913,5 @@ public class RepairService {
         }
         return total_price;
     }
-
-    //obtiene solo el tiempo que demorala reparacion
-    public int TimeCar(String patent){
-        int hora_admision = repairRepository.findByPatentrepair(patent).getWorkTime();
-        return hora_admision;
-    }
-
 }
 
