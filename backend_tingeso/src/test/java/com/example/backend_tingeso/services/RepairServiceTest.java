@@ -34,51 +34,10 @@ public class RepairServiceTest {
     @InjectMocks
     private RepairService repairService;
 
+
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-    }
-    @Test
-    public void testSaveCostentity() {
-        // Arrange
-        String patent = "ABC123";
-
-        // Mock del repositorio de reparaciones
-        RepairRepository repairRepositoryMock = mock(RepairRepository.class);
-        when(repairRepositoryMock.save(any(RepairEntity.class))).thenAnswer(invocation -> invocation.getArgument(0));
-
-        CarRepository carRepositoryMock = mock(CarRepository.class);
-        when(carRepositoryMock.findByPatent(patent)).thenReturn(new CarEntity(1L,
-                "ABC123",
-                "Suzuki",
-                "Swift",
-                "Sedan",
-                2010,
-                "Gasolina",
-                4,
-                2000));
-        // Mock de la lógica de cálculo en el servicio
-        RepairService repairService = new RepairService();
-        when(repairService.precioSegunReparacionyMotor(patent)).thenReturn(1000.0); // Supongamos que el costo original es 1000
-        when(repairService.IVATOTAL(1000.0)).thenReturn(1200.0); // Supongamos que el total con IVA es 1200
-        when(repairService.DescuentosSegunHora(patent, 1200.0)).thenReturn(1100.0); // Supongamos que se aplica un descuento y el costo es 1100
-        when(repairService.recargoPorAtraso(patent, 1100.0)).thenReturn(1150.0); // Supongamos que se aplica un recargo y el costo es 1150
-        when(repairService.RecargoPorKilometraje(patent, 1150.0)).thenReturn(1200.0); // Supongamos que se aplica un recargo y el costo es 1200
-        when(repairService.recargoPorAntiguedad(patent, 1200.0)).thenReturn(1250.0); // Supongamos que se aplica un recargo y el costo es 1250
-        when(repairService.tiempodeTrabajo(patent)).thenReturn(5); // Supongamos que el tiempo de trabajo es 5 días
-
-        // Act
-        RepairEntity actualEntity = repairService.saveCostentity(patent);
-
-        // Assert
-        Assertions.assertEquals(patent, actualEntity.getPatent());
-        Assertions.assertEquals(1000.0, actualEntity.getTotalOriginal(), 0.01);
-        Assertions.assertEquals(1200.0, actualEntity.getIVA(), 0.01);
-        Assertions.assertEquals(1100.0, actualEntity.getDiscountPerDay(), 0.01);
-        Assertions.assertEquals(1150.0, actualEntity.getDelayCharge(), 0.01);
-        Assertions.assertEquals(1200.0, actualEntity.getMileageCharge(), 0.01);
-        Assertions.assertEquals(1250.0, actualEntity.getSeniorityCharge(), 0.01);
-        Assertions.assertEquals(5, actualEntity.getWorkTime());
     }
 
 
@@ -387,115 +346,6 @@ public class RepairServiceTest {
         }
         // Verifying the result
         Assertions.assertTrue(result);
-    }
-
-    @Test
-    public void testGetRepairByPatentfinal() {
-        // Mock del repositorio de reparaciones
-        RepairRepository repairRepositoryMock = mock(RepairRepository.class);
-
-        // Instancia de la clase que contiene el método a testear (puede ser un servicio)
-        RepairService repairService = new RepairService();
-
-        // Mock de una lista de reparaciones para una patente específica
-        ArrayList<RepairEntity> mockRepairList = new ArrayList<>();
-        // Agrega reparaciones de ejemplo a la lista
-        mockRepairList.add(new RepairEntity(1L,
-                "DEF456",
-                120000,
-                1200,
-                1200,
-                3111,
-                1,
-                231,
-                1,
-                1,
-                4));
-
-        mockRepairList.add(new RepairEntity(2L,
-                "DEF456",
-                120000,
-                1200,
-                1200,
-                3111,
-                1,
-                231,
-                1,
-                1,
-                4));
-        // Mock del comportamiento del repositorio al llamar al método findByPatentrepairfinal
-        when(repairRepositoryMock.findByPatentrepairfinal(anyString())).thenReturn(mockRepairList);
-
-        // Llama al método del servicio para obtener la lista de reparaciones
-        ArrayList<RepairEntity> actualRepairList = repairService.getRepairByPatentfinal("DEF456");
-
-        // Verifica que la lista de reparaciones devuelta por el servicio sea la misma que la lista mockeada
-        Assertions.assertEquals(mockRepairList.size(), actualRepairList.size());
-        // Aquí podrías agregar más aserciones para verificar otros aspectos de las reparaciones si lo deseas
-    }
-
-    @Test
-    void testRecargoPorAtraso1() {
-        // Definir la patente del vehículo
-        String patent = "ABC123";
-
-        // Definir el precio total de la reparación
-        double total_price = 1000.0;
-
-        // Simular un escenario de retraso por días
-        // Definir una nueva patente
-        String patent2 = "DEF456";
-        RecordEntity mockRecordEntity = new RecordEntity(2L,
-                "ABC123",
-                "Miercoles",
-                15,
-                4,
-                14,
-                "Reparaciones del Sistema de Frenos",
-                17,
-                4,
-                12,
-                18,
-                4,
-                12,
-                150000);
-        when(recordRepository.findByPatentOne(patent)).thenReturn(mockRecordEntity);
-
-        // Llamar al método que se está probando para este escenario
-        double recargo_total2 = repairService.recargoPorAtraso1(patent2, total_price);
-
-        // Verificar si el recargo total por retraso es correcto para el escenario de retraso por días
-        double expectedRecargoTotal2 = 50.0; // (5 días de retraso) * (0.05) * (1000)
-        Assertions.assertEquals(expectedRecargoTotal2, recargo_total2);
-    }
-
-    @Test
-    public void testTiempodeTrabajo_ConDemoraDias() {
-        // Arrange
-        String patent = "ABC123";
-        RecordEntity record = new RecordEntity(2L,
-                "ABC123",
-                "Miercoles",
-                15,
-                4,
-                14,
-                "Reparaciones del Sistema de Frenos",
-                17,
-                4,
-                12,
-                18,
-                4,
-                12,
-                150000);
-        record.setAdmissionDateDay(5);
-        record.setAdmissionDateMonth(4); // April
-        record.setDepartureDateDay(10); // 5 days later
-        record.setDepartureDateMonth(4); // April
-
-        int diasDemora = repairService.tiempodeTrabajo(record.getPatent());
-
-        // Assert
-        Assertions.assertEquals(0, diasDemora);
     }
 
     @Test

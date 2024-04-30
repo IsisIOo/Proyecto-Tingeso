@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="9c807474-c446-4d81-b464-6c4ad2836b6c" name="Changes" comment="" />
+    <list default="true" id="9c807474-c446-4d81-b464-6c4ad2836b6c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_tingeso/src/test/java/com/example/backend_tingeso/services/RepairServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend_tingeso/src/test/java/com/example/backend_tingeso/services/RepairServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_tingeso/src/test/java/resources/application.properties" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,7 +29,11 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/ioyan/OneDrive/Desktop/Proyecto Tingeso",
+    "last_opened_file_path": "C:/Users/ioyan/OneDrive/Desktop/Proyecto Tingeso/backend_tingeso",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -35,6 +46,9 @@
       <option name="presentableId" value="Default" />
       <updated>1712330134172</updated>
       <workItem from="1712330136996" duration="68000" />
+      <workItem from="1714411627449" duration="1025000" />
+      <workItem from="1714412992954" duration="787000" />
+      <workItem from="1714490841633" duration="556000" />
     </task>
     <servers />
   </component>
