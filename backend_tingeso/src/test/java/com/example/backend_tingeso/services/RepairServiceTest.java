@@ -3,24 +3,20 @@ package com.example.backend_tingeso.services;
 import com.example.backend_tingeso.entities.RepairEntity;
 import com.example.backend_tingeso.repositories.RepairRepository;
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 import com.example.backend_tingeso.entities.RecordEntity;
 import com.example.backend_tingeso.entities.CarEntity;
 import com.example.backend_tingeso.repositories.RecordRepository;
 import com.example.backend_tingeso.repositories.CarRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import static org.mockito.ArgumentMatchers.anyString;
-import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.doNothing;
+
 public class RepairServiceTest {
     @Mock
     private CarRepository carRepository;

@@ -4,19 +4,17 @@ import com.example.backend_tingeso.entities.RecordEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
 @DataJpaTest
 @ActiveProfiles("test")
 public class RecordRepositoryTest {
 
-    @Autowired
-    private TestEntityManager entityManager;
 
     @Autowired
     private RecordRepository recordRepository;
@@ -41,7 +39,7 @@ public class RecordRepositoryTest {
                 4,
                 12,
                 150000);
-        entityManager.persistAndFlush(record);
+        recordRepository.save(record);
 
         // when
         RecordEntity found = recordRepository.findByPatentOne(record.getPatent());
@@ -84,9 +82,8 @@ public class RecordRepositoryTest {
                 14,
                 15000);
 
-        entityManager.persist(record1);
-        entityManager.persist(record2);
-        entityManager.flush();
+        recordRepository.save(record1);
+        recordRepository.save(record2);
 
         // when
         List<RecordEntity> foundRecord = recordRepository.findByPatent("ABC123");

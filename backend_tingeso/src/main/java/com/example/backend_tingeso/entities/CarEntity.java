@@ -19,20 +19,20 @@ public class CarEntity {
     @Column(unique = true, nullable = false)
     private Long id; //no lo asigno
 
-    @NonNull
+
     private String patent; //patente de letras y numeros
-    @NonNull
+
     private String brand; //marca del vehiculo
-    @NonNull
+
     private String model; //modelo del vehiculo suzuki swift -> swift modelo
-    @NonNull
+
     private String type; //tipo de vehiculo, Sedan, Hatchback, SUV, Pickup, Furgoneta
-    @NonNull
+
     private int productionYear; //año de fabricacion
-    @NonNull
+
     private String motorType; //tipo de motor gasolina, diesel, hibrido y electrico
-    @NonNull
+
     private int numberSeats; //numero de asientos
-    @NonNull
+
     private int kilometers; //kilometraje del vehiculo
 }

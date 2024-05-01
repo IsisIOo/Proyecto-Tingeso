@@ -4,18 +4,16 @@ import com.example.backend_tingeso.entities.RepairEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 @DataJpaTest
 @ActiveProfiles("test")
 public class RepairRepositoryTest {
-    @Autowired
-    private TestEntityManager entityManager;
 
     @Autowired
     private RepairRepository repairRepository;
@@ -36,7 +34,7 @@ public class RepairRepositoryTest {
                 1,
                 1,
                 4);
-        entityManager.persistAndFlush(repair);
+        repairRepository.save(repair);
 
         // when
         RepairEntity found = repairRepository.findByPatentrepair(repair.getPatent());
@@ -73,9 +71,8 @@ public class RepairRepositoryTest {
                 1,
                 4);
 
-        entityManager.persist(repair1);
-        entityManager.persist(repair2);
-        entityManager.flush();
+        repairRepository.save(repair1);
+        repairRepository.save(repair2);
 
         // when
         List<RepairEntity> foundRepair = repairRepository.findByPatentrepairfinal("DEF456");
