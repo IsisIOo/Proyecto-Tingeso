@@ -14,8 +14,6 @@ services:
       - app3
 
 
-
-
   postgres-db:
     image: postgres
     restart: always

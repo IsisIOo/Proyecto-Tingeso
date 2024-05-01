@@ -1,0 +1,141 @@
+version: "3.8"
+services:
+
+
+  nginx-backend:
+    image: nginx
+    container_name: nginx-backend
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - tingeso_docker_1-network
+    volumes:
+      - ./backend_tingeso.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app1
+      - app2
+      - app3
+
+
+  nginx-frontend:
+    image: nginx
+    container_name: nginx-frontend
+    restart: always
+    ports:
+      - 8070:8070
+    networks:
+      - docker_tingeso_frontend-network 
+    volumes:
+      - ./frontend_tingeso.conf:/etc/nginx/nginx.conf
+
+    depends_on:
+      - frontend_tingeso1
+      - frontend_tingeso2
+      - frontend_tingeso3
+
+
+  postgres-db:
+    container_name: autofix-postgres-container
+    image: postgres
+    restart: always
+    volumes:
+      - dbpayroll:/var/lib/postgresql/data
+    networks:
+      - tingeso_docker_1-network
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: isilinda
+      POSTGRES_DB: dbpayroll
+    ports:
+      - "5432:5432"
+
+
+  app1:
+    container_name: tingeso_docker_11
+    image: isisi/tingeso_docker_1
+    ports:
+      - "8091:8090"
+    networks:
+      - tingeso_docker_1-network
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/dbpayroll?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=isilinda
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - postgres-db
+
+
+  app2:
+    container_name: tingeso_docker_2
+    image: isisi/tingeso_docker_1
+    ports:
+      - "8092:8090"
+    networks:
+      - tingeso_docker_1-network      
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/dbpayroll?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=isilinda
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - postgres-db
+
+  app3:
+    container_name: tingeso_docker_3
+    image: isisi/tingeso_docker_1
+    ports:
+      - "8093:8090"
+    networks:
+      - tingeso_docker_1-network      
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/dbpayroll?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=isilinda
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - postgres-db
+
+
+
+  frontend_tingeso1:
+    container_name: docker_tingeso_frontend1
+    image: isisi/tingeso_docker_frontend
+    ports:
+      - 3001:3000
+    networks:
+      - docker_tingeso_frontend-network
+    restart: on-failure
+
+  frontend_tingeso2:
+    container_name: docker_tingeso_frontend2
+    image: isisi/tingeso_docker_frontend
+    ports:
+      - 3002:3000
+    networks:
+      - docker_tingeso_frontend-network   
+    restart: on-failure
+
+  frontend_tingeso3:
+    container_name: docker_tingeso_frontend3
+    image: isisi/tingeso_docker_frontend
+    ports:
+      - 3003:3000
+    networks:
+      - docker_tingeso_frontend-network 
+    restart: on-failure 
+
+volumes:
+  dbpayroll:
+
+networks:
+  tingeso_docker_1-network:
+  docker_tingeso_frontend-network:
+
