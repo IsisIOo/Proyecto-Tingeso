@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  frontend:
+    image: isisi/frontend_tingeso
+    container_name: frontend_tingeso
+    restart: always
+    ports:
+    - "8070:80"
