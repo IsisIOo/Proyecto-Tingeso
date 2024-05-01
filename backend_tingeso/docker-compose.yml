@@ -30,7 +30,7 @@ services:
 
 
   app1:
-    container_name: tingeso_docker_11
+    container_name: tingeso_docker_1
     image: isisi/tingeso_docker_1
     ports:
       - "8091:8090"
@@ -45,7 +45,7 @@ services:
       - postgres-db
 
 
-  app 2:
+  app2:
     container_name: tingeso_docker_2
     image: isisi/tingeso_docker_1
     ports:
@@ -60,7 +60,7 @@ services:
     depends_on:
       - postgres-db
 
-  app 3:
+  app3:
     container_name: tingeso_docker_3
     image: isisi/tingeso_docker_1
     ports:
