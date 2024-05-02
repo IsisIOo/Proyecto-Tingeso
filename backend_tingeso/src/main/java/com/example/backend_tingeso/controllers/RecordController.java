@@ -1,13 +1,10 @@
 package com.example.backend_tingeso.controllers;
 
-import com.example.backend_tingeso.entities.RepairEntity;
-import com.example.backend_tingeso.services.RepairService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.backend_tingeso.entities.RecordEntity;
 import com.example.backend_tingeso.services.RecordService;
-import com.example.backend_tingeso.entities.CarEntity;
 
 
 import java.util.List;

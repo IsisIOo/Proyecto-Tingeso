@@ -1,6 +1,5 @@
 package com.example.backend_tingeso.services;
 
-import com.example.backend_tingeso.entities.CarEntity;
 import com.example.backend_tingeso.entities.RepairEntity;
 import com.example.backend_tingeso.repositories.CarRepository;
 import com.example.backend_tingeso.repositories.RecordRepository;

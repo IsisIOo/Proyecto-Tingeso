@@ -1,5 +1,4 @@
 package com.example.backend_tingeso.repositories;
-import com.example.backend_tingeso.entities.RecordEntity;
 import com.example.backend_tingeso.entities.RepairEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

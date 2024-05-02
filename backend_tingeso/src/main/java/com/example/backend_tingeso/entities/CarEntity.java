@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-//import com.example.backend_tingeso.entities.RecordEntity;
-//import com.example.backend_tingeso.services.RecordService;
 
 @Entity //va asi tal cual
 @Table(name = "car")

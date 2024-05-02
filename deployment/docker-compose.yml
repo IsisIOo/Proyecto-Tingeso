@@ -9,7 +9,7 @@ services:
     ports:
       - "80:80"
     networks:
-      - tingeso_docker_1-network
+      - tingeso_network
     volumes:
       - ./backend_tingeso.conf:/etc/nginx/nginx.conf
     depends_on:
@@ -38,13 +38,14 @@ services:
   postgres-db:
     container_name: postgres
     image: postgres
-    restart: always
+    deploy:
+      restart_policy:
+        condition: on-failure
     volumes:
       - dbpayroll:/var/lib/postgresql/data
     networks:
-      - tingeso_docker_1-network
+      - tingeso_network
     environment:
-      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: isilinda
       POSTGRES_DB: dbpayroll
     ports:
@@ -53,12 +54,14 @@ services:
 
   app1:
     container_name: tingeso_docker_11
-    image: isisi/tingeso_docker_1
+    image: isisi/tingeso_docker_1:latest
     ports:
       - "8091:8090"
     networks:
-      - tingeso_docker_1-network
+      - tingeso_network
     environment:
+      - DB_HOST = localhost 
+      - DB_PORT=5432
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/dbpayroll?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=isilinda
@@ -71,12 +74,14 @@ services:
 
   app2:
     container_name: tingeso_docker_2
-    image: isisi/tingeso_docker_1
+    image: isisi/tingeso_docker_1:latest
     ports:
       - "8092:8090"
     networks:
-      - tingeso_docker_1-network      
+      - tingeso_network     
     environment:
+      - DB_HOST = localhost 
+      - DB_PORT=5432
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/dbpayroll?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=isilinda
@@ -88,12 +93,14 @@ services:
 
   app3:
     container_name: tingeso_docker_3
-    image: isisi/tingeso_docker_1
+    image: isisi/tingeso_docker_1:latest
     ports:
       - "8093:8090"
     networks:
-      - tingeso_docker_1-network      
+      - tingeso_network      
     environment:
+      - DB_HOST = localhost 
+      - DB_PORT=5432
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/dbpayroll?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=isilinda
@@ -107,35 +114,41 @@ services:
 
   frontend_tingeso1:
     container_name: docker_tingeso_frontend1
-    image: isisi/tingeso_docker_frontend
+    image: isisi/tingeso_docker_frontend:latest
     ports:
       - 3001:3000
     networks:
       - docker_tingeso_frontend-network
-    restart: on-failure
+    deploy:
+      restart_policy:
+        condition: on-failure
 
   frontend_tingeso2:
     container_name: docker_tingeso_frontend2
-    image: isisi/tingeso_docker_frontend
+    image: isisi/tingeso_docker_frontend:latest
     ports:
       - 3002:3000
     networks:
       - docker_tingeso_frontend-network   
-    restart: on-failure
+    deploy:
+      restart_policy:
+        condition: on-failure
 
   frontend_tingeso3:
     container_name: docker_tingeso_frontend3
-    image: isisi/tingeso_docker_frontend
+    image: isisi/tingeso_docker_frontend:latest
     ports:
       - 3003:3000
     networks:
       - docker_tingeso_frontend-network 
-    restart: on-failure 
+    deploy:
+      restart_policy:
+        condition: on-failure
 
 volumes:
   dbpayroll:
 
 networks:
-  tingeso_docker_1-network:
+  tingeso_network:
   docker_tingeso_frontend-network:
 

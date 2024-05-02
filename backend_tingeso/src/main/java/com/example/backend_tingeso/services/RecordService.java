@@ -1,15 +1,12 @@
 package com.example.backend_tingeso.services;
 
-import com.example.backend_tingeso.entities.RepairEntity;
 import com.example.backend_tingeso.repositories.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.backend_tingeso.entities.RecordEntity;
-import com.example.backend_tingeso.entities.CarEntity;
 import com.example.backend_tingeso.repositories.RecordRepository;
 import org.springframework.stereotype.Service;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

@@ -1,15 +1,12 @@
 package com.example.backend_tingeso.controllers;
 
 
-import com.example.backend_tingeso.entities.CarEntity;
-import com.example.backend_tingeso.repositories.RepairRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend_tingeso.entities.RepairEntity;
 import com.example.backend_tingeso.services.RepairService;
-import com.example.backend_tingeso.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
