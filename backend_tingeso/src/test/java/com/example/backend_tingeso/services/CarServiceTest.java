@@ -11,8 +11,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.*;
 
 
 public class CarServiceTest {
@@ -30,7 +29,6 @@ public class CarServiceTest {
 
     @Test
     void testGetCar() {
-        // Mocking the behavior of CarRepository
         List<CarEntity> cars = new ArrayList<>();
         cars.add(new CarEntity(1L,
                 "ABC123",
@@ -52,19 +50,65 @@ public class CarServiceTest {
                 4,
                 2000));
 
-        // Mocking the behavior of CarRepository
         when(carRepository.findAll()).thenReturn(cars);
 
-        // Calling the method under test
         List<CarEntity> result = carService.getCar();
 
-        // Verifying the result
         Assertions.assertEquals(2, result.size());
     }
 
     @Test
+    void testGetCar0() {
+        List<CarEntity> cars = new ArrayList<>();
+
+        when(carRepository.findAll()).thenReturn(cars);
+
+        List<CarEntity> result = carService.getCar();
+
+        Assertions.assertEquals(0, result.size());
+    }
+
+    @Test
+    void testGetCars() {
+        List<CarEntity> cars = new ArrayList<>();
+        cars.add(new CarEntity(1L,
+                "ABC123",
+                "Suzuki",
+                "Swift",
+                "Sedan",
+                2010,
+                "Gasolina",
+                4,
+                2000));
+
+        cars.add(new CarEntity(2L,
+                "DEF456",
+                "Suzuki",
+                "Swift",
+                "Sedan",
+                2010,
+                "Gasolina",
+                4,
+                2000));
+        cars.add(new CarEntity(2L,
+                "JKL768",
+                "Suzuki",
+                "Swift",
+                "Sedan",
+                2010,
+                "Gasolina",
+                4,
+                2000));
+
+        when(carRepository.findAll()).thenReturn(cars);
+
+        List<CarEntity> result = carService.getCar();
+
+        Assertions.assertEquals(3, result.size());
+    }
+
+    @Test
     void testSaveCar() {
-        // Creating a mock CarEntity
         CarEntity car = new CarEntity(1L,
                 "DEF456",
                 "Suzuki",
@@ -75,19 +119,15 @@ public class CarServiceTest {
                 4,
                 2000);
 
-        // Mocking the behavior of CarRepository
         when(carRepository.save(any(CarEntity.class))).thenReturn(car);
 
-        // Calling the method under test
         CarEntity savedCar = carService.saveCar(car);
 
-        // Verifying the result
         Assertions.assertEquals(car, savedCar);
     }
 
     @Test
     void testGetCarByPatent() {
-        // Mocking the behavior of CarRepository
         String patent = "ABC123";
         CarEntity car = new CarEntity(2L,
                 "ABC123",
@@ -100,16 +140,13 @@ public class CarServiceTest {
                 2000);
         when(carRepository.findByPatent(patent)).thenReturn(car);
 
-        // Calling the method under test
         CarEntity result = carService.getCarByPatent(patent);
 
-        // Verifying the result
         Assertions.assertEquals(patent, result.getPatent());
     }
 
     @Test
     void testUpdateCar() {
-        // Creating a mock CarEntity
         CarEntity car = new CarEntity(2L,
                 "DEF456",
                 "Suzuki",
@@ -120,32 +157,71 @@ public class CarServiceTest {
                 4,
                 2000);
 
-        // Mocking the behavior of CarRepository
         when(carRepository.save(any(CarEntity.class))).thenReturn(car);
 
-        // Calling the method under test
         CarEntity updatedCar = carService.updateCar(car);
 
-        // Verifying the result
         Assertions.assertEquals(car, updatedCar);
     }
 
     @Test
     void testDeleteCar() {
-        // Mocking the behavior of CarRepository
         Long id = 1L;
         doNothing().when(carRepository).deleteById(id);
 
-        // Calling the method under test
         boolean result = false;
         try {
             result = carService.deleteCar(id);
         } catch (Exception e) {
-            e.printStackTrace(); // Handle exception properly in your code
+            e.printStackTrace();
         }
-
-        // Verifying the result
         Assertions.assertTrue(result);
     }
 
+    @Test
+    void testDeleteCarFalse() {
+        Long id = 1L;
+        doNothing().when(carRepository).deleteById(2L);
+
+        boolean result = false;
+        try {
+            result = carService.deleteCar(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    void testUpdateCar2() {
+        CarEntity car = new CarEntity(1L,
+                "DEF456",
+                "Suzuki",
+                "Swift",
+                "Sedan",
+                2010,
+                "Gasolina",
+                4,
+                2000);
+
+        // Configuración del repositorio para devolver el auto actualizado
+        when(carRepository.save(any(CarEntity.class))).thenReturn(car);
+
+        // Actualización del auto
+        CarEntity updatedCar = carService.updateCar(car);
+
+        // Verificación de que el auto devuelto es el mismo que se pasó como parámetro
+        Assertions.assertEquals(car, updatedCar);
+    }
+
+    @Test
+    void testDeleteCarFailure() {
+        Long id = 1L;
+
+        // Configuración del repositorio para lanzar una excepción al eliminar el auto
+        doThrow(new RuntimeException("Error al eliminar el auto")).when(carRepository).deleteById(id);
+
+        // Verificación de que se lanza una excepción al intentar eliminar el auto
+        Assertions.assertThrows(Exception.class, () -> carService.deleteCar(id));
+    }
 }

@@ -118,6 +118,38 @@ public class RepairServiceTest {
     }
 
     @Test
+    public void testDescuentosSegunHora2() {
+        // Arrange
+        String patent = "ABC123";
+        RecordEntity record = new RecordEntity(2L,
+                "ABC123",
+                "Lunes",
+                15,
+                4,
+                10,
+                "Reparaciones del motor",
+                17,
+                4,
+                12,
+                18,
+                4,
+                12,
+                150000); // Supongamos que aquí creas una instancia de Record con la hora de ingreso deseada
+        record.setAdmissionHour(10); // Hora de ingreso: 10 AM
+        record.setAdmissionDateDayName("lunes"); // Día de ingreso: lunes
+        when(recordRepository.findByPatentOne(patent)).thenReturn(record);
+
+        double total_price = 1000.0; // Supongamos que el precio total sin descuento es 1000
+
+        // Act
+        double actualPrice = repairService.DescuentosSegunHora(patent, total_price);
+
+        // Assert
+        double expectedPrice = 900.0; // Precio esperado con el descuento del 10%
+        Assertions.assertEquals(expectedPrice, actualPrice);
+    }
+
+    @Test
     public void testDescuentoSegunMarca() {
         // Arrange
         String patent = "ABC123";
@@ -144,7 +176,85 @@ public class RepairServiceTest {
     }
 
     @Test
-    public void testRecargoPorKilometraje() {
+    public void testDescuentoSegunMarca2() {
+        // Arrange
+        String patent = "ABC123";
+        CarEntity car = new CarEntity(1L,
+                "ABC123",
+                "ford",
+                "Swift",
+                "Sedan",
+                2010,
+                "Gasolina",
+                4,
+                2000); // Supongamos que aquí creas una instancia de Car con la marca deseada
+        car.setBrand("Ford"); // Marca del carro: Toyota
+        when(carRepository.findByPatent(patent)).thenReturn(car);
+
+        double total_price = 70000.0; // Supongamos que el precio total sin descuento es 1000
+
+        // Act
+        double actualPrice = repairService.DescuentoSegunMarca(patent, total_price);
+
+        // Assert
+        double expectedPrice = 0.0; // Precio esperado con el descuento de Toyota (1000 - 70000)
+        Assertions.assertNotEquals(expectedPrice, actualPrice, 0.01); // Utilizamos un margen de error de 0.01 para la comparación de doubles
+    }
+
+    @Test
+    public void testDescuentoSegunMarca3() {
+        // Arrange
+        String patent = "ABC123";
+        CarEntity car = new CarEntity(1L,
+                "ABC123",
+                "hyundai",
+                "Swift",
+                "Sedan",
+                2010,
+                "Gasolina",
+                4,
+                2000); // Supongamos que aquí creas una instancia de Car con la marca deseada
+        car.setBrand("hyundai"); // Marca del carro: Toyota
+        when(carRepository.findByPatent(patent)).thenReturn(car);
+
+        double total_price = 70000.0; // Supongamos que el precio total sin descuento es 1000
+
+        // Act
+        double actualPrice = repairService.DescuentoSegunMarca(patent, total_price);
+
+        // Assert
+        double expectedPrice = 0.0; // Precio esperado con el descuento de Toyota (1000 - 70000)
+        Assertions.assertNotEquals(expectedPrice, actualPrice, 0.01); // Utilizamos un margen de error de 0.01 para la comparación de doubles
+    }
+
+    @Test
+    public void testDescuentoSegunMarca4() {
+        // Arrange
+        String patent = "ABC123";
+        CarEntity car = new CarEntity(1L,
+                "ABC123",
+                "honda",
+                "Swift",
+                "Sedan",
+                2010,
+                "Gasolina",
+                4,
+                2000); // Supongamos que aquí creas una instancia de Car con la marca deseada
+        car.setBrand("honda"); // Marca del carro: Toyota
+        when(carRepository.findByPatent(patent)).thenReturn(car);
+
+        double total_price = 70000.0; // Supongamos que el precio total sin descuento es 1000
+
+        // Act
+        double actualPrice = repairService.DescuentoSegunMarca(patent, total_price);
+
+        // Assert
+        double expectedPrice = 0.0; // Precio esperado con el descuento de Toyota (1000 - 70000)
+        Assertions.assertNotEquals(expectedPrice, actualPrice, 0.01); // Utilizamos un margen de error de 0.01 para la comparación de doubles
+    }
+
+    @Test
+    public void testRecargoPorKilometrajeSEDAN1() {
         // Arrange
         String patent = "ABC123";
         CarEntity car = new CarEntity(1L,
@@ -169,6 +279,250 @@ public class RepairServiceTest {
         double expectedPrice = 1090.0; // Precio esperado con el recargo del 9% para un SUV con 15000 km
         Assertions.assertEquals(expectedPrice, actualPrice, 0.01); // Utilizamos un margen de error de 0.01 para la comparación de doubles
     }
+
+    @Test
+    public void testRecargoPorKilometrajeSEDAN2() {
+        // Arrange
+        String patent = "ABC123";
+        CarEntity car = new CarEntity(1L,
+                "ABC123",
+                "Suzuki",
+                "Swift",
+                "Sedan",
+                2010,
+                "Gasolina",
+                4,
+                6000); // Supongamos que aquí creas una instancia de Car con el tipo y kilómetros deseados
+        car.setType("SUV"); // Tipo de vehículo: SUV
+        car.setKilometers(15000); // Kilómetros recorridos: 15000
+        when(carRepository.findByPatent(patent)).thenReturn(car);
+
+        double total_price = 1000.0; // Supongamos que el precio total sin recargo es 1000
+
+        // Act
+        double actualPrice = repairService.RecargoPorKilometraje(patent, total_price);
+
+        // Assert
+        double expectedPrice = 1090.0; // Precio esperado con el recargo del 9% para un SUV con 15000 km
+        Assertions.assertEquals(expectedPrice, actualPrice, 0.01); // Utilizamos un margen de error de 0.01 para la comparación de doubles
+    }
+
+    @Test
+    public void testRecargoPorKilometrajeSEDAN3() {
+        // Arrange
+        String patent = "ABC123";
+        CarEntity car = new CarEntity(1L,
+                "ABC123",
+                "Suzuki",
+                "Swift",
+                "Sedan",
+                2010,
+                "Gasolina",
+                4,
+                13000); // Supongamos que aquí creas una instancia de Car con el tipo y kilómetros deseados
+        car.setType("SUV"); // Tipo de vehículo: SUV
+        car.setKilometers(15000); // Kilómetros recorridos: 15000
+        when(carRepository.findByPatent(patent)).thenReturn(car);
+
+        double total_price = 1000.0; // Supongamos que el precio total sin recargo es 1000
+
+        // Act
+        double actualPrice = repairService.RecargoPorKilometraje(patent, total_price);
+
+        // Assert
+        double expectedPrice = 1090.0; // Precio esperado con el recargo del 9% para un SUV con 15000 km
+        Assertions.assertEquals(expectedPrice, actualPrice, 0.01); // Utilizamos un margen de error de 0.01 para la comparación de doubles
+    }
+
+    @Test
+    public void testRecargoPorKilometrajeSEDAN4() {
+        // Arrange
+        String patent = "ABC123";
+        CarEntity car = new CarEntity(1L,
+                "ABC123",
+                "Suzuki",
+                "Swift",
+                "Sedan",
+                2010,
+                "Gasolina",
+                4,
+                27000); // Supongamos que aquí creas una instancia de Car con el tipo y kilómetros deseados
+        car.setType("SUV"); // Tipo de vehículo: SUV
+        car.setKilometers(15000); // Kilómetros recorridos: 15000
+        when(carRepository.findByPatent(patent)).thenReturn(car);
+
+        double total_price = 1000.0; // Supongamos que el precio total sin recargo es 1000
+
+        // Act
+        double actualPrice = repairService.RecargoPorKilometraje(patent, total_price);
+
+        // Assert
+        double expectedPrice = 1090.0; // Precio esperado con el recargo del 9% para un SUV con 15000 km
+        Assertions.assertEquals(expectedPrice, actualPrice, 0.01); // Utilizamos un margen de error de 0.01 para la comparación de doubles
+    }
+
+    @Test
+    public void testRecargoPorKilometrajeSEDAN5() {
+        // Arrange
+        String patent = "ABC123";
+        CarEntity car = new CarEntity(1L,
+                "ABC123",
+                "Suzuki",
+                "Swift",
+                "Sedan",
+                2010,
+                "Gasolina",
+                4,
+                60000); // Supongamos que aquí creas una instancia de Car con el tipo y kilómetros deseados
+        car.setType("SUV"); // Tipo de vehículo: SUV
+        car.setKilometers(15000); // Kilómetros recorridos: 15000
+        when(carRepository.findByPatent(patent)).thenReturn(car);
+
+        double total_price = 1000.0; // Supongamos que el precio total sin recargo es 1000
+
+        // Act
+        double actualPrice = repairService.RecargoPorKilometraje(patent, total_price);
+
+        // Assert
+        double expectedPrice = 1090.0; // Precio esperado con el recargo del 9% para un SUV con 15000 km
+        Assertions.assertEquals(expectedPrice, actualPrice, 0.01); // Utilizamos un margen de error de 0.01 para la comparación de doubles
+    }
+
+    @Test
+    public void testRecargoPorKilometrajehatchback1() {
+        // Arrange
+        String patent = "ABC123";
+        CarEntity car = new CarEntity(1L,
+                "ABC123",
+                "Suzuki",
+                "Swift",
+                "hatchback",
+                2010,
+                "Gasolina",
+                4,
+                2000); // Supongamos que aquí creas una instancia de Car con el tipo y kilómetros deseados
+        car.setType("SUV"); // Tipo de vehículo: SUV
+        car.setKilometers(15000); // Kilómetros recorridos: 15000
+        when(carRepository.findByPatent(patent)).thenReturn(car);
+
+        double total_price = 1000.0; // Supongamos que el precio total sin recargo es 1000
+
+        // Act
+        double actualPrice = repairService.RecargoPorKilometraje(patent, total_price);
+
+        // Assert
+        double expectedPrice = 1090.0; // Precio esperado con el recargo del 9% para un SUV con 15000 km
+        Assertions.assertEquals(expectedPrice, actualPrice, 0.01); // Utilizamos un margen de error de 0.01 para la comparación de doubles
+    }
+
+    @Test
+    public void testRecargoPorKilometrajehatchback2() {
+        // Arrange
+        String patent = "ABC123";
+        CarEntity car = new CarEntity(1L,
+                "ABC123",
+                "Suzuki",
+                "Swift",
+                "hatchback",
+                2010,
+                "Gasolina",
+                4,
+                6000); // Supongamos que aquí creas una instancia de Car con el tipo y kilómetros deseados
+        car.setType("SUV"); // Tipo de vehículo: SUV
+        car.setKilometers(15000); // Kilómetros recorridos: 15000
+        when(carRepository.findByPatent(patent)).thenReturn(car);
+
+        double total_price = 1000.0; // Supongamos que el precio total sin recargo es 1000
+
+        // Act
+        double actualPrice = repairService.RecargoPorKilometraje(patent, total_price);
+
+        // Assert
+        double expectedPrice = 1090.0; // Precio esperado con el recargo del 9% para un SUV con 15000 km
+        Assertions.assertEquals(expectedPrice, actualPrice, 0.01); // Utilizamos un margen de error de 0.01 para la comparación de doubles
+    }
+
+    @Test
+    public void testRecargoPorKilometrajehatchback3() {
+        // Arrange
+        String patent = "ABC123";
+        CarEntity car = new CarEntity(1L,
+                "ABC123",
+                "Suzuki",
+                "Swift",
+                "hatchback",
+                2010,
+                "Gasolina",
+                4,
+                13000); // Supongamos que aquí creas una instancia de Car con el tipo y kilómetros deseados
+        car.setType("SUV"); // Tipo de vehículo: SUV
+        car.setKilometers(15000); // Kilómetros recorridos: 15000
+        when(carRepository.findByPatent(patent)).thenReturn(car);
+
+        double total_price = 1000.0; // Supongamos que el precio total sin recargo es 1000
+
+        // Act
+        double actualPrice = repairService.RecargoPorKilometraje(patent, total_price);
+
+        // Assert
+        double expectedPrice = 1090.0; // Precio esperado con el recargo del 9% para un SUV con 15000 km
+        Assertions.assertEquals(expectedPrice, actualPrice, 0.01); // Utilizamos un margen de error de 0.01 para la comparación de doubles
+    }
+
+    @Test
+    public void testRecargoPorKilometrajehatchback4() {
+        // Arrange
+        String patent = "ABC123";
+        CarEntity car = new CarEntity(1L,
+                "ABC123",
+                "Suzuki",
+                "Swift",
+                "hatchback",
+                2010,
+                "Gasolina",
+                4,
+                27000); // Supongamos que aquí creas una instancia de Car con el tipo y kilómetros deseados
+        car.setType("SUV"); // Tipo de vehículo: SUV
+        car.setKilometers(15000); // Kilómetros recorridos: 15000
+        when(carRepository.findByPatent(patent)).thenReturn(car);
+
+        double total_price = 1000.0; // Supongamos que el precio total sin recargo es 1000
+
+        // Act
+        double actualPrice = repairService.RecargoPorKilometraje(patent, total_price);
+
+        // Assert
+        double expectedPrice = 1090.0; // Precio esperado con el recargo del 9% para un SUV con 15000 km
+        Assertions.assertEquals(expectedPrice, actualPrice, 0.01); // Utilizamos un margen de error de 0.01 para la comparación de doubles
+    }
+
+    @Test
+    public void testRecargoPorKilometrajehatchback5() {
+        // Arrange
+        String patent = "ABC123";
+        CarEntity car = new CarEntity(1L,
+                "ABC123",
+                "Suzuki",
+                "Swift",
+                "hatchback",
+                2010,
+                "Gasolina",
+                4,
+                60000); // Supongamos que aquí creas una instancia de Car con el tipo y kilómetros deseados
+        car.setType("SUV"); // Tipo de vehículo: SUV
+        car.setKilometers(15000); // Kilómetros recorridos: 15000
+        when(carRepository.findByPatent(patent)).thenReturn(car);
+
+        double total_price = 1000.0; // Supongamos que el precio total sin recargo es 1000
+
+        // Act
+        double actualPrice = repairService.RecargoPorKilometraje(patent, total_price);
+
+        // Assert
+        double expectedPrice = 1090.0; // Precio esperado con el recargo del 9% para un SUV con 15000 km
+        Assertions.assertEquals(expectedPrice, actualPrice, 0.01); // Utilizamos un margen de error de 0.01 para la comparación de doubles
+    }
+
 
     @Test
     public void testRecargoPorAntiguedad() {
