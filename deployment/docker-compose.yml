@@ -36,7 +36,7 @@ services:
 
 
   postgres-db:
-    container_name: autofix-postgres-container
+    container_name: postgres
     image: postgres
     restart: always
     volumes:
