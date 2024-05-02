@@ -204,13 +204,11 @@ public class CarServiceTest {
                 4,
                 2000);
 
-        // Configuración del repositorio para devolver el auto actualizado
+
         when(carRepository.save(any(CarEntity.class))).thenReturn(car);
 
-        // Actualización del auto
         CarEntity updatedCar = carService.updateCar(car);
 
-        // Verificación de que el auto devuelto es el mismo que se pasó como parámetro
         Assertions.assertEquals(car, updatedCar);
     }
 
@@ -218,10 +216,8 @@ public class CarServiceTest {
     void testDeleteCarFailure() {
         Long id = 1L;
 
-        // Configuración del repositorio para lanzar una excepción al eliminar el auto
         doThrow(new RuntimeException("Error al eliminar el auto")).when(carRepository).deleteById(id);
 
-        // Verificación de que se lanza una excepción al intentar eliminar el auto
         Assertions.assertThrows(Exception.class, () -> carService.deleteCar(id));
     }
 }

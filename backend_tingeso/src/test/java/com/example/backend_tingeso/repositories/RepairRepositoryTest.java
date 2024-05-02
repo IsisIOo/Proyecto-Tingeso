@@ -21,7 +21,6 @@ public class RepairRepositoryTest {
     //buscando solo 1
     @Test
     public void whenfindByPatentrepair_thenReturnRepair() {
-        // given
         RepairEntity repair = new RepairEntity(null,
                 "DEF456",
                 120000,
@@ -35,17 +34,14 @@ public class RepairRepositoryTest {
                 4);
         repairRepository.save(repair);
 
-        // when
         RepairEntity found = repairRepository.findByPatentrepair(repair.getPatent());
 
-        // then
         assertThat(found.getPatent()).isEqualTo(repair.getPatent());
     }
 
     //buscando todos
     @Test
     public void whenfindByPatentrepairfinal_thenReturnRepairs() {
-        // given
         RepairEntity repair1 = new RepairEntity(null,
                 "DEF456",
                 120000,
@@ -73,10 +69,8 @@ public class RepairRepositoryTest {
         repairRepository.save(repair1);
         repairRepository.save(repair2);
 
-        // when
         List<RepairEntity> foundRepair = repairRepository.findByPatentrepairfinal("DEF456");
 
-        // then
         assertThat(foundRepair).hasSize(2).extracting(RepairEntity::getPatent).containsOnly("DEF456");
     }
 

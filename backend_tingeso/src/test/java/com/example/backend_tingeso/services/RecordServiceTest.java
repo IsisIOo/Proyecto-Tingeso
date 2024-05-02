@@ -206,8 +206,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertEquals(350000, totalPrice);
@@ -241,8 +239,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -276,8 +273,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -311,8 +307,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -346,8 +341,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -381,8 +375,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -416,8 +408,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -451,8 +442,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -486,8 +475,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -521,8 +508,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -556,8 +542,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -591,8 +575,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -626,8 +609,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -661,8 +642,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -696,8 +676,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -731,8 +709,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -766,8 +742,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -801,8 +775,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -836,8 +809,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -871,8 +842,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -906,8 +876,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -941,8 +909,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -976,8 +943,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1011,8 +977,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1046,8 +1011,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1081,8 +1045,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1116,8 +1079,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1151,8 +1112,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1186,8 +1145,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1221,8 +1178,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1256,8 +1211,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1291,8 +1245,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1326,8 +1279,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1360,8 +1311,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1395,8 +1344,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1430,8 +1377,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1465,8 +1411,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1500,8 +1444,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1535,8 +1478,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1570,8 +1511,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1605,8 +1545,6 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1640,8 +1578,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1675,8 +1612,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);
@@ -1710,8 +1646,7 @@ public class RecordServiceTest {
                 12,
                 150000);
 
-        // recibiendo como entrada el record del vehiculo encontrado se busca el tipo de reparacion segun su
-        // tipo de motor y el tipo de reparacion que tiene ingresado, retorna costo total
+
         double totalPrice = recordService.precioSegunReparacionyMotor(record);
 
         Assertions.assertNotEquals(350000, totalPrice);

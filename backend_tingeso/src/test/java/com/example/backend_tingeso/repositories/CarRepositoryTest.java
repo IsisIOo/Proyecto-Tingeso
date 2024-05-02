@@ -19,7 +19,6 @@ public class CarRepositoryTest {
 
     @Test
     public void whenFindByPatent_thenReturnCar() {
-        // given
         CarEntity car = new CarEntity(null,
                 "ABC123",
                 "Suzuki",
@@ -31,10 +30,8 @@ public class CarRepositoryTest {
                 2000);
         carRepository.save(car);
 
-        // when
         CarEntity found = carRepository.findByPatent(car.getPatent());
 
-        // then
         assertThat(found.getPatent()).isEqualTo(car.getPatent());
     }
 

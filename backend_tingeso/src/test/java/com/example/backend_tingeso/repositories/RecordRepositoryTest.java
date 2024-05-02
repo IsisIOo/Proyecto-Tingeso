@@ -24,7 +24,6 @@ public class RecordRepositoryTest {
     //buscando solo 1
     @Test
     public void whenfindByPatentOne_thenReturnRecord() {
-        // given
         RecordEntity record = new RecordEntity(null,
                 "ABC123",
                 "Miercoles",
@@ -41,17 +40,14 @@ public class RecordRepositoryTest {
                 150000);
         recordRepository.save(record);
 
-        // when
         RecordEntity found = recordRepository.findByPatentOne(record.getPatent());
 
-        // then
         assertThat(found.getPatent()).isEqualTo(record.getPatent());
     }
 
     //buscando todos
     @Test
     public void whenfindByPatent_thenReturnRecords() {
-        // given
         RecordEntity record1 = new RecordEntity(null,
                 "ABC123",
                 "Miercoles",
@@ -85,10 +81,8 @@ public class RecordRepositoryTest {
         recordRepository.save(record1);
         recordRepository.save(record2);
 
-        // when
         List<RecordEntity> foundRecord = recordRepository.findByPatent("ABC123");
 
-        // then
         assertThat(foundRecord).hasSize(2).extracting(RecordEntity::getPatent).containsOnly("ABC123");
     }
 
