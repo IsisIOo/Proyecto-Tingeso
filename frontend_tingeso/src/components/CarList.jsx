@@ -121,7 +121,17 @@ const CarList = () => {
           <TableCell align="right">{car.numberSeats}</TableCell> {/* Nro. de asientos */}
 
           <TableCell>
-
+                <Button
+                  variant="contained"
+                  color="info"
+                  size="small"
+                  onClick={() => handleEdit(car.patent)}
+                  style={{ marginLeft: "0.5rem" }}
+                  startIcon={<EditIcon />}
+                  
+                >
+                  Editar vehiculo
+                </Button>
 
                 <Button
                   variant="contained"
